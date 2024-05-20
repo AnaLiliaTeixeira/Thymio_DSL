@@ -25,7 +25,7 @@
     </genClasses>
     <genClasses ecoreClass="thymio_DSL.ecore#//MovementAction">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//MovementAction/direction"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//MovementAction/speed"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//MovementAction/speed"/>
     </genClasses>
     <genClasses ecoreClass="thymio_DSL.ecore#//ColorTopAction">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//ColorTopAction/color"/>
@@ -46,31 +46,18 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//ProxEvent/sensor"/>
     </genClasses>
     <genClasses ecoreClass="thymio_DSL.ecore#//IfStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//IfStatement/condition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//IfStatement/action"/>
-    </genClasses>
-    <genClasses ecoreClass="thymio_DSL.ecore#//Condition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//Condition/booleanexpression"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//Condition/logicalexpression"/>
-    </genClasses>
-    <genClasses ecoreClass="thymio_DSL.ecore#//BooleanExpression">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//BooleanExpression/sensor"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//BooleanExpression/comparisonexpression"/>
-    </genClasses>
-    <genClasses ecoreClass="thymio_DSL.ecore#//LogicalExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//LogicalExpression/right"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//LogicalExpression/left"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//LogicalExpression/operator"/>
-    </genClasses>
-    <genClasses ecoreClass="thymio_DSL.ecore#//ComparisonExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//ComparisonExpression/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//ComparisonExpression/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//ComparisonExpression/right"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//IfStatement/condition"/>
     </genClasses>
     <genClasses ecoreClass="thymio_DSL.ecore#//ArithmeticExpression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//ArithmeticExpression/operator"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//ArithmeticExpression/right"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//ArithmeticExpression/left"/>
+    </genClasses>
+    <genClasses ecoreClass="thymio_DSL.ecore#//Condition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//Condition/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//Condition/rightSensor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//Condition/leftSensor"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
