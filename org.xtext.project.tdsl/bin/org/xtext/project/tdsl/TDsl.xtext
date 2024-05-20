@@ -8,8 +8,8 @@ ThymioDSL returns ThymioDSL:
     (statement+=Statement)*;
 
 Statement returns Statement:
-        '-' event=Event
-            (ifstatement+=IfStatement | action+=Action)*;
+        '->' event=Event
+            (ifstatement+=IfStatement | action+=Action)+;
     
 Event returns Event:
     UpperEvent | ProxEvent | TapEvent | ClapEvent;
@@ -29,11 +29,11 @@ SoundAction returns SoundAction:
 
 ColorBottomAction returns ColorBottomAction:
     'set' 'bottom' 'color' 'to' color=Color
-    | {ColorBottomAction} 'Turn' 'off' 'bottom' 'leds';
+    | {ColorBottomAction} 'turn' 'off' 'bottom' 'leds';
 
 ColorTopAction returns ColorTopAction:
     'set' 'top' 'color' 'to' color=Color
-    | {ColorTopAction} 'Turn' 'off' 'top' 'leds';
+    | {ColorTopAction} 'turn' 'off' 'top' 'leds';
 
 IfStatement returns IfStatement:
     'If' condition=Condition ':'
@@ -41,10 +41,10 @@ IfStatement returns IfStatement:
     'End' 'if';
 
 UpperEvent returns UpperEvent:
-    'On' buttons+=Buttons ('and' buttons+=Buttons)* state=State 'do' ':';
+    'On' buttons+=Buttons ('and' buttons+=Buttons)* 'button' state=State 'do' ':';
 
 ProxEvent returns ProxEvent:
-    'On' sensor=Sensor 'do:';
+    'On' sensor=Sensor 'do' ':';
 
 Sensor returns Sensor:
     HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' ('proximity'|'no' 'proximity')

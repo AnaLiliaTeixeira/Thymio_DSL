@@ -3,6 +3,20 @@
  */
 package org.xtext.project.tdsl.validation;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.xtext.validation.Check;
+
+import thymio_DSL.Action;
+import thymio_DSL.ColorTopAction;
+import thymio_DSL.Statement;
+import thymio_DSL.ThymioDSL;
+import thymio_DSL.Thymio_DSLPackage;
+import thymio_DSL.UpperEvent;
 
 /**
  * This class contains custom validation rules. 
@@ -11,15 +25,120 @@ package org.xtext.project.tdsl.validation;
  */
 public class TDslValidator extends AbstractTDslValidator {
 	
-//	public static final String INVALID_NAME = "invalidName";
-//
-//	@Check
-//	public void checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-//			warning("Name should start with a capital",
-//					TDslPackage.Literals.GREETING__NAME,
-//					INVALID_NAME);
-//		}
-//	}
+	public static final String DUPLICATE_ACTION_WARNING = "duplicateActionWarning";
+
+    @Check
+    public void checkForDuplicateActions(Statement statement) {
+    	Map<Class<?>, Boolean> seenActions = new HashMap<>();
+        List<Action> actions = statement.getAction();
+        
+        for (int i = 0; i < actions.size(); i++) {
+            Action action = actions.get(i);
+            Class<?> actionClass = action.getClass();
+            if (seenActions.containsKey(actionClass)) {
+                // Emit a warning for all subsequent duplicate actions
+                warning("This action will not be executed as there is another action of the same type that will override it.",
+                        Thymio_DSLPackage.Literals.STATEMENT__ACTION,
+                        DUPLICATE_ACTION_WARNING,
+                        actionClass.getSimpleName());
+            } else {
+                // Mark the first occurrence as seen
+                seenActions.put(actionClass, true);
+            }
+        }
+    }
+    
+    public static final String TURN_OFF_TOP_LEDS_WARNING = "turnOffTopLedsWarning";
+
+    @Check
+    public void checkTurnOffTopLeds(Statement statement) {
+        boolean setTopColorSeen = false;
+        for (Action action : statement.getAction()) {
+            if (action instanceof ColorTopAction) {
+                ColorTopAction colorTopAction = (ColorTopAction) action;
+                if (colorTopAction.getColor() != null) {
+                    setTopColorSeen = true;
+                } else if (setTopColorSeen == false) {
+                    warning("Turning off top LEDs without setting the top color first.",
+                            Thymio_DSLPackage.Literals.STATEMENT__ACTION,
+                            TURN_OFF_TOP_LEDS_WARNING,
+                            action.getClass().getSimpleName());
+                }
+            }
+        }
+    }
+    
+    public static final String TURN_OFF_BOTTOM_LEDS_WARNING = "turnOffTopLedsWarning";
+
+//    @Check
+//    public void checkTurnOffBottomLeds(Statement statement) {
+//        boolean setBottomColorSeen = false;
+//        for (Action action : statement.getAction()) {
+//            if (action instanceof ColorBottomAction) {
+//            	ColorBottomAction colorBottomAction = (ColorBottomAction) action;
+//                if (colorBottomAction.getColor() != null) {
+//                    setBottomColorSeen = true;
+//                } else if (setBottomColorSeen == false) {
+//                    warning("Turning off bottom LEDs without setting the bottom color first.",
+//                            Thymio_DSLPackage.Literals.STATEMENT__ACTION,
+//                            TURN_OFF_BOTTOM_LEDS_WARNING,
+//                            action.getClass().getSimpleName());
+//                }
+//            }
+//        }
+//    }
+    @Check
+    public void checkTurnOffTopLeds(ThymioDSL model) {
+        boolean setTopColorSeen = false;
+        
+        // Iterate through all statements in the model
+        for (Statement statement : model.getStatement()) {
+            for (Action action : statement.getAction()) {
+                if (action instanceof ColorTopAction) {
+                    ColorTopAction colorTopAction = (ColorTopAction) action;
+                    if (colorTopAction.getColor() != null) {
+                        setTopColorSeen = true;
+                        break; // No need to check further if we found a set top color action
+                    }
+                }
+            }
+            if (setTopColorSeen) {
+                break;
+            }
+        }
+
+        // If no set top color action was found, check for turn off top leds actions
+        if (!setTopColorSeen) {
+            for (Statement statement : model.getStatement()) {
+                for (Action action : statement.getAction()) {
+                    if (action instanceof ColorTopAction) {
+                        ColorTopAction colorTopAction = (ColorTopAction) action;
+                        if (colorTopAction.getColor() == null) {
+                            warning("Turning off top LEDs without setting the top color first.",
+                                    Thymio_DSLPackage.Literals.STATEMENT__ACTION,
+                                    TURN_OFF_TOP_LEDS_WARNING,
+                                    action.getClass().getSimpleName());
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    public static final String DUPLICATE_BUTTON_WARNING = "duplicateButtonWarning";
+
+    @Check
+    public void checkDuplicateButtons(UpperEvent upperEvent) {
+        Set<String> seenButtons = new HashSet<>();
+        for (String button : upperEvent.getButtons()) {
+            if (!seenButtons.add(button)) {
+                warning("The button '" + button + "' is repeated and does not make any difference, so it is redundant.",
+                        Thymio_DSLPackage.Literals.UPPER_EVENT__BUTTONS,
+                        DUPLICATE_BUTTON_WARNING,
+                        button);
+                System.out.println("OIIII");
+            }
+        }
+    }
 	
 }
