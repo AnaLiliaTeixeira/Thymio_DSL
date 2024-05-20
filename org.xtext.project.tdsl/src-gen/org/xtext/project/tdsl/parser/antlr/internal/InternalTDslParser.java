@@ -552,11 +552,11 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     {
                     int LA3_5 = input.LA(3);
 
-                    if ( (LA3_5==45) ) {
-                        alt3=2;
-                    }
-                    else if ( ((LA3_5>=37 && LA3_5<=38)) ) {
+                    if ( ((LA3_5>=37 && LA3_5<=38)) ) {
                         alt3=1;
+                    }
+                    else if ( (LA3_5==45) ) {
+                        alt3=2;
                     }
                     else {
                         NoViableAltException nvae =
@@ -570,11 +570,11 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     {
                     int LA3_6 = input.LA(3);
 
-                    if ( ((LA3_6>=37 && LA3_6<=38)) ) {
-                        alt3=1;
-                    }
-                    else if ( (LA3_6==45) ) {
+                    if ( (LA3_6==45) ) {
                         alt3=2;
+                    }
+                    else if ( ((LA3_6>=37 && LA3_6<=38)) ) {
+                        alt3=1;
                     }
                     else {
                         NoViableAltException nvae =
@@ -2472,7 +2472,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSensor"
-    // InternalTDsl.g:902:1: ruleSensor returns [EObject current=null] : ( ( ruleHorizontalSensors ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) ) | ( ruleRightLeft ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) ) ) ;
+    // InternalTDsl.g:902:1: ruleSensor returns [EObject current=null] : ( ( ( (lv_direction_0_0= ruleHorizontalSensors ) ) ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) ) | ( ( (lv_direction_7_0= ruleRightLeft ) ) ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) ) ) ;
     public final EObject ruleSensor() throws RecognitionException {
         EObject current = null;
 
@@ -2490,15 +2490,19 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         Token otherlv_13=null;
         Token otherlv_14=null;
         Token otherlv_15=null;
+        AntlrDatatypeRuleToken lv_direction_0_0 = null;
+
+        AntlrDatatypeRuleToken lv_direction_7_0 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalTDsl.g:908:2: ( ( ( ruleHorizontalSensors ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) ) | ( ruleRightLeft ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) ) ) )
-            // InternalTDsl.g:909:2: ( ( ruleHorizontalSensors ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) ) | ( ruleRightLeft ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) ) )
+            // InternalTDsl.g:908:2: ( ( ( ( (lv_direction_0_0= ruleHorizontalSensors ) ) ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) ) | ( ( (lv_direction_7_0= ruleRightLeft ) ) ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) ) ) )
+            // InternalTDsl.g:909:2: ( ( ( (lv_direction_0_0= ruleHorizontalSensors ) ) ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) ) | ( ( (lv_direction_7_0= ruleRightLeft ) ) ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) ) )
             {
-            // InternalTDsl.g:909:2: ( ( ruleHorizontalSensors ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) ) | ( ruleRightLeft ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) ) )
+            // InternalTDsl.g:909:2: ( ( ( (lv_direction_0_0= ruleHorizontalSensors ) ) ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) ) | ( ( (lv_direction_7_0= ruleRightLeft ) ) ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2516,27 +2520,47 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalTDsl.g:910:3: ( ruleHorizontalSensors ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) )
+                    // InternalTDsl.g:910:3: ( ( (lv_direction_0_0= ruleHorizontalSensors ) ) ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) )
                     {
-                    // InternalTDsl.g:910:3: ( ruleHorizontalSensors ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) )
-                    // InternalTDsl.g:911:4: ruleHorizontalSensors ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) )
+                    // InternalTDsl.g:910:3: ( ( (lv_direction_0_0= ruleHorizontalSensors ) ) ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) ) )
+                    // InternalTDsl.g:911:4: ( (lv_direction_0_0= ruleHorizontalSensors ) ) ( (lv_sensor_type_1_0= 'horizontal' ) ) otherlv_2= 'sensor' otherlv_3= 'detecting' (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) )
+                    {
+                    // InternalTDsl.g:911:4: ( (lv_direction_0_0= ruleHorizontalSensors ) )
+                    // InternalTDsl.g:912:5: (lv_direction_0_0= ruleHorizontalSensors )
+                    {
+                    // InternalTDsl.g:912:5: (lv_direction_0_0= ruleHorizontalSensors )
+                    // InternalTDsl.g:913:6: lv_direction_0_0= ruleHorizontalSensors
                     {
 
-                    				newCompositeNode(grammarAccess.getSensorAccess().getHorizontalSensorsParserRuleCall_0_0());
-                    			
+                    						newCompositeNode(grammarAccess.getSensorAccess().getDirectionHorizontalSensorsParserRuleCall_0_0_0());
+                    					
                     pushFollow(FOLLOW_33);
-                    ruleHorizontalSensors();
+                    lv_direction_0_0=ruleHorizontalSensors();
 
                     state._fsp--;
 
 
-                    				afterParserOrEnumRuleCall();
-                    			
-                    // InternalTDsl.g:918:4: ( (lv_sensor_type_1_0= 'horizontal' ) )
-                    // InternalTDsl.g:919:5: (lv_sensor_type_1_0= 'horizontal' )
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getSensorRule());
+                    						}
+                    						set(
+                    							current,
+                    							"direction",
+                    							lv_direction_0_0,
+                    							"org.xtext.project.tdsl.TDsl.HorizontalSensors");
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+
+
+                    }
+
+                    // InternalTDsl.g:930:4: ( (lv_sensor_type_1_0= 'horizontal' ) )
+                    // InternalTDsl.g:931:5: (lv_sensor_type_1_0= 'horizontal' )
                     {
-                    // InternalTDsl.g:919:5: (lv_sensor_type_1_0= 'horizontal' )
-                    // InternalTDsl.g:920:6: lv_sensor_type_1_0= 'horizontal'
+                    // InternalTDsl.g:931:5: (lv_sensor_type_1_0= 'horizontal' )
+                    // InternalTDsl.g:932:6: lv_sensor_type_1_0= 'horizontal'
                     {
                     lv_sensor_type_1_0=(Token)match(input,40,FOLLOW_34); 
 
@@ -2562,7 +2586,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_3, grammarAccess.getSensorAccess().getDetectingKeyword_0_3());
                     			
-                    // InternalTDsl.g:940:4: (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) )
+                    // InternalTDsl.g:952:4: (otherlv_4= 'proximity' | (otherlv_5= 'no' otherlv_6= 'proximity' ) )
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -2580,7 +2604,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt13) {
                         case 1 :
-                            // InternalTDsl.g:941:5: otherlv_4= 'proximity'
+                            // InternalTDsl.g:953:5: otherlv_4= 'proximity'
                             {
                             otherlv_4=(Token)match(input,43,FOLLOW_2); 
 
@@ -2590,10 +2614,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalTDsl.g:946:5: (otherlv_5= 'no' otherlv_6= 'proximity' )
+                            // InternalTDsl.g:958:5: (otherlv_5= 'no' otherlv_6= 'proximity' )
                             {
-                            // InternalTDsl.g:946:5: (otherlv_5= 'no' otherlv_6= 'proximity' )
-                            // InternalTDsl.g:947:6: otherlv_5= 'no' otherlv_6= 'proximity'
+                            // InternalTDsl.g:958:5: (otherlv_5= 'no' otherlv_6= 'proximity' )
+                            // InternalTDsl.g:959:6: otherlv_5= 'no' otherlv_6= 'proximity'
                             {
                             otherlv_5=(Token)match(input,44,FOLLOW_37); 
 
@@ -2619,27 +2643,47 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTDsl.g:959:3: ( ruleRightLeft ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) )
+                    // InternalTDsl.g:971:3: ( ( (lv_direction_7_0= ruleRightLeft ) ) ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) )
                     {
-                    // InternalTDsl.g:959:3: ( ruleRightLeft ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) )
-                    // InternalTDsl.g:960:4: ruleRightLeft ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' )
+                    // InternalTDsl.g:971:3: ( ( (lv_direction_7_0= ruleRightLeft ) ) ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' ) )
+                    // InternalTDsl.g:972:4: ( (lv_direction_7_0= ruleRightLeft ) ) ( (lv_sensor_type_8_0= 'ground' ) ) otherlv_9= 'sensor' otherlv_10= 'detecting' (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' )
+                    {
+                    // InternalTDsl.g:972:4: ( (lv_direction_7_0= ruleRightLeft ) )
+                    // InternalTDsl.g:973:5: (lv_direction_7_0= ruleRightLeft )
+                    {
+                    // InternalTDsl.g:973:5: (lv_direction_7_0= ruleRightLeft )
+                    // InternalTDsl.g:974:6: lv_direction_7_0= ruleRightLeft
                     {
 
-                    				newCompositeNode(grammarAccess.getSensorAccess().getRightLeftParserRuleCall_1_0());
-                    			
+                    						newCompositeNode(grammarAccess.getSensorAccess().getDirectionRightLeftParserRuleCall_1_0_0());
+                    					
                     pushFollow(FOLLOW_38);
-                    ruleRightLeft();
+                    lv_direction_7_0=ruleRightLeft();
 
                     state._fsp--;
 
 
-                    				afterParserOrEnumRuleCall();
-                    			
-                    // InternalTDsl.g:967:4: ( (lv_sensor_type_8_0= 'ground' ) )
-                    // InternalTDsl.g:968:5: (lv_sensor_type_8_0= 'ground' )
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getSensorRule());
+                    						}
+                    						set(
+                    							current,
+                    							"direction",
+                    							lv_direction_7_0,
+                    							"org.xtext.project.tdsl.TDsl.RightLeft");
+                    						afterParserOrEnumRuleCall();
+                    					
+
+                    }
+
+
+                    }
+
+                    // InternalTDsl.g:991:4: ( (lv_sensor_type_8_0= 'ground' ) )
+                    // InternalTDsl.g:992:5: (lv_sensor_type_8_0= 'ground' )
                     {
-                    // InternalTDsl.g:968:5: (lv_sensor_type_8_0= 'ground' )
-                    // InternalTDsl.g:969:6: lv_sensor_type_8_0= 'ground'
+                    // InternalTDsl.g:992:5: (lv_sensor_type_8_0= 'ground' )
+                    // InternalTDsl.g:993:6: lv_sensor_type_8_0= 'ground'
                     {
                     lv_sensor_type_8_0=(Token)match(input,45,FOLLOW_34); 
 
@@ -2665,7 +2709,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_10, grammarAccess.getSensorAccess().getDetectingKeyword_1_3());
                     			
-                    // InternalTDsl.g:989:4: (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' )
+                    // InternalTDsl.g:1013:4: (otherlv_11= 'proximity' | (otherlv_12= 'no' otherlv_13= 'proximity' ) | otherlv_14= 'black' | otherlv_15= 'white' )
                     int alt14=4;
                     switch ( input.LA(1) ) {
                     case 43:
@@ -2697,7 +2741,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
                     switch (alt14) {
                         case 1 :
-                            // InternalTDsl.g:990:5: otherlv_11= 'proximity'
+                            // InternalTDsl.g:1014:5: otherlv_11= 'proximity'
                             {
                             otherlv_11=(Token)match(input,43,FOLLOW_2); 
 
@@ -2707,10 +2751,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalTDsl.g:995:5: (otherlv_12= 'no' otherlv_13= 'proximity' )
+                            // InternalTDsl.g:1019:5: (otherlv_12= 'no' otherlv_13= 'proximity' )
                             {
-                            // InternalTDsl.g:995:5: (otherlv_12= 'no' otherlv_13= 'proximity' )
-                            // InternalTDsl.g:996:6: otherlv_12= 'no' otherlv_13= 'proximity'
+                            // InternalTDsl.g:1019:5: (otherlv_12= 'no' otherlv_13= 'proximity' )
+                            // InternalTDsl.g:1020:6: otherlv_12= 'no' otherlv_13= 'proximity'
                             {
                             otherlv_12=(Token)match(input,44,FOLLOW_37); 
 
@@ -2727,7 +2771,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalTDsl.g:1006:5: otherlv_14= 'black'
+                            // InternalTDsl.g:1030:5: otherlv_14= 'black'
                             {
                             otherlv_14=(Token)match(input,46,FOLLOW_2); 
 
@@ -2737,7 +2781,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // InternalTDsl.g:1011:5: otherlv_15= 'white'
+                            // InternalTDsl.g:1035:5: otherlv_15= 'white'
                             {
                             otherlv_15=(Token)match(input,47,FOLLOW_2); 
 
@@ -2778,7 +2822,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTapEvent"
-    // InternalTDsl.g:1021:1: entryRuleTapEvent returns [EObject current=null] : iv_ruleTapEvent= ruleTapEvent EOF ;
+    // InternalTDsl.g:1045:1: entryRuleTapEvent returns [EObject current=null] : iv_ruleTapEvent= ruleTapEvent EOF ;
     public final EObject entryRuleTapEvent() throws RecognitionException {
         EObject current = null;
 
@@ -2786,8 +2830,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1021:49: (iv_ruleTapEvent= ruleTapEvent EOF )
-            // InternalTDsl.g:1022:2: iv_ruleTapEvent= ruleTapEvent EOF
+            // InternalTDsl.g:1045:49: (iv_ruleTapEvent= ruleTapEvent EOF )
+            // InternalTDsl.g:1046:2: iv_ruleTapEvent= ruleTapEvent EOF
             {
              newCompositeNode(grammarAccess.getTapEventRule()); 
             pushFollow(FOLLOW_1);
@@ -2814,7 +2858,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTapEvent"
-    // InternalTDsl.g:1028:1: ruleTapEvent returns [EObject current=null] : ( () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':' ) ;
+    // InternalTDsl.g:1052:1: ruleTapEvent returns [EObject current=null] : ( () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':' ) ;
     public final EObject ruleTapEvent() throws RecognitionException {
         EObject current = null;
 
@@ -2827,14 +2871,14 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1034:2: ( ( () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':' ) )
-            // InternalTDsl.g:1035:2: ( () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':' )
+            // InternalTDsl.g:1058:2: ( ( () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':' ) )
+            // InternalTDsl.g:1059:2: ( () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':' )
             {
-            // InternalTDsl.g:1035:2: ( () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':' )
-            // InternalTDsl.g:1036:3: () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':'
+            // InternalTDsl.g:1059:2: ( () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':' )
+            // InternalTDsl.g:1060:3: () otherlv_1= 'On' otherlv_2= 'tap' otherlv_3= 'do' otherlv_4= ':'
             {
-            // InternalTDsl.g:1036:3: ()
-            // InternalTDsl.g:1037:4: 
+            // InternalTDsl.g:1060:3: ()
+            // InternalTDsl.g:1061:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2883,7 +2927,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleClapEvent"
-    // InternalTDsl.g:1063:1: entryRuleClapEvent returns [EObject current=null] : iv_ruleClapEvent= ruleClapEvent EOF ;
+    // InternalTDsl.g:1087:1: entryRuleClapEvent returns [EObject current=null] : iv_ruleClapEvent= ruleClapEvent EOF ;
     public final EObject entryRuleClapEvent() throws RecognitionException {
         EObject current = null;
 
@@ -2891,8 +2935,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1063:50: (iv_ruleClapEvent= ruleClapEvent EOF )
-            // InternalTDsl.g:1064:2: iv_ruleClapEvent= ruleClapEvent EOF
+            // InternalTDsl.g:1087:50: (iv_ruleClapEvent= ruleClapEvent EOF )
+            // InternalTDsl.g:1088:2: iv_ruleClapEvent= ruleClapEvent EOF
             {
              newCompositeNode(grammarAccess.getClapEventRule()); 
             pushFollow(FOLLOW_1);
@@ -2919,7 +2963,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleClapEvent"
-    // InternalTDsl.g:1070:1: ruleClapEvent returns [EObject current=null] : ( () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':' ) ;
+    // InternalTDsl.g:1094:1: ruleClapEvent returns [EObject current=null] : ( () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':' ) ;
     public final EObject ruleClapEvent() throws RecognitionException {
         EObject current = null;
 
@@ -2932,14 +2976,14 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1076:2: ( ( () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':' ) )
-            // InternalTDsl.g:1077:2: ( () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':' )
+            // InternalTDsl.g:1100:2: ( ( () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':' ) )
+            // InternalTDsl.g:1101:2: ( () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':' )
             {
-            // InternalTDsl.g:1077:2: ( () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':' )
-            // InternalTDsl.g:1078:3: () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':'
+            // InternalTDsl.g:1101:2: ( () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':' )
+            // InternalTDsl.g:1102:3: () otherlv_1= 'On' otherlv_2= 'clap' otherlv_3= 'do' otherlv_4= ':'
             {
-            // InternalTDsl.g:1078:3: ()
-            // InternalTDsl.g:1079:4: 
+            // InternalTDsl.g:1102:3: ()
+            // InternalTDsl.g:1103:4: 
             {
 
             				current = forceCreateModelElement(
@@ -2988,7 +3032,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleCondition"
-    // InternalTDsl.g:1105:1: entryRuleCondition returns [EObject current=null] : iv_ruleCondition= ruleCondition EOF ;
+    // InternalTDsl.g:1129:1: entryRuleCondition returns [EObject current=null] : iv_ruleCondition= ruleCondition EOF ;
     public final EObject entryRuleCondition() throws RecognitionException {
         EObject current = null;
 
@@ -2996,8 +3040,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1105:50: (iv_ruleCondition= ruleCondition EOF )
-            // InternalTDsl.g:1106:2: iv_ruleCondition= ruleCondition EOF
+            // InternalTDsl.g:1129:50: (iv_ruleCondition= ruleCondition EOF )
+            // InternalTDsl.g:1130:2: iv_ruleCondition= ruleCondition EOF
             {
              newCompositeNode(grammarAccess.getConditionRule()); 
             pushFollow(FOLLOW_1);
@@ -3024,7 +3068,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCondition"
-    // InternalTDsl.g:1112:1: ruleCondition returns [EObject current=null] : ( ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )? ) ;
+    // InternalTDsl.g:1136:1: ruleCondition returns [EObject current=null] : ( ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )? ) ;
     public final EObject ruleCondition() throws RecognitionException {
         EObject current = null;
 
@@ -3039,17 +3083,17 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1118:2: ( ( ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )? ) )
-            // InternalTDsl.g:1119:2: ( ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )? )
+            // InternalTDsl.g:1142:2: ( ( ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )? ) )
+            // InternalTDsl.g:1143:2: ( ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )? )
             {
-            // InternalTDsl.g:1119:2: ( ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )? )
-            // InternalTDsl.g:1120:3: ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )?
+            // InternalTDsl.g:1143:2: ( ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )? )
+            // InternalTDsl.g:1144:3: ( (lv_leftSensor_0_0= ruleSensor ) ) ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )?
             {
-            // InternalTDsl.g:1120:3: ( (lv_leftSensor_0_0= ruleSensor ) )
-            // InternalTDsl.g:1121:4: (lv_leftSensor_0_0= ruleSensor )
+            // InternalTDsl.g:1144:3: ( (lv_leftSensor_0_0= ruleSensor ) )
+            // InternalTDsl.g:1145:4: (lv_leftSensor_0_0= ruleSensor )
             {
-            // InternalTDsl.g:1121:4: (lv_leftSensor_0_0= ruleSensor )
-            // InternalTDsl.g:1122:5: lv_leftSensor_0_0= ruleSensor
+            // InternalTDsl.g:1145:4: (lv_leftSensor_0_0= ruleSensor )
+            // InternalTDsl.g:1146:5: lv_leftSensor_0_0= ruleSensor
             {
 
             					newCompositeNode(grammarAccess.getConditionAccess().getLeftSensorSensorParserRuleCall_0_0());
@@ -3076,7 +3120,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTDsl.g:1139:3: ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )?
+            // InternalTDsl.g:1163:3: ( ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) ) )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -3085,15 +3129,15 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt17) {
                 case 1 :
-                    // InternalTDsl.g:1140:4: ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) )
+                    // InternalTDsl.g:1164:4: ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) ) ( (lv_rightSensor_2_0= ruleSensor ) )
                     {
-                    // InternalTDsl.g:1140:4: ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) )
-                    // InternalTDsl.g:1141:5: ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) )
+                    // InternalTDsl.g:1164:4: ( ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) ) )
+                    // InternalTDsl.g:1165:5: ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) )
                     {
-                    // InternalTDsl.g:1141:5: ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) )
-                    // InternalTDsl.g:1142:6: (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' )
+                    // InternalTDsl.g:1165:5: ( (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' ) )
+                    // InternalTDsl.g:1166:6: (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' )
                     {
-                    // InternalTDsl.g:1142:6: (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' )
+                    // InternalTDsl.g:1166:6: (lv_operator_1_1= 'and' | lv_operator_1_2= 'or' )
                     int alt16=2;
                     int LA16_0 = input.LA(1);
 
@@ -3111,7 +3155,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt16) {
                         case 1 :
-                            // InternalTDsl.g:1143:7: lv_operator_1_1= 'and'
+                            // InternalTDsl.g:1167:7: lv_operator_1_1= 'and'
                             {
                             lv_operator_1_1=(Token)match(input,37,FOLLOW_25); 
 
@@ -3127,7 +3171,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalTDsl.g:1154:7: lv_operator_1_2= 'or'
+                            // InternalTDsl.g:1178:7: lv_operator_1_2= 'or'
                             {
                             lv_operator_1_2=(Token)match(input,50,FOLLOW_25); 
 
@@ -3151,11 +3195,11 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTDsl.g:1167:4: ( (lv_rightSensor_2_0= ruleSensor ) )
-                    // InternalTDsl.g:1168:5: (lv_rightSensor_2_0= ruleSensor )
+                    // InternalTDsl.g:1191:4: ( (lv_rightSensor_2_0= ruleSensor ) )
+                    // InternalTDsl.g:1192:5: (lv_rightSensor_2_0= ruleSensor )
                     {
-                    // InternalTDsl.g:1168:5: (lv_rightSensor_2_0= ruleSensor )
-                    // InternalTDsl.g:1169:6: lv_rightSensor_2_0= ruleSensor
+                    // InternalTDsl.g:1192:5: (lv_rightSensor_2_0= ruleSensor )
+                    // InternalTDsl.g:1193:6: lv_rightSensor_2_0= ruleSensor
                     {
 
                     						newCompositeNode(grammarAccess.getConditionAccess().getRightSensorSensorParserRuleCall_1_1_0());
@@ -3211,7 +3255,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleArithmeticExpression"
-    // InternalTDsl.g:1191:1: entryRuleArithmeticExpression returns [EObject current=null] : iv_ruleArithmeticExpression= ruleArithmeticExpression EOF ;
+    // InternalTDsl.g:1215:1: entryRuleArithmeticExpression returns [EObject current=null] : iv_ruleArithmeticExpression= ruleArithmeticExpression EOF ;
     public final EObject entryRuleArithmeticExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3219,8 +3263,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1191:61: (iv_ruleArithmeticExpression= ruleArithmeticExpression EOF )
-            // InternalTDsl.g:1192:2: iv_ruleArithmeticExpression= ruleArithmeticExpression EOF
+            // InternalTDsl.g:1215:61: (iv_ruleArithmeticExpression= ruleArithmeticExpression EOF )
+            // InternalTDsl.g:1216:2: iv_ruleArithmeticExpression= ruleArithmeticExpression EOF
             {
              newCompositeNode(grammarAccess.getArithmeticExpressionRule()); 
             pushFollow(FOLLOW_1);
@@ -3247,7 +3291,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleArithmeticExpression"
-    // InternalTDsl.g:1198:1: ruleArithmeticExpression returns [EObject current=null] : ( ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )? ) ;
+    // InternalTDsl.g:1222:1: ruleArithmeticExpression returns [EObject current=null] : ( ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )? ) ;
     public final EObject ruleArithmeticExpression() throws RecognitionException {
         EObject current = null;
 
@@ -3265,17 +3309,17 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1204:2: ( ( ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )? ) )
-            // InternalTDsl.g:1205:2: ( ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )? )
+            // InternalTDsl.g:1228:2: ( ( ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )? ) )
+            // InternalTDsl.g:1229:2: ( ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )? )
             {
-            // InternalTDsl.g:1205:2: ( ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )? )
-            // InternalTDsl.g:1206:3: ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )?
+            // InternalTDsl.g:1229:2: ( ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )? )
+            // InternalTDsl.g:1230:3: ( (lv_left_0_0= ruleEIntegerObject ) ) ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )?
             {
-            // InternalTDsl.g:1206:3: ( (lv_left_0_0= ruleEIntegerObject ) )
-            // InternalTDsl.g:1207:4: (lv_left_0_0= ruleEIntegerObject )
+            // InternalTDsl.g:1230:3: ( (lv_left_0_0= ruleEIntegerObject ) )
+            // InternalTDsl.g:1231:4: (lv_left_0_0= ruleEIntegerObject )
             {
-            // InternalTDsl.g:1207:4: (lv_left_0_0= ruleEIntegerObject )
-            // InternalTDsl.g:1208:5: lv_left_0_0= ruleEIntegerObject
+            // InternalTDsl.g:1231:4: (lv_left_0_0= ruleEIntegerObject )
+            // InternalTDsl.g:1232:5: lv_left_0_0= ruleEIntegerObject
             {
 
             					newCompositeNode(grammarAccess.getArithmeticExpressionAccess().getLeftEIntegerObjectParserRuleCall_0_0());
@@ -3302,7 +3346,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTDsl.g:1225:3: ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )?
+            // InternalTDsl.g:1249:3: ( ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) ) )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -3318,15 +3362,15 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalTDsl.g:1226:4: ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) )
+                    // InternalTDsl.g:1250:4: ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) ) ( (lv_right_2_0= ruleEIntegerObject ) )
                     {
-                    // InternalTDsl.g:1226:4: ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) )
-                    // InternalTDsl.g:1227:5: ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) )
+                    // InternalTDsl.g:1250:4: ( ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) ) )
+                    // InternalTDsl.g:1251:5: ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) )
                     {
-                    // InternalTDsl.g:1227:5: ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) )
-                    // InternalTDsl.g:1228:6: (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' )
+                    // InternalTDsl.g:1251:5: ( (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' ) )
+                    // InternalTDsl.g:1252:6: (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' )
                     {
-                    // InternalTDsl.g:1228:6: (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' )
+                    // InternalTDsl.g:1252:6: (lv_operator_1_1= '+' | lv_operator_1_2= '-' | lv_operator_1_3= '*' | lv_operator_1_4= '/' | lv_operator_1_5= 'mod' )
                     int alt18=5;
                     switch ( input.LA(1) ) {
                     case 51:
@@ -3363,7 +3407,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
                     switch (alt18) {
                         case 1 :
-                            // InternalTDsl.g:1229:7: lv_operator_1_1= '+'
+                            // InternalTDsl.g:1253:7: lv_operator_1_1= '+'
                             {
                             lv_operator_1_1=(Token)match(input,51,FOLLOW_11); 
 
@@ -3379,7 +3423,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalTDsl.g:1240:7: lv_operator_1_2= '-'
+                            // InternalTDsl.g:1264:7: lv_operator_1_2= '-'
                             {
                             lv_operator_1_2=(Token)match(input,12,FOLLOW_11); 
 
@@ -3395,7 +3439,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalTDsl.g:1251:7: lv_operator_1_3= '*'
+                            // InternalTDsl.g:1275:7: lv_operator_1_3= '*'
                             {
                             lv_operator_1_3=(Token)match(input,52,FOLLOW_11); 
 
@@ -3411,7 +3455,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // InternalTDsl.g:1262:7: lv_operator_1_4= '/'
+                            // InternalTDsl.g:1286:7: lv_operator_1_4= '/'
                             {
                             lv_operator_1_4=(Token)match(input,53,FOLLOW_11); 
 
@@ -3427,7 +3471,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 5 :
-                            // InternalTDsl.g:1273:7: lv_operator_1_5= 'mod'
+                            // InternalTDsl.g:1297:7: lv_operator_1_5= 'mod'
                             {
                             lv_operator_1_5=(Token)match(input,54,FOLLOW_11); 
 
@@ -3451,11 +3495,11 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTDsl.g:1286:4: ( (lv_right_2_0= ruleEIntegerObject ) )
-                    // InternalTDsl.g:1287:5: (lv_right_2_0= ruleEIntegerObject )
+                    // InternalTDsl.g:1310:4: ( (lv_right_2_0= ruleEIntegerObject ) )
+                    // InternalTDsl.g:1311:5: (lv_right_2_0= ruleEIntegerObject )
                     {
-                    // InternalTDsl.g:1287:5: (lv_right_2_0= ruleEIntegerObject )
-                    // InternalTDsl.g:1288:6: lv_right_2_0= ruleEIntegerObject
+                    // InternalTDsl.g:1311:5: (lv_right_2_0= ruleEIntegerObject )
+                    // InternalTDsl.g:1312:6: lv_right_2_0= ruleEIntegerObject
                     {
 
                     						newCompositeNode(grammarAccess.getArithmeticExpressionAccess().getRightEIntegerObjectParserRuleCall_1_1_0());
@@ -3511,7 +3555,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEIntegerObject"
-    // InternalTDsl.g:1310:1: entryRuleEIntegerObject returns [String current=null] : iv_ruleEIntegerObject= ruleEIntegerObject EOF ;
+    // InternalTDsl.g:1334:1: entryRuleEIntegerObject returns [String current=null] : iv_ruleEIntegerObject= ruleEIntegerObject EOF ;
     public final String entryRuleEIntegerObject() throws RecognitionException {
         String current = null;
 
@@ -3519,8 +3563,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1310:54: (iv_ruleEIntegerObject= ruleEIntegerObject EOF )
-            // InternalTDsl.g:1311:2: iv_ruleEIntegerObject= ruleEIntegerObject EOF
+            // InternalTDsl.g:1334:54: (iv_ruleEIntegerObject= ruleEIntegerObject EOF )
+            // InternalTDsl.g:1335:2: iv_ruleEIntegerObject= ruleEIntegerObject EOF
             {
              newCompositeNode(grammarAccess.getEIntegerObjectRule()); 
             pushFollow(FOLLOW_1);
@@ -3547,7 +3591,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEIntegerObject"
-    // InternalTDsl.g:1317:1: ruleEIntegerObject returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? this_INT_1= RULE_INT ) ;
+    // InternalTDsl.g:1341:1: ruleEIntegerObject returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? this_INT_1= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleEIntegerObject() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3558,13 +3602,13 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1323:2: ( ( (kw= '-' )? this_INT_1= RULE_INT ) )
-            // InternalTDsl.g:1324:2: ( (kw= '-' )? this_INT_1= RULE_INT )
+            // InternalTDsl.g:1347:2: ( ( (kw= '-' )? this_INT_1= RULE_INT ) )
+            // InternalTDsl.g:1348:2: ( (kw= '-' )? this_INT_1= RULE_INT )
             {
-            // InternalTDsl.g:1324:2: ( (kw= '-' )? this_INT_1= RULE_INT )
-            // InternalTDsl.g:1325:3: (kw= '-' )? this_INT_1= RULE_INT
+            // InternalTDsl.g:1348:2: ( (kw= '-' )? this_INT_1= RULE_INT )
+            // InternalTDsl.g:1349:3: (kw= '-' )? this_INT_1= RULE_INT
             {
-            // InternalTDsl.g:1325:3: (kw= '-' )?
+            // InternalTDsl.g:1349:3: (kw= '-' )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -3573,7 +3617,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt20) {
                 case 1 :
-                    // InternalTDsl.g:1326:4: kw= '-'
+                    // InternalTDsl.g:1350:4: kw= '-'
                     {
                     kw=(Token)match(input,12,FOLLOW_44); 
 
@@ -3616,7 +3660,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleColor"
-    // InternalTDsl.g:1343:1: entryRuleColor returns [String current=null] : iv_ruleColor= ruleColor EOF ;
+    // InternalTDsl.g:1367:1: entryRuleColor returns [String current=null] : iv_ruleColor= ruleColor EOF ;
     public final String entryRuleColor() throws RecognitionException {
         String current = null;
 
@@ -3624,8 +3668,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1343:45: (iv_ruleColor= ruleColor EOF )
-            // InternalTDsl.g:1344:2: iv_ruleColor= ruleColor EOF
+            // InternalTDsl.g:1367:45: (iv_ruleColor= ruleColor EOF )
+            // InternalTDsl.g:1368:2: iv_ruleColor= ruleColor EOF
             {
              newCompositeNode(grammarAccess.getColorRule()); 
             pushFollow(FOLLOW_1);
@@ -3652,7 +3696,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleColor"
-    // InternalTDsl.g:1350:1: ruleColor returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' ) ) ;
+    // InternalTDsl.g:1374:1: ruleColor returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' ) ) ;
     public final AntlrDatatypeRuleToken ruleColor() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3662,13 +3706,13 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1356:2: ( ( (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' ) ) )
-            // InternalTDsl.g:1357:2: ( (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' ) )
+            // InternalTDsl.g:1380:2: ( ( (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' ) ) )
+            // InternalTDsl.g:1381:2: ( (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' ) )
             {
-            // InternalTDsl.g:1357:2: ( (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' ) )
-            // InternalTDsl.g:1358:3: (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' )
+            // InternalTDsl.g:1381:2: ( (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' ) )
+            // InternalTDsl.g:1382:3: (kw= 'light' | kw= 'dark' )? (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' )
             {
-            // InternalTDsl.g:1358:3: (kw= 'light' | kw= 'dark' )?
+            // InternalTDsl.g:1382:3: (kw= 'light' | kw= 'dark' )?
             int alt21=3;
             int LA21_0 = input.LA(1);
 
@@ -3680,7 +3724,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt21) {
                 case 1 :
-                    // InternalTDsl.g:1359:4: kw= 'light'
+                    // InternalTDsl.g:1383:4: kw= 'light'
                     {
                     kw=(Token)match(input,55,FOLLOW_45); 
 
@@ -3691,7 +3735,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTDsl.g:1365:4: kw= 'dark'
+                    // InternalTDsl.g:1389:4: kw= 'dark'
                     {
                     kw=(Token)match(input,56,FOLLOW_45); 
 
@@ -3704,7 +3748,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTDsl.g:1371:3: (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' )
+            // InternalTDsl.g:1395:3: (kw= 'red' | kw= 'green' | kw= 'blue' | kw= 'black' | kw= 'white' | kw= 'yellow' )
             int alt22=6;
             switch ( input.LA(1) ) {
             case 57:
@@ -3746,7 +3790,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
             switch (alt22) {
                 case 1 :
-                    // InternalTDsl.g:1372:4: kw= 'red'
+                    // InternalTDsl.g:1396:4: kw= 'red'
                     {
                     kw=(Token)match(input,57,FOLLOW_2); 
 
@@ -3757,7 +3801,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTDsl.g:1378:4: kw= 'green'
+                    // InternalTDsl.g:1402:4: kw= 'green'
                     {
                     kw=(Token)match(input,58,FOLLOW_2); 
 
@@ -3768,7 +3812,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTDsl.g:1384:4: kw= 'blue'
+                    // InternalTDsl.g:1408:4: kw= 'blue'
                     {
                     kw=(Token)match(input,59,FOLLOW_2); 
 
@@ -3779,7 +3823,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalTDsl.g:1390:4: kw= 'black'
+                    // InternalTDsl.g:1414:4: kw= 'black'
                     {
                     kw=(Token)match(input,46,FOLLOW_2); 
 
@@ -3790,7 +3834,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalTDsl.g:1396:4: kw= 'white'
+                    // InternalTDsl.g:1420:4: kw= 'white'
                     {
                     kw=(Token)match(input,47,FOLLOW_2); 
 
@@ -3801,7 +3845,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalTDsl.g:1402:4: kw= 'yellow'
+                    // InternalTDsl.g:1426:4: kw= 'yellow'
                     {
                     kw=(Token)match(input,60,FOLLOW_2); 
 
@@ -3837,7 +3881,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSound"
-    // InternalTDsl.g:1412:1: entryRuleSound returns [String current=null] : iv_ruleSound= ruleSound EOF ;
+    // InternalTDsl.g:1436:1: entryRuleSound returns [String current=null] : iv_ruleSound= ruleSound EOF ;
     public final String entryRuleSound() throws RecognitionException {
         String current = null;
 
@@ -3845,8 +3889,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1412:45: (iv_ruleSound= ruleSound EOF )
-            // InternalTDsl.g:1413:2: iv_ruleSound= ruleSound EOF
+            // InternalTDsl.g:1436:45: (iv_ruleSound= ruleSound EOF )
+            // InternalTDsl.g:1437:2: iv_ruleSound= ruleSound EOF
             {
              newCompositeNode(grammarAccess.getSoundRule()); 
             pushFollow(FOLLOW_1);
@@ -3873,7 +3917,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSound"
-    // InternalTDsl.g:1419:1: ruleSound returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'sound1' | kw= 'sound2' | kw= 'sound3' | kw= 'sound4' ) ;
+    // InternalTDsl.g:1443:1: ruleSound returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'sound1' | kw= 'sound2' | kw= 'sound3' | kw= 'sound4' ) ;
     public final AntlrDatatypeRuleToken ruleSound() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3883,10 +3927,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1425:2: ( (kw= 'sound1' | kw= 'sound2' | kw= 'sound3' | kw= 'sound4' ) )
-            // InternalTDsl.g:1426:2: (kw= 'sound1' | kw= 'sound2' | kw= 'sound3' | kw= 'sound4' )
+            // InternalTDsl.g:1449:2: ( (kw= 'sound1' | kw= 'sound2' | kw= 'sound3' | kw= 'sound4' ) )
+            // InternalTDsl.g:1450:2: (kw= 'sound1' | kw= 'sound2' | kw= 'sound3' | kw= 'sound4' )
             {
-            // InternalTDsl.g:1426:2: (kw= 'sound1' | kw= 'sound2' | kw= 'sound3' | kw= 'sound4' )
+            // InternalTDsl.g:1450:2: (kw= 'sound1' | kw= 'sound2' | kw= 'sound3' | kw= 'sound4' )
             int alt23=4;
             switch ( input.LA(1) ) {
             case 61:
@@ -3918,7 +3962,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
             switch (alt23) {
                 case 1 :
-                    // InternalTDsl.g:1427:3: kw= 'sound1'
+                    // InternalTDsl.g:1451:3: kw= 'sound1'
                     {
                     kw=(Token)match(input,61,FOLLOW_2); 
 
@@ -3929,7 +3973,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTDsl.g:1433:3: kw= 'sound2'
+                    // InternalTDsl.g:1457:3: kw= 'sound2'
                     {
                     kw=(Token)match(input,62,FOLLOW_2); 
 
@@ -3940,7 +3984,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTDsl.g:1439:3: kw= 'sound3'
+                    // InternalTDsl.g:1463:3: kw= 'sound3'
                     {
                     kw=(Token)match(input,63,FOLLOW_2); 
 
@@ -3951,7 +3995,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalTDsl.g:1445:3: kw= 'sound4'
+                    // InternalTDsl.g:1469:3: kw= 'sound4'
                     {
                     kw=(Token)match(input,64,FOLLOW_2); 
 
@@ -3984,7 +4028,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleButtons"
-    // InternalTDsl.g:1454:1: entryRuleButtons returns [String current=null] : iv_ruleButtons= ruleButtons EOF ;
+    // InternalTDsl.g:1478:1: entryRuleButtons returns [String current=null] : iv_ruleButtons= ruleButtons EOF ;
     public final String entryRuleButtons() throws RecognitionException {
         String current = null;
 
@@ -3992,8 +4036,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1454:47: (iv_ruleButtons= ruleButtons EOF )
-            // InternalTDsl.g:1455:2: iv_ruleButtons= ruleButtons EOF
+            // InternalTDsl.g:1478:47: (iv_ruleButtons= ruleButtons EOF )
+            // InternalTDsl.g:1479:2: iv_ruleButtons= ruleButtons EOF
             {
              newCompositeNode(grammarAccess.getButtonsRule()); 
             pushFollow(FOLLOW_1);
@@ -4020,7 +4064,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleButtons"
-    // InternalTDsl.g:1461:1: ruleButtons returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'center' | kw= 'right' | kw= 'left' | kw= 'forward' | kw= 'backward' ) ;
+    // InternalTDsl.g:1485:1: ruleButtons returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'center' | kw= 'right' | kw= 'left' | kw= 'forward' | kw= 'backward' ) ;
     public final AntlrDatatypeRuleToken ruleButtons() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4030,10 +4074,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1467:2: ( (kw= 'center' | kw= 'right' | kw= 'left' | kw= 'forward' | kw= 'backward' ) )
-            // InternalTDsl.g:1468:2: (kw= 'center' | kw= 'right' | kw= 'left' | kw= 'forward' | kw= 'backward' )
+            // InternalTDsl.g:1491:2: ( (kw= 'center' | kw= 'right' | kw= 'left' | kw= 'forward' | kw= 'backward' ) )
+            // InternalTDsl.g:1492:2: (kw= 'center' | kw= 'right' | kw= 'left' | kw= 'forward' | kw= 'backward' )
             {
-            // InternalTDsl.g:1468:2: (kw= 'center' | kw= 'right' | kw= 'left' | kw= 'forward' | kw= 'backward' )
+            // InternalTDsl.g:1492:2: (kw= 'center' | kw= 'right' | kw= 'left' | kw= 'forward' | kw= 'backward' )
             int alt24=5;
             switch ( input.LA(1) ) {
             case 65:
@@ -4070,7 +4114,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
             switch (alt24) {
                 case 1 :
-                    // InternalTDsl.g:1469:3: kw= 'center'
+                    // InternalTDsl.g:1493:3: kw= 'center'
                     {
                     kw=(Token)match(input,65,FOLLOW_2); 
 
@@ -4081,7 +4125,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTDsl.g:1475:3: kw= 'right'
+                    // InternalTDsl.g:1499:3: kw= 'right'
                     {
                     kw=(Token)match(input,66,FOLLOW_2); 
 
@@ -4092,7 +4136,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTDsl.g:1481:3: kw= 'left'
+                    // InternalTDsl.g:1505:3: kw= 'left'
                     {
                     kw=(Token)match(input,67,FOLLOW_2); 
 
@@ -4103,7 +4147,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalTDsl.g:1487:3: kw= 'forward'
+                    // InternalTDsl.g:1511:3: kw= 'forward'
                     {
                     kw=(Token)match(input,14,FOLLOW_2); 
 
@@ -4114,7 +4158,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalTDsl.g:1493:3: kw= 'backward'
+                    // InternalTDsl.g:1517:3: kw= 'backward'
                     {
                     kw=(Token)match(input,15,FOLLOW_2); 
 
@@ -4147,7 +4191,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleState"
-    // InternalTDsl.g:1502:1: entryRuleState returns [String current=null] : iv_ruleState= ruleState EOF ;
+    // InternalTDsl.g:1526:1: entryRuleState returns [String current=null] : iv_ruleState= ruleState EOF ;
     public final String entryRuleState() throws RecognitionException {
         String current = null;
 
@@ -4155,8 +4199,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1502:45: (iv_ruleState= ruleState EOF )
-            // InternalTDsl.g:1503:2: iv_ruleState= ruleState EOF
+            // InternalTDsl.g:1526:45: (iv_ruleState= ruleState EOF )
+            // InternalTDsl.g:1527:2: iv_ruleState= ruleState EOF
             {
              newCompositeNode(grammarAccess.getStateRule()); 
             pushFollow(FOLLOW_1);
@@ -4183,7 +4227,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleState"
-    // InternalTDsl.g:1509:1: ruleState returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'touched' | kw= 'released' ) ;
+    // InternalTDsl.g:1533:1: ruleState returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'touched' | kw= 'released' ) ;
     public final AntlrDatatypeRuleToken ruleState() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4193,10 +4237,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1515:2: ( (kw= 'touched' | kw= 'released' ) )
-            // InternalTDsl.g:1516:2: (kw= 'touched' | kw= 'released' )
+            // InternalTDsl.g:1539:2: ( (kw= 'touched' | kw= 'released' ) )
+            // InternalTDsl.g:1540:2: (kw= 'touched' | kw= 'released' )
             {
-            // InternalTDsl.g:1516:2: (kw= 'touched' | kw= 'released' )
+            // InternalTDsl.g:1540:2: (kw= 'touched' | kw= 'released' )
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -4214,7 +4258,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt25) {
                 case 1 :
-                    // InternalTDsl.g:1517:3: kw= 'touched'
+                    // InternalTDsl.g:1541:3: kw= 'touched'
                     {
                     kw=(Token)match(input,68,FOLLOW_2); 
 
@@ -4225,7 +4269,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTDsl.g:1523:3: kw= 'released'
+                    // InternalTDsl.g:1547:3: kw= 'released'
                     {
                     kw=(Token)match(input,69,FOLLOW_2); 
 
@@ -4258,7 +4302,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRightLeft"
-    // InternalTDsl.g:1532:1: entryRuleRightLeft returns [String current=null] : iv_ruleRightLeft= ruleRightLeft EOF ;
+    // InternalTDsl.g:1556:1: entryRuleRightLeft returns [String current=null] : iv_ruleRightLeft= ruleRightLeft EOF ;
     public final String entryRuleRightLeft() throws RecognitionException {
         String current = null;
 
@@ -4266,8 +4310,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1532:49: (iv_ruleRightLeft= ruleRightLeft EOF )
-            // InternalTDsl.g:1533:2: iv_ruleRightLeft= ruleRightLeft EOF
+            // InternalTDsl.g:1556:49: (iv_ruleRightLeft= ruleRightLeft EOF )
+            // InternalTDsl.g:1557:2: iv_ruleRightLeft= ruleRightLeft EOF
             {
              newCompositeNode(grammarAccess.getRightLeftRule()); 
             pushFollow(FOLLOW_1);
@@ -4294,7 +4338,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRightLeft"
-    // InternalTDsl.g:1539:1: ruleRightLeft returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'left' | kw= 'right' ) ;
+    // InternalTDsl.g:1563:1: ruleRightLeft returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'left' | kw= 'right' ) ;
     public final AntlrDatatypeRuleToken ruleRightLeft() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4304,10 +4348,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1545:2: ( (kw= 'left' | kw= 'right' ) )
-            // InternalTDsl.g:1546:2: (kw= 'left' | kw= 'right' )
+            // InternalTDsl.g:1569:2: ( (kw= 'left' | kw= 'right' ) )
+            // InternalTDsl.g:1570:2: (kw= 'left' | kw= 'right' )
             {
-            // InternalTDsl.g:1546:2: (kw= 'left' | kw= 'right' )
+            // InternalTDsl.g:1570:2: (kw= 'left' | kw= 'right' )
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -4325,7 +4369,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
             }
             switch (alt26) {
                 case 1 :
-                    // InternalTDsl.g:1547:3: kw= 'left'
+                    // InternalTDsl.g:1571:3: kw= 'left'
                     {
                     kw=(Token)match(input,67,FOLLOW_2); 
 
@@ -4336,7 +4380,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTDsl.g:1553:3: kw= 'right'
+                    // InternalTDsl.g:1577:3: kw= 'right'
                     {
                     kw=(Token)match(input,66,FOLLOW_2); 
 
@@ -4369,7 +4413,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleHorizontalSensors"
-    // InternalTDsl.g:1562:1: entryRuleHorizontalSensors returns [String current=null] : iv_ruleHorizontalSensors= ruleHorizontalSensors EOF ;
+    // InternalTDsl.g:1586:1: entryRuleHorizontalSensors returns [String current=null] : iv_ruleHorizontalSensors= ruleHorizontalSensors EOF ;
     public final String entryRuleHorizontalSensors() throws RecognitionException {
         String current = null;
 
@@ -4377,8 +4421,8 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTDsl.g:1562:57: (iv_ruleHorizontalSensors= ruleHorizontalSensors EOF )
-            // InternalTDsl.g:1563:2: iv_ruleHorizontalSensors= ruleHorizontalSensors EOF
+            // InternalTDsl.g:1586:57: (iv_ruleHorizontalSensors= ruleHorizontalSensors EOF )
+            // InternalTDsl.g:1587:2: iv_ruleHorizontalSensors= ruleHorizontalSensors EOF
             {
              newCompositeNode(grammarAccess.getHorizontalSensorsRule()); 
             pushFollow(FOLLOW_1);
@@ -4405,7 +4449,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleHorizontalSensors"
-    // InternalTDsl.g:1569:1: ruleHorizontalSensors returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) ) ;
+    // InternalTDsl.g:1593:1: ruleHorizontalSensors returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) ) ;
     public final AntlrDatatypeRuleToken ruleHorizontalSensors() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4415,18 +4459,18 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTDsl.g:1575:2: ( ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) ) )
-            // InternalTDsl.g:1576:2: ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) )
+            // InternalTDsl.g:1599:2: ( ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) ) )
+            // InternalTDsl.g:1600:2: ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) )
             {
-            // InternalTDsl.g:1576:2: ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) )
+            // InternalTDsl.g:1600:2: ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) )
             int alt27=7;
             alt27 = dfa27.predict(input);
             switch (alt27) {
                 case 1 :
-                    // InternalTDsl.g:1577:3: (kw= 'front' kw= 'left' )
+                    // InternalTDsl.g:1601:3: (kw= 'front' kw= 'left' )
                     {
-                    // InternalTDsl.g:1577:3: (kw= 'front' kw= 'left' )
-                    // InternalTDsl.g:1578:4: kw= 'front' kw= 'left'
+                    // InternalTDsl.g:1601:3: (kw= 'front' kw= 'left' )
+                    // InternalTDsl.g:1602:4: kw= 'front' kw= 'left'
                     {
                     kw=(Token)match(input,70,FOLLOW_46); 
 
@@ -4445,10 +4489,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTDsl.g:1590:3: (kw= 'front' kw= 'left/middle' )
+                    // InternalTDsl.g:1614:3: (kw= 'front' kw= 'left/middle' )
                     {
-                    // InternalTDsl.g:1590:3: (kw= 'front' kw= 'left/middle' )
-                    // InternalTDsl.g:1591:4: kw= 'front' kw= 'left/middle'
+                    // InternalTDsl.g:1614:3: (kw= 'front' kw= 'left/middle' )
+                    // InternalTDsl.g:1615:4: kw= 'front' kw= 'left/middle'
                     {
                     kw=(Token)match(input,70,FOLLOW_47); 
 
@@ -4467,10 +4511,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTDsl.g:1603:3: (kw= 'front' kw= 'middle' )
+                    // InternalTDsl.g:1627:3: (kw= 'front' kw= 'middle' )
                     {
-                    // InternalTDsl.g:1603:3: (kw= 'front' kw= 'middle' )
-                    // InternalTDsl.g:1604:4: kw= 'front' kw= 'middle'
+                    // InternalTDsl.g:1627:3: (kw= 'front' kw= 'middle' )
+                    // InternalTDsl.g:1628:4: kw= 'front' kw= 'middle'
                     {
                     kw=(Token)match(input,70,FOLLOW_48); 
 
@@ -4489,10 +4533,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalTDsl.g:1616:3: (kw= 'front' kw= 'right/middle' )
+                    // InternalTDsl.g:1640:3: (kw= 'front' kw= 'right/middle' )
                     {
-                    // InternalTDsl.g:1616:3: (kw= 'front' kw= 'right/middle' )
-                    // InternalTDsl.g:1617:4: kw= 'front' kw= 'right/middle'
+                    // InternalTDsl.g:1640:3: (kw= 'front' kw= 'right/middle' )
+                    // InternalTDsl.g:1641:4: kw= 'front' kw= 'right/middle'
                     {
                     kw=(Token)match(input,70,FOLLOW_49); 
 
@@ -4511,10 +4555,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalTDsl.g:1629:3: (kw= 'front' kw= 'right' )
+                    // InternalTDsl.g:1653:3: (kw= 'front' kw= 'right' )
                     {
-                    // InternalTDsl.g:1629:3: (kw= 'front' kw= 'right' )
-                    // InternalTDsl.g:1630:4: kw= 'front' kw= 'right'
+                    // InternalTDsl.g:1653:3: (kw= 'front' kw= 'right' )
+                    // InternalTDsl.g:1654:4: kw= 'front' kw= 'right'
                     {
                     kw=(Token)match(input,70,FOLLOW_50); 
 
@@ -4533,10 +4577,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalTDsl.g:1642:3: (kw= 'backward' kw= 'left' )
+                    // InternalTDsl.g:1666:3: (kw= 'backward' kw= 'left' )
                     {
-                    // InternalTDsl.g:1642:3: (kw= 'backward' kw= 'left' )
-                    // InternalTDsl.g:1643:4: kw= 'backward' kw= 'left'
+                    // InternalTDsl.g:1666:3: (kw= 'backward' kw= 'left' )
+                    // InternalTDsl.g:1667:4: kw= 'backward' kw= 'left'
                     {
                     kw=(Token)match(input,15,FOLLOW_46); 
 
@@ -4555,10 +4599,10 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // InternalTDsl.g:1655:3: (kw= 'backward' kw= 'right' )
+                    // InternalTDsl.g:1679:3: (kw= 'backward' kw= 'right' )
                     {
-                    // InternalTDsl.g:1655:3: (kw= 'backward' kw= 'right' )
-                    // InternalTDsl.g:1656:4: kw= 'backward' kw= 'right'
+                    // InternalTDsl.g:1679:3: (kw= 'backward' kw= 'right' )
+                    // InternalTDsl.g:1680:4: kw= 'backward' kw= 'right'
                     {
                     kw=(Token)match(input,15,FOLLOW_50); 
 
@@ -4604,12 +4648,12 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
     static final String dfa_1s = "\12\uffff";
     static final String dfa_2s = "\1\17\2\102\7\uffff";
     static final String dfa_3s = "\1\106\1\111\1\103\7\uffff";
-    static final String dfa_4s = "\3\uffff\1\3\1\5\1\2\1\4\1\1\1\7\1\6";
+    static final String dfa_4s = "\3\uffff\1\1\1\3\1\5\1\2\1\4\1\6\1\7";
     static final String dfa_5s = "\12\uffff}>";
     static final String[] dfa_6s = {
             "\1\2\66\uffff\1\1",
-            "\1\4\1\7\3\uffff\1\5\1\3\1\6",
-            "\1\10\1\11",
+            "\1\5\1\3\3\uffff\1\6\1\4\1\7",
+            "\1\11\1\10",
             "",
             "",
             "",
@@ -4640,7 +4684,7 @@ public class InternalTDslParser extends AbstractInternalAntlrParser {
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "1576:2: ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) )";
+            return "1600:2: ( (kw= 'front' kw= 'left' ) | (kw= 'front' kw= 'left/middle' ) | (kw= 'front' kw= 'middle' ) | (kw= 'front' kw= 'right/middle' ) | (kw= 'front' kw= 'right' ) | (kw= 'backward' kw= 'left' ) | (kw= 'backward' kw= 'right' ) )";
         }
     }
  

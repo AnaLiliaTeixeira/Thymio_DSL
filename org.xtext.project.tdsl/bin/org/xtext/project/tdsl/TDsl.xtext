@@ -47,8 +47,8 @@ ProxEvent returns ProxEvent:
     'On' sensor=Sensor 'do' ':';
 
 Sensor returns Sensor:
-    HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' ('proximity'|'no' 'proximity')
-    | RightLeft sensor_type='ground' 'sensor' 'detecting' ('proximity'|'no' 'proximity'|'black'|'white');
+    direction = HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' ('proximity'|'no' 'proximity')
+    | direction = RightLeft sensor_type='ground' 'sensor' 'detecting' ('proximity'|'no' 'proximity'|'black'|'white');
 
 TapEvent returns Event:
     {Event} 'On' 'tap' 'do' ':';

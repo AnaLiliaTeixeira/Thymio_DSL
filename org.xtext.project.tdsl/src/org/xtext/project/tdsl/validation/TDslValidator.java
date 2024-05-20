@@ -9,66 +9,62 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.validation.Check;
 
 import thymio_DSL.Action;
+import thymio_DSL.ClapEvent;
 import thymio_DSL.ColorTopAction;
+import thymio_DSL.Event;
+import thymio_DSL.IfStatement;
+import thymio_DSL.ProxEvent;
+import thymio_DSL.Sensor;
 import thymio_DSL.Statement;
+import thymio_DSL.TapEvent;
 import thymio_DSL.ThymioDSL;
 import thymio_DSL.Thymio_DSLPackage;
 import thymio_DSL.UpperEvent;
 
 /**
- * This class contains custom validation rules. 
+ * This class contains custom validation rules.
  *
- * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
+ * See
+ * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class TDslValidator extends AbstractTDslValidator {
-	
+
 	public static final String DUPLICATE_ACTION_WARNING = "duplicateActionWarning";
 
-    @Check
-    public void checkForDuplicateActions(Statement statement) {
-    	Map<Class<?>, Boolean> seenActions = new HashMap<>();
-        List<Action> actions = statement.getAction();
-        
-        for (int i = 0; i < actions.size(); i++) {
-            Action action = actions.get(i);
-            Class<?> actionClass = action.getClass();
-            if (seenActions.containsKey(actionClass)) {
-                // Emit a warning for all subsequent duplicate actions
-                warning("This action will not be executed as there is another action of the same type that will override it.",
-                        Thymio_DSLPackage.Literals.STATEMENT__ACTION,
-                        DUPLICATE_ACTION_WARNING,
-                        actionClass.getSimpleName());
-            } else {
-                // Mark the first occurrence as seen
-                seenActions.put(actionClass, true);
-            }
-        }
-    }
-    
-    public static final String TURN_OFF_TOP_LEDS_WARNING = "turnOffTopLedsWarning";
+	@Check
+	public void checkForDuplicateActions(Statement statement) {
+		Set<Class<?>> seenActions = new HashSet<>();
+		List<Action> actions = statement.getAction();
+		for (int i = 0; i < actions.size(); i++) {
+			Action action = actions.get(i);
+			Class<?> actionClass = action.getClass();
+			if (seenActions.contains(actionClass)) {
+				warning("This action will not be executed as there is another action of the same type that will override it.",
+						Thymio_DSLPackage.Literals.STATEMENT__ACTION, i, DUPLICATE_ACTION_WARNING,
+						actionClass.getSimpleName());
+			} else {
+				seenActions.add(actionClass);
+			}
+		}
+	}
 
-    @Check
-    public void checkTurnOffTopLeds(Statement statement) {
-        boolean setTopColorSeen = false;
-        for (Action action : statement.getAction()) {
-            if (action instanceof ColorTopAction) {
-                ColorTopAction colorTopAction = (ColorTopAction) action;
-                if (colorTopAction.getColor() != null) {
-                    setTopColorSeen = true;
-                } else if (setTopColorSeen == false) {
-                    warning("Turning off top LEDs without setting the top color first.",
-                            Thymio_DSLPackage.Literals.STATEMENT__ACTION,
-                            TURN_OFF_TOP_LEDS_WARNING,
-                            action.getClass().getSimpleName());
-                }
-            }
-        }
-    }
-    
-    public static final String TURN_OFF_BOTTOM_LEDS_WARNING = "turnOffTopLedsWarning";
+	public static final String TURN_OFF_TOP_LEDS_WARNING = "turnOffTopLedsWarning";
+	/**
+	 * @Check public void checkTurnOffTopLeds(Statement statement) { boolean
+	 *        setTopColorSeen = false; for (Action action : statement.getAction()) {
+	 *        if (action instanceof ColorTopAction) { ColorTopAction colorTopAction
+	 *        = (ColorTopAction) action; if (colorTopAction.getColor() != null) {
+	 *        setTopColorSeen = true; } else if (setTopColorSeen == false) {
+	 *        warning("Turning off top LEDs without setting the top color first.",
+	 *        Thymio_DSLPackage.Literals.STATEMENT__ACTION,
+	 *        TURN_OFF_TOP_LEDS_WARNING, action.getClass().getSimpleName()); } } } }
+	 */
+
+	public static final String TURN_OFF_BOTTOM_LEDS_WARNING = "turnOffTopLedsWarning";
 
 //    @Check
 //    public void checkTurnOffBottomLeds(Statement statement) {
@@ -87,58 +83,149 @@ public class TDslValidator extends AbstractTDslValidator {
 //            }
 //        }
 //    }
-    @Check
-    public void checkTurnOffTopLeds(ThymioDSL model) {
-        boolean setTopColorSeen = false;
-        
-        // Iterate through all statements in the model
-        for (Statement statement : model.getStatement()) {
-            for (Action action : statement.getAction()) {
-                if (action instanceof ColorTopAction) {
-                    ColorTopAction colorTopAction = (ColorTopAction) action;
-                    if (colorTopAction.getColor() != null) {
-                        setTopColorSeen = true;
-                        break; // No need to check further if we found a set top color action
-                    }
-                }
-            }
-            if (setTopColorSeen) {
-                break;
-            }
-        }
+	@Check
+	public void checkTurnOffTopLeds(ThymioDSL model) {
+		boolean setTopColorSeen = false;
 
-        // If no set top color action was found, check for turn off top leds actions
-        if (!setTopColorSeen) {
-            for (Statement statement : model.getStatement()) {
-                for (Action action : statement.getAction()) {
-                    if (action instanceof ColorTopAction) {
-                        ColorTopAction colorTopAction = (ColorTopAction) action;
-                        if (colorTopAction.getColor() == null) {
-                            warning("Turning off top LEDs without setting the top color first.",
-                                    Thymio_DSLPackage.Literals.STATEMENT__ACTION,
-                                    TURN_OFF_TOP_LEDS_WARNING,
-                                    action.getClass().getSimpleName());
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    public static final String DUPLICATE_BUTTON_WARNING = "duplicateButtonWarning";
+		// Iterate through all statements in the model
+		for (Statement statement : model.getStatement()) {
+			for (Action action : statement.getAction()) {
+				if (action instanceof ColorTopAction) {
+					ColorTopAction colorTopAction = (ColorTopAction) action;
+					if (colorTopAction.getColor() != null) {
+						setTopColorSeen = true;
+						break;
+					}
+				}
+			}
+			if (setTopColorSeen) {
+				break;
+			}
+		}
 
-    @Check
-    public void checkDuplicateButtons(UpperEvent upperEvent) {
-        Set<String> seenButtons = new HashSet<>();
-        for (String button : upperEvent.getButtons()) {
-            if (!seenButtons.add(button)) {
-                warning("The button '" + button + "' is repeated and does not make any difference, so it is redundant.",
-                        Thymio_DSLPackage.Literals.UPPER_EVENT__BUTTONS,
-                        DUPLICATE_BUTTON_WARNING,
-                        button);
-                System.out.println("OIIII");
-            }
-        }
-    }
-	
+		// If no set top color action was found, check for turn off top leds actions
+		if (!setTopColorSeen) {
+			for (Statement statement : model.getStatement()) {
+				for (Action action : statement.getAction()) {
+					if (action instanceof ColorTopAction) {
+						ColorTopAction colorTopAction = (ColorTopAction) action;
+						if (colorTopAction.getColor() == null) {
+							warning("Turning off top LEDs without setting the top color first.",
+									Thymio_DSLPackage.Literals.STATEMENT__ACTION, TURN_OFF_TOP_LEDS_WARNING,
+									action.getClass().getSimpleName());
+						}
+					}
+				}
+			}
+		}
+	}
+	//////////////////////////////////////////////////////////////////////////////
+	public static final String DUPLICATE_EVENT_WARNING = "duplicateEventWarning";
+
+	@Check
+	public void checkSameEvents(ThymioDSL model) {
+		Set<Event> seenEvents = new HashSet<>();
+
+		for (Statement statement : model.getStatement()) {
+			Event event = statement.getEvent();
+
+			if (event != null) {
+				if (isDuplicateEvent(seenEvents, event)) {
+					warning("This event will not be executed as there is another identical event that will override it.", Thymio_DSLPackage.Literals.STATEMENT__EVENT,
+                            DUPLICATE_EVENT_WARNING);
+				} else	{
+					seenEvents.add(event);
+				}
+			}
+		}
+	}
+
+	private boolean isDuplicateEvent(Set<Event> seenEvents, Event newEvent) {
+		for (Event seenEvent : seenEvents) {
+			if (eventsAreEqual(seenEvent, newEvent)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean eventsAreEqual(Event event1, Event event2) {
+		if (event1.getClass() != event2.getClass()) {
+			return false;
+		}
+
+		if (event1 instanceof UpperEvent && event2 instanceof UpperEvent) {
+			return upperEventsAreEqual((UpperEvent) event1, (UpperEvent) event2);
+		} else if (event1 instanceof ProxEvent && event2 instanceof ProxEvent) {
+			return proxEventsAreEqual((ProxEvent) event1, (ProxEvent) event2);
+		} else if (event1 instanceof TapEvent && event2 instanceof TapEvent) {
+			return true;
+		} else if (event1 instanceof ClapEvent && event2 instanceof ClapEvent) {
+			return true;
+		}
+
+		return false;
+	}
+
+	private boolean upperEventsAreEqual(UpperEvent event1, UpperEvent event2) {
+		/**if (!event1.getState().equals(event2.getState())) {
+			return false;
+		}*/
+		if (!event1.getButtons().equals(event2.getButtons())) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean proxEventsAreEqual(ProxEvent event1, ProxEvent event2) {
+		if (!event1.getSensor().equals(event2.getSensor())) {
+			return false;
+		}
+		return true;
+	}
+
+	//////////////////////////////////////////////////////////////////////////////
+
+	public static final String DUPLICATE_BUTTON_WARNING = "duplicateButtonWarning";
+
+	@Check
+	public void checkDuplicateButtons(UpperEvent upperEvent) {
+
+		Set<String> seenButtons = new HashSet<>();
+		for (String button : upperEvent.getButtons()) {
+			if (!seenButtons.add(button)) {
+				warning("The button '" + button + "' is repeated and does not make any difference, so it is redundant.",
+						Thymio_DSLPackage.Literals.UPPER_EVENT__BUTTONS, DUPLICATE_BUTTON_WARNING, button);
+			}
+		}
+	}
+
+	public static final String NO_ACTIONS_ERROR = "noActionsError";
+
+	@Check
+	public void checkIfHasActions(Statement statement) {
+		if (statement.getAction().isEmpty() && statement.getIfstatement().isEmpty())
+			error("You should write at least one Action", Thymio_DSLPackage.Literals.STATEMENT__ACTION,
+					NO_ACTIONS_ERROR);
+	}
+
+	public static final String DUPLICATE_SENSORIF_WARNING = "duplicateSensorIfWarning";
+
+	@Check
+	public void checkIfStatement(IfStatement ifStatement) {
+		Sensor leftsensor = ifStatement.getCondition().getLeftSensor();
+		Sensor rightsensor = ifStatement.getCondition().getRightSensor();
+		if (leftsensor.getDirection().equals(rightsensor.getDirection())
+				&& leftsensor.getSensor_type().equals(rightsensor.getSensor_type()))
+			warning("The sensor type:'" + leftsensor.getSensor_type() + "' with direction: '"
+					+ leftsensor.getDirection() + "' is repeated and does not make any difference/detection",
+					Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION, DUPLICATE_SENSORIF_WARNING);
+		if (ifStatement.getAction().isEmpty())
+			error("You should write at least one Action", Thymio_DSLPackage.Literals.IF_STATEMENT__ACTION,
+					NO_ACTIONS_ERROR);
+		if (ifStatement.getCondition().getLeftSensor() == null && ifStatement.getCondition().getRightSensor() == null) {
+			warning("You should write a condition", Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION);
+		}
+	}
+
 }
