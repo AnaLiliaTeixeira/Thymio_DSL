@@ -51,12 +51,12 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cActionActionParserRuleCall_2_1_0 = (RuleCall)cActionAssignment_2_1.eContents().get(0);
 		
 		//Statement returns Statement:
-		//        '->' event=Event
-		//            (ifstatement+=IfStatement | action+=Action)+;
+		//    '->' event=Event
+		//    (ifstatement+=IfStatement | action+=Action)+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'->' event=Event
-		//    (ifstatement+=IfStatement | action+=Action)+
+		//(ifstatement+=IfStatement | action+=Action)+
 		public Group getGroup() { return cGroup; }
 		
 		//'->'
@@ -166,35 +166,37 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
 		private final Action cMovementActionAction_2_0 = (Action)cGroup_2.eContents().get(0);
 		private final Keyword cStopKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
-		private final Keyword cDrivingKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		private final Assignment cDirectionAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final Keyword cDirectionDrivingKeyword_2_2_0 = (Keyword)cDirectionAssignment_2_2.eContents().get(0);
 		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
 		private final Action cMovementActionAction_3_0 = (Action)cGroup_3.eContents().get(0);
 		private final Keyword cStopKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
-		private final Keyword cTurningKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Assignment cDirectionAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final Keyword cDirectionTurningKeyword_3_2_0 = (Keyword)cDirectionAssignment_3_2.eContents().get(0);
 		
 		//MovementAction returns MovementAction:
-		//    'drive' direction=("forward"|"backward") ('with' 'speed' speed=ArithmeticExpression)?
+		//    'drive' direction=("forward" | "backward") ('with' 'speed' speed=ArithmeticExpression)?
 		//    | 'turn' direction=RightLeft
-		//    | {MovementAction} 'stop' 'driving'
-		//    | {MovementAction} 'stop' 'turning';
+		//    | {MovementAction} 'stop' direction='driving'
+		//    | {MovementAction} 'stop' direction='turning';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'drive' direction=("forward"|"backward") ('with' 'speed' speed=ArithmeticExpression)?
+		//'drive' direction=("forward" | "backward") ('with' 'speed' speed=ArithmeticExpression)?
 		//| 'turn' direction=RightLeft
-		//| {MovementAction} 'stop' 'driving'
-		//| {MovementAction} 'stop' 'turning'
+		//| {MovementAction} 'stop' direction='driving'
+		//| {MovementAction} 'stop' direction='turning'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'drive' direction=("forward"|"backward") ('with' 'speed' speed=ArithmeticExpression)?
+		//'drive' direction=("forward" | "backward") ('with' 'speed' speed=ArithmeticExpression)?
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//'drive'
 		public Keyword getDriveKeyword_0_0() { return cDriveKeyword_0_0; }
 		
-		//direction=("forward"|"backward")
+		//direction=("forward" | "backward")
 		public Assignment getDirectionAssignment_0_1() { return cDirectionAssignment_0_1; }
 		
-		//("forward"|"backward")
+		//("forward" | "backward")
 		public Alternatives getDirectionAlternatives_0_1_0() { return cDirectionAlternatives_0_1_0; }
 		
 		//"forward"
@@ -230,7 +232,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//RightLeft
 		public RuleCall getDirectionRightLeftParserRuleCall_1_1_0() { return cDirectionRightLeftParserRuleCall_1_1_0; }
 		
-		//{MovementAction} 'stop' 'driving'
+		//{MovementAction} 'stop' direction='driving'
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//{MovementAction}
@@ -239,10 +241,13 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//'stop'
 		public Keyword getStopKeyword_2_1() { return cStopKeyword_2_1; }
 		
-		//'driving'
-		public Keyword getDrivingKeyword_2_2() { return cDrivingKeyword_2_2; }
+		//direction='driving'
+		public Assignment getDirectionAssignment_2_2() { return cDirectionAssignment_2_2; }
 		
-		//{MovementAction} 'stop' 'turning'
+		//'driving'
+		public Keyword getDirectionDrivingKeyword_2_2_0() { return cDirectionDrivingKeyword_2_2_0; }
+		
+		//{MovementAction} 'stop' direction='turning'
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//{MovementAction}
@@ -251,8 +256,11 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//'stop'
 		public Keyword getStopKeyword_3_1() { return cStopKeyword_3_1; }
 		
+		//direction='turning'
+		public Assignment getDirectionAssignment_3_2() { return cDirectionAssignment_3_2; }
+		
 		//'turning'
-		public Keyword getTurningKeyword_3_2() { return cTurningKeyword_3_2; }
+		public Keyword getDirectionTurningKeyword_3_2_0() { return cDirectionTurningKeyword_3_2_0; }
 	}
 	public class SoundActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.SoundAction");
@@ -488,12 +496,12 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.UpperEvent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOnKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cButtonsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cButtonsButtonsParserRuleCall_1_0 = (RuleCall)cButtonsAssignment_1.eContents().get(0);
+		private final Assignment cButtonAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cButtonButtonParserRuleCall_1_0 = (RuleCall)cButtonAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cAndKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cButtonsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cButtonsButtonsParserRuleCall_2_1_0 = (RuleCall)cButtonsAssignment_2_1.eContents().get(0);
+		private final Assignment cButtonAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cButtonButtonParserRuleCall_2_1_0 = (RuleCall)cButtonAssignment_2_1.eContents().get(0);
 		private final Keyword cButtonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cStateAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cStateStateParserRuleCall_4_0 = (RuleCall)cStateAssignment_4.eContents().get(0);
@@ -501,32 +509,32 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cColonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//UpperEvent returns UpperEvent:
-		//    'On' buttons+=Buttons ('and' buttons+=Buttons)* 'button' state=State 'do' ':';
+		//    'On' button+=Button ('and' button+=Button)* 'button' state=State 'do' ':';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'On' buttons+=Buttons ('and' buttons+=Buttons)* 'button' state=State 'do' ':'
+		//'On' button+=Button ('and' button+=Button)* 'button' state=State 'do' ':'
 		public Group getGroup() { return cGroup; }
 		
 		//'On'
 		public Keyword getOnKeyword_0() { return cOnKeyword_0; }
 		
-		//buttons+=Buttons
-		public Assignment getButtonsAssignment_1() { return cButtonsAssignment_1; }
+		//button+=Button
+		public Assignment getButtonAssignment_1() { return cButtonAssignment_1; }
 		
-		//Buttons
-		public RuleCall getButtonsButtonsParserRuleCall_1_0() { return cButtonsButtonsParserRuleCall_1_0; }
+		//Button
+		public RuleCall getButtonButtonParserRuleCall_1_0() { return cButtonButtonParserRuleCall_1_0; }
 		
-		//('and' buttons+=Buttons)*
+		//('and' button+=Button)*
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'and'
 		public Keyword getAndKeyword_2_0() { return cAndKeyword_2_0; }
 		
-		//buttons+=Buttons
-		public Assignment getButtonsAssignment_2_1() { return cButtonsAssignment_2_1; }
+		//button+=Button
+		public Assignment getButtonAssignment_2_1() { return cButtonAssignment_2_1; }
 		
-		//Buttons
-		public RuleCall getButtonsButtonsParserRuleCall_2_1_0() { return cButtonsButtonsParserRuleCall_2_1_0; }
+		//Button
+		public RuleCall getButtonButtonParserRuleCall_2_1_0() { return cButtonButtonParserRuleCall_2_1_0; }
 		
 		//'button'
 		public Keyword getButtonKeyword_3() { return cButtonKeyword_3; }
@@ -542,6 +550,21 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		
 		//':'
 		public Keyword getColonKeyword_6() { return cColonKeyword_6; }
+	}
+	public class ButtonElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.Button");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameButtonsParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//Button returns Button:
+		//    name = Buttons;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name = Buttons
+		public Assignment getNameAssignment() { return cNameAssignment; }
+		
+		//Buttons
+		public RuleCall getNameButtonsParserRuleCall_0() { return cNameButtonsParserRuleCall_0; }
 	}
 	public class ProxEventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.ProxEvent");
@@ -584,11 +607,8 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cSensor_typeHorizontalKeyword_0_1_0 = (Keyword)cSensor_typeAssignment_0_1.eContents().get(0);
 		private final Keyword cSensorKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
 		private final Keyword cDetectingKeyword_0_3 = (Keyword)cGroup_0.eContents().get(3);
-		private final Alternatives cAlternatives_0_4 = (Alternatives)cGroup_0.eContents().get(4);
-		private final Keyword cProximityKeyword_0_4_0 = (Keyword)cAlternatives_0_4.eContents().get(0);
-		private final Group cGroup_0_4_1 = (Group)cAlternatives_0_4.eContents().get(1);
-		private final Keyword cNoKeyword_0_4_1_0 = (Keyword)cGroup_0_4_1.eContents().get(0);
-		private final Keyword cProximityKeyword_0_4_1_1 = (Keyword)cGroup_0_4_1.eContents().get(1);
+		private final Assignment cStateAssignment_0_4 = (Assignment)cGroup_0.eContents().get(4);
+		private final RuleCall cStateState_Horizontal_SensorParserRuleCall_0_4_0 = (RuleCall)cStateAssignment_0_4.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final Assignment cDirectionAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
 		private final RuleCall cDirectionRightLeftParserRuleCall_1_0_0 = (RuleCall)cDirectionAssignment_1_0.eContents().get(0);
@@ -596,27 +616,22 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cSensor_typeGroundKeyword_1_1_0 = (Keyword)cSensor_typeAssignment_1_1.eContents().get(0);
 		private final Keyword cSensorKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		private final Keyword cDetectingKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
-		private final Alternatives cAlternatives_1_4 = (Alternatives)cGroup_1.eContents().get(4);
-		private final Keyword cProximityKeyword_1_4_0 = (Keyword)cAlternatives_1_4.eContents().get(0);
-		private final Group cGroup_1_4_1 = (Group)cAlternatives_1_4.eContents().get(1);
-		private final Keyword cNoKeyword_1_4_1_0 = (Keyword)cGroup_1_4_1.eContents().get(0);
-		private final Keyword cProximityKeyword_1_4_1_1 = (Keyword)cGroup_1_4_1.eContents().get(1);
-		private final Keyword cBlackKeyword_1_4_2 = (Keyword)cAlternatives_1_4.eContents().get(2);
-		private final Keyword cWhiteKeyword_1_4_3 = (Keyword)cAlternatives_1_4.eContents().get(3);
+		private final Assignment cStateAssignment_1_4 = (Assignment)cGroup_1.eContents().get(4);
+		private final RuleCall cStateState_Ground_SensorParserRuleCall_1_4_0 = (RuleCall)cStateAssignment_1_4.eContents().get(0);
 		
 		//Sensor returns Sensor:
-		//    direction = HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' ('proximity'|'no' 'proximity')
-		//    | direction = RightLeft sensor_type='ground' 'sensor' 'detecting' ('proximity'|'no' 'proximity'|'black'|'white');
+		//    direction=HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' state = State_Horizontal_Sensor
+		//    | direction=RightLeft sensor_type='ground' 'sensor' 'detecting' state = State_Ground_Sensor;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//direction = HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' ('proximity'|'no' 'proximity')
-		//| direction = RightLeft sensor_type='ground' 'sensor' 'detecting' ('proximity'|'no' 'proximity'|'black'|'white')
+		//direction=HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' state = State_Horizontal_Sensor
+		//| direction=RightLeft sensor_type='ground' 'sensor' 'detecting' state = State_Ground_Sensor
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//direction = HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' ('proximity'|'no' 'proximity')
+		//direction=HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' state = State_Horizontal_Sensor
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//direction = HorizontalSensors
+		//direction=HorizontalSensors
 		public Assignment getDirectionAssignment_0_0() { return cDirectionAssignment_0_0; }
 		
 		//HorizontalSensors
@@ -634,25 +649,16 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//'detecting'
 		public Keyword getDetectingKeyword_0_3() { return cDetectingKeyword_0_3; }
 		
-		//('proximity'|'no' 'proximity')
-		public Alternatives getAlternatives_0_4() { return cAlternatives_0_4; }
+		//state = State_Horizontal_Sensor
+		public Assignment getStateAssignment_0_4() { return cStateAssignment_0_4; }
 		
-		//'proximity'
-		public Keyword getProximityKeyword_0_4_0() { return cProximityKeyword_0_4_0; }
+		//State_Horizontal_Sensor
+		public RuleCall getStateState_Horizontal_SensorParserRuleCall_0_4_0() { return cStateState_Horizontal_SensorParserRuleCall_0_4_0; }
 		
-		//'no' 'proximity'
-		public Group getGroup_0_4_1() { return cGroup_0_4_1; }
-		
-		//'no'
-		public Keyword getNoKeyword_0_4_1_0() { return cNoKeyword_0_4_1_0; }
-		
-		//'proximity'
-		public Keyword getProximityKeyword_0_4_1_1() { return cProximityKeyword_0_4_1_1; }
-		
-		//direction = RightLeft sensor_type='ground' 'sensor' 'detecting' ('proximity'|'no' 'proximity'|'black'|'white')
+		//direction=RightLeft sensor_type='ground' 'sensor' 'detecting' state = State_Ground_Sensor
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//direction = RightLeft
+		//direction=RightLeft
 		public Assignment getDirectionAssignment_1_0() { return cDirectionAssignment_1_0; }
 		
 		//RightLeft
@@ -670,26 +676,11 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//'detecting'
 		public Keyword getDetectingKeyword_1_3() { return cDetectingKeyword_1_3; }
 		
-		//('proximity'|'no' 'proximity'|'black'|'white')
-		public Alternatives getAlternatives_1_4() { return cAlternatives_1_4; }
+		//state = State_Ground_Sensor
+		public Assignment getStateAssignment_1_4() { return cStateAssignment_1_4; }
 		
-		//'proximity'
-		public Keyword getProximityKeyword_1_4_0() { return cProximityKeyword_1_4_0; }
-		
-		//'no' 'proximity'
-		public Group getGroup_1_4_1() { return cGroup_1_4_1; }
-		
-		//'no'
-		public Keyword getNoKeyword_1_4_1_0() { return cNoKeyword_1_4_1_0; }
-		
-		//'proximity'
-		public Keyword getProximityKeyword_1_4_1_1() { return cProximityKeyword_1_4_1_1; }
-		
-		//'black'
-		public Keyword getBlackKeyword_1_4_2() { return cBlackKeyword_1_4_2; }
-		
-		//'white'
-		public Keyword getWhiteKeyword_1_4_3() { return cWhiteKeyword_1_4_3; }
+		//State_Ground_Sensor
+		public RuleCall getStateState_Ground_SensorParserRuleCall_1_4_0() { return cStateState_Ground_SensorParserRuleCall_1_4_0; }
 	}
 	public class TapEventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.TapEvent");
@@ -767,19 +758,19 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cRightSensorSensorParserRuleCall_1_1_0 = (RuleCall)cRightSensorAssignment_1_1.eContents().get(0);
 		
 		//Condition returns Condition:
-		//   leftSensor = Sensor (operator=('and' | 'or') rightSensor = Sensor)?;
+		//    leftSensor=Sensor (operator=('and' | 'or') rightSensor=Sensor)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//leftSensor = Sensor (operator=('and' | 'or') rightSensor = Sensor)?
+		//leftSensor=Sensor (operator=('and' | 'or') rightSensor=Sensor)?
 		public Group getGroup() { return cGroup; }
 		
-		//leftSensor = Sensor
+		//leftSensor=Sensor
 		public Assignment getLeftSensorAssignment_0() { return cLeftSensorAssignment_0; }
 		
 		//Sensor
 		public RuleCall getLeftSensorSensorParserRuleCall_0_0() { return cLeftSensorSensorParserRuleCall_0_0; }
 		
-		//(operator=('and' | 'or') rightSensor = Sensor)?
+		//(operator=('and' | 'or') rightSensor=Sensor)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//operator=('and' | 'or')
@@ -794,7 +785,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//'or'
 		public Keyword getOperatorOrKeyword_1_0_0_1() { return cOperatorOrKeyword_1_0_0_1; }
 		
-		//rightSensor = Sensor
+		//rightSensor=Sensor
 		public Assignment getRightSensorAssignment_1_1() { return cRightSensorAssignment_1_1; }
 		
 		//Sensor
@@ -817,10 +808,10 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cRightEIntegerObjectParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
 		//ArithmeticExpression returns ArithmeticExpression:
-		//    left=EIntegerObject (operator=('+'|'-'|'*'|'/'|'mod') right=EIntegerObject)?;
+		//    left=EIntegerObject (operator=('+' | '-' | '*' | '/' | 'mod') right=EIntegerObject)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//left=EIntegerObject (operator=('+'|'-'|'*'|'/'|'mod') right=EIntegerObject)?
+		//left=EIntegerObject (operator=('+' | '-' | '*' | '/' | 'mod') right=EIntegerObject)?
 		public Group getGroup() { return cGroup; }
 		
 		//left=EIntegerObject
@@ -829,13 +820,13 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//EIntegerObject
 		public RuleCall getLeftEIntegerObjectParserRuleCall_0_0() { return cLeftEIntegerObjectParserRuleCall_0_0; }
 		
-		//(operator=('+'|'-'|'*'|'/'|'mod') right=EIntegerObject)?
+		//(operator=('+' | '-' | '*' | '/' | 'mod') right=EIntegerObject)?
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//operator=('+'|'-'|'*'|'/'|'mod')
+		//operator=('+' | '-' | '*' | '/' | 'mod')
 		public Assignment getOperatorAssignment_1_0() { return cOperatorAssignment_1_0; }
 		
-		//('+'|'-'|'*'|'/'|'mod')
+		//('+' | '-' | '*' | '/' | 'mod')
 		public Alternatives getOperatorAlternatives_1_0_0() { return cOperatorAlternatives_1_0_0; }
 		
 		//'+'
@@ -913,13 +904,13 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cYellowKeyword_1_5 = (Keyword)cAlternatives_1.eContents().get(5);
 		
 		//Color:
-		//    ('light'|'dark')? ('red' | 'green'|'blue' |'black'|'white'| 'yellow');
+		//    ('light' | 'dark')? ('red' | 'green' | 'blue' | 'black' | 'white' | 'yellow');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//('light'|'dark')? ('red' | 'green'|'blue' |'black'|'white'| 'yellow')
+		//('light' | 'dark')? ('red' | 'green' | 'blue' | 'black' | 'white' | 'yellow')
 		public Group getGroup() { return cGroup; }
 		
-		//('light'|'dark')?
+		//('light' | 'dark')?
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//'light'
@@ -928,7 +919,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//'dark'
 		public Keyword getDarkKeyword_0_1() { return cDarkKeyword_0_1; }
 		
-		//('red' | 'green'|'blue' |'black'|'white'| 'yellow')
+		//('red' | 'green' | 'blue' | 'black' | 'white' | 'yellow')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//'red'
@@ -958,10 +949,10 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cSound4Keyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		
 		//Sound:
-		//    'sound1'|'sound2'|'sound3'|'sound4';
+		//    'sound1' | 'sound2' | 'sound3' | 'sound4';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'sound1'|'sound2'|'sound3'|'sound4'
+		//'sound1' | 'sound2' | 'sound3' | 'sound4'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'sound1'
@@ -976,6 +967,68 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//'sound4'
 		public Keyword getSound4Keyword_3() { return cSound4Keyword_3; }
 	}
+	public class State_Horizontal_SensorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.State_Horizontal_Sensor");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cProximityKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cNoKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Keyword cProximityKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		
+		//State_Horizontal_Sensor:
+		//    'proximity' | 'no' 'proximity';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'proximity' | 'no' 'proximity'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//'proximity'
+		public Keyword getProximityKeyword_0() { return cProximityKeyword_0; }
+		
+		//'no' 'proximity'
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'no'
+		public Keyword getNoKeyword_1_0() { return cNoKeyword_1_0; }
+		
+		//'proximity'
+		public Keyword getProximityKeyword_1_1() { return cProximityKeyword_1_1; }
+	}
+	public class State_Ground_SensorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.State_Ground_Sensor");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cProximityKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cNoKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Keyword cProximityKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Keyword cBlackKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cWhiteKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		
+		//State_Ground_Sensor:
+		//'proximity' | 'no' 'proximity' | 'black' | 'white';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'proximity' | 'no' 'proximity' | 'black' | 'white'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//'proximity'
+		public Keyword getProximityKeyword_0() { return cProximityKeyword_0; }
+		
+		//'no' 'proximity'
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'no'
+		public Keyword getNoKeyword_1_0() { return cNoKeyword_1_0; }
+		
+		//'proximity'
+		public Keyword getProximityKeyword_1_1() { return cProximityKeyword_1_1; }
+		
+		//'black'
+		public Keyword getBlackKeyword_2() { return cBlackKeyword_2; }
+		
+		//'white'
+		public Keyword getWhiteKeyword_3() { return cWhiteKeyword_3; }
+	}
 	public class ButtonsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.Buttons");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -986,10 +1039,10 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cBackwardKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		
 		//Buttons:
-		//    'center' |'right' |'left' |'forward' | 'backward';
+		//    'center' | 'right' | 'left' | 'forward' | 'backward';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'center' |'right' |'left' |'forward' | 'backward'
+		//'center' | 'right' | 'left' | 'forward' | 'backward'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'center'
@@ -1033,10 +1086,10 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cRightKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
 		//RightLeft:
-		//    'left'|'right';
+		//    'left' | 'right';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'left'|'right'
+		//'left' | 'right'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'left'
@@ -1071,10 +1124,10 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cRightKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
 		
 		//HorizontalSensors:
-		//'front' 'left'| 'front' 'left/middle'| 'front' 'middle'| 'front' 'right/middle' |'front' 'right'|'backward' 'left' |'backward' 'right';
+		//    'front' 'left' | 'front' 'left/middle' | 'front' 'middle' | 'front' 'right/middle' | 'front' 'right' | 'backward' 'left' | 'backward' 'right';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'front' 'left'| 'front' 'left/middle'| 'front' 'middle'| 'front' 'right/middle' |'front' 'right'|'backward' 'left' |'backward' 'right'
+		//'front' 'left' | 'front' 'left/middle' | 'front' 'middle' | 'front' 'right/middle' | 'front' 'right' | 'backward' 'left' | 'backward' 'right'
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'front' 'left'
@@ -1152,6 +1205,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	private final ColorTopActionElements pColorTopAction;
 	private final IfStatementElements pIfStatement;
 	private final UpperEventElements pUpperEvent;
+	private final ButtonElements pButton;
 	private final ProxEventElements pProxEvent;
 	private final SensorElements pSensor;
 	private final TapEventElements pTapEvent;
@@ -1162,6 +1216,8 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	private final EStringElements pEString;
 	private final ColorElements pColor;
 	private final SoundElements pSound;
+	private final State_Horizontal_SensorElements pState_Horizontal_Sensor;
+	private final State_Ground_SensorElements pState_Ground_Sensor;
 	private final ButtonsElements pButtons;
 	private final StateElements pState;
 	private final RightLeftElements pRightLeft;
@@ -1186,6 +1242,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		this.pColorTopAction = new ColorTopActionElements();
 		this.pIfStatement = new IfStatementElements();
 		this.pUpperEvent = new UpperEventElements();
+		this.pButton = new ButtonElements();
 		this.pProxEvent = new ProxEventElements();
 		this.pSensor = new SensorElements();
 		this.pTapEvent = new TapEventElements();
@@ -1196,6 +1253,8 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		this.pEString = new EStringElements();
 		this.pColor = new ColorElements();
 		this.pSound = new SoundElements();
+		this.pState_Horizontal_Sensor = new State_Horizontal_SensorElements();
+		this.pState_Ground_Sensor = new State_Ground_SensorElements();
 		this.pButtons = new ButtonsElements();
 		this.pState = new StateElements();
 		this.pRightLeft = new RightLeftElements();
@@ -1240,8 +1299,8 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//Statement returns Statement:
-	//        '->' event=Event
-	//            (ifstatement+=IfStatement | action+=Action)+;
+	//    '->' event=Event
+	//    (ifstatement+=IfStatement | action+=Action)+;
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
@@ -1271,10 +1330,10 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//MovementAction returns MovementAction:
-	//    'drive' direction=("forward"|"backward") ('with' 'speed' speed=ArithmeticExpression)?
+	//    'drive' direction=("forward" | "backward") ('with' 'speed' speed=ArithmeticExpression)?
 	//    | 'turn' direction=RightLeft
-	//    | {MovementAction} 'stop' 'driving'
-	//    | {MovementAction} 'stop' 'turning';
+	//    | {MovementAction} 'stop' direction='driving'
+	//    | {MovementAction} 'stop' direction='turning';
 	public MovementActionElements getMovementActionAccess() {
 		return pMovementAction;
 	}
@@ -1329,13 +1388,23 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//UpperEvent returns UpperEvent:
-	//    'On' buttons+=Buttons ('and' buttons+=Buttons)* 'button' state=State 'do' ':';
+	//    'On' button+=Button ('and' button+=Button)* 'button' state=State 'do' ':';
 	public UpperEventElements getUpperEventAccess() {
 		return pUpperEvent;
 	}
 	
 	public ParserRule getUpperEventRule() {
 		return getUpperEventAccess().getRule();
+	}
+	
+	//Button returns Button:
+	//    name = Buttons;
+	public ButtonElements getButtonAccess() {
+		return pButton;
+	}
+	
+	public ParserRule getButtonRule() {
+		return getButtonAccess().getRule();
 	}
 	
 	//ProxEvent returns ProxEvent:
@@ -1349,8 +1418,8 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//Sensor returns Sensor:
-	//    direction = HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' ('proximity'|'no' 'proximity')
-	//    | direction = RightLeft sensor_type='ground' 'sensor' 'detecting' ('proximity'|'no' 'proximity'|'black'|'white');
+	//    direction=HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' state = State_Horizontal_Sensor
+	//    | direction=RightLeft sensor_type='ground' 'sensor' 'detecting' state = State_Ground_Sensor;
 	public SensorElements getSensorAccess() {
 		return pSensor;
 	}
@@ -1380,7 +1449,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//Condition returns Condition:
-	//   leftSensor = Sensor (operator=('and' | 'or') rightSensor = Sensor)?;
+	//    leftSensor=Sensor (operator=('and' | 'or') rightSensor=Sensor)?;
 	public ConditionElements getConditionAccess() {
 		return pCondition;
 	}
@@ -1390,7 +1459,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//ArithmeticExpression returns ArithmeticExpression:
-	//    left=EIntegerObject (operator=('+'|'-'|'*'|'/'|'mod') right=EIntegerObject)?;
+	//    left=EIntegerObject (operator=('+' | '-' | '*' | '/' | 'mod') right=EIntegerObject)?;
 	public ArithmeticExpressionElements getArithmeticExpressionAccess() {
 		return pArithmeticExpression;
 	}
@@ -1421,7 +1490,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//Color:
-	//    ('light'|'dark')? ('red' | 'green'|'blue' |'black'|'white'| 'yellow');
+	//    ('light' | 'dark')? ('red' | 'green' | 'blue' | 'black' | 'white' | 'yellow');
 	public ColorElements getColorAccess() {
 		return pColor;
 	}
@@ -1431,7 +1500,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//Sound:
-	//    'sound1'|'sound2'|'sound3'|'sound4';
+	//    'sound1' | 'sound2' | 'sound3' | 'sound4';
 	public SoundElements getSoundAccess() {
 		return pSound;
 	}
@@ -1440,8 +1509,28 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getSoundAccess().getRule();
 	}
 	
+	//State_Horizontal_Sensor:
+	//    'proximity' | 'no' 'proximity';
+	public State_Horizontal_SensorElements getState_Horizontal_SensorAccess() {
+		return pState_Horizontal_Sensor;
+	}
+	
+	public ParserRule getState_Horizontal_SensorRule() {
+		return getState_Horizontal_SensorAccess().getRule();
+	}
+	
+	//State_Ground_Sensor:
+	//'proximity' | 'no' 'proximity' | 'black' | 'white';
+	public State_Ground_SensorElements getState_Ground_SensorAccess() {
+		return pState_Ground_Sensor;
+	}
+	
+	public ParserRule getState_Ground_SensorRule() {
+		return getState_Ground_SensorAccess().getRule();
+	}
+	
 	//Buttons:
-	//    'center' |'right' |'left' |'forward' | 'backward';
+	//    'center' | 'right' | 'left' | 'forward' | 'backward';
 	public ButtonsElements getButtonsAccess() {
 		return pButtons;
 	}
@@ -1461,7 +1550,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//RightLeft:
-	//    'left'|'right';
+	//    'left' | 'right';
 	public RightLeftElements getRightLeftAccess() {
 		return pRightLeft;
 	}
@@ -1471,7 +1560,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//HorizontalSensors:
-	//'front' 'left'| 'front' 'left/middle'| 'front' 'middle'| 'front' 'right/middle' |'front' 'right'|'backward' 'left' |'backward' 'right';
+	//    'front' 'left' | 'front' 'left/middle' | 'front' 'middle' | 'front' 'right/middle' | 'front' 'right' | 'backward' 'left' | 'backward' 'right';
 	public HorizontalSensorsElements getHorizontalSensorsAccess() {
 		return pHorizontalSensors;
 	}

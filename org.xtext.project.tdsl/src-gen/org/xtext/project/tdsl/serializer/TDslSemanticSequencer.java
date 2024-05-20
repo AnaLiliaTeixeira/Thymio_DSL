@@ -16,6 +16,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequence
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.xtext.project.tdsl.services.TDslGrammarAccess;
 import thymio_DSL.ArithmeticExpression;
+import thymio_DSL.Button;
 import thymio_DSL.ColorBottomAction;
 import thymio_DSL.ColorTopAction;
 import thymio_DSL.Condition;
@@ -46,6 +47,9 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			switch (semanticObject.eClass().getClassifierID()) {
 			case Thymio_DSLPackage.ARITHMETIC_EXPRESSION:
 				sequence_ArithmeticExpression(context, (ArithmeticExpression) semanticObject); 
+				return; 
+			case Thymio_DSLPackage.BUTTON:
+				sequence_Button(context, (Button) semanticObject); 
 				return; 
 			case Thymio_DSLPackage.COLOR_BOTTOM_ACTION:
 				sequence_ColorBottomAction(context, (ColorBottomAction) semanticObject); 
@@ -99,6 +103,26 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_ArithmeticExpression(ISerializationContext context, ArithmeticExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Button returns Button
+	 *
+	 * Constraint:
+	 *     name=Buttons
+	 * </pre>
+	 */
+	protected void sequence_Button(ISerializationContext context, Button semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Thymio_DSLPackage.Literals.BUTTON__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Thymio_DSLPackage.Literals.BUTTON__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getButtonAccess().getNameButtonsParserRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -183,7 +207,7 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     MovementAction returns MovementAction
 	 *
 	 * Constraint:
-	 *     (((direction='forward' | direction='backward') speed=ArithmeticExpression?) | direction=RightLeft)?
+	 *     (((direction='forward' | direction='backward') speed=ArithmeticExpression?) | direction=RightLeft | direction='driving' | direction='turning')
 	 * </pre>
 	 */
 	protected void sequence_MovementAction(ISerializationContext context, MovementAction semanticObject) {
@@ -218,7 +242,10 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Sensor returns Sensor
 	 *
 	 * Constraint:
-	 *     ((direction=HorizontalSensors sensor_type='horizontal') | (direction=RightLeft sensor_type='ground'))
+	 *     (
+	 *         (direction=HorizontalSensors sensor_type='horizontal' state=State_Horizontal_Sensor) | 
+	 *         (direction=RightLeft sensor_type='ground' state=State_Ground_Sensor)
+	 *     )
 	 * </pre>
 	 */
 	protected void sequence_Sensor(ISerializationContext context, Sensor semanticObject) {
@@ -276,7 +303,7 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     UpperEvent returns UpperEvent
 	 *
 	 * Constraint:
-	 *     (buttons+=Buttons buttons+=Buttons* state=State)
+	 *     (button+=Button button+=Button* state=State)
 	 * </pre>
 	 */
 	protected void sequence_UpperEvent(ISerializationContext context, UpperEvent semanticObject) {

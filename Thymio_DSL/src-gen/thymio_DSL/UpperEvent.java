@@ -13,8 +13,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link thymio_DSL.UpperEvent#getButtons <em>Buttons</em>}</li>
  *   <li>{@link thymio_DSL.UpperEvent#getState <em>State</em>}</li>
+ *   <li>{@link thymio_DSL.UpperEvent#getButton <em>Button</em>}</li>
  * </ul>
  *
  * @see thymio_DSL.Thymio_DSLPackage#getUpperEvent()
@@ -22,18 +22,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface UpperEvent extends Event {
-	/**
-	 * Returns the value of the '<em><b>Buttons</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Buttons</em>' attribute list.
-	 * @see thymio_DSL.Thymio_DSLPackage#getUpperEvent_Buttons()
-	 * @model required="true"
-	 * @generated
-	 */
-	EList<String> getButtons();
-
 	/**
 	 * Returns the value of the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,5 +43,17 @@ public interface UpperEvent extends Event {
 	 * @generated
 	 */
 	void setState(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Button</b></em>' containment reference list.
+	 * The list contents are of type {@link thymio_DSL.Button}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Button</em>' containment reference list.
+	 * @see thymio_DSL.Thymio_DSLPackage#getUpperEvent_Button()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	EList<Button> getButton();
 
 } // UpperEvent

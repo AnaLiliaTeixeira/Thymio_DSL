@@ -299,6 +299,31 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Entry rule entryRuleButton
+entryRuleButton
+:
+{ before(grammarAccess.getButtonRule()); }
+	 ruleButton
+{ after(grammarAccess.getButtonRule()); } 
+	 EOF 
+;
+
+// Rule Button
+ruleButton 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getButtonAccess().getNameAssignment()); }
+		(rule__Button__NameAssignment)
+		{ after(grammarAccess.getButtonAccess().getNameAssignment()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Entry rule entryRuleProxEvent
 entryRuleProxEvent
 :
@@ -518,6 +543,56 @@ ruleSound
 		{ before(grammarAccess.getSoundAccess().getAlternatives()); }
 		(rule__Sound__Alternatives)
 		{ after(grammarAccess.getSoundAccess().getAlternatives()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+// Entry rule entryRuleState_Horizontal_Sensor
+entryRuleState_Horizontal_Sensor
+:
+{ before(grammarAccess.getState_Horizontal_SensorRule()); }
+	 ruleState_Horizontal_Sensor
+{ after(grammarAccess.getState_Horizontal_SensorRule()); } 
+	 EOF 
+;
+
+// Rule State_Horizontal_Sensor
+ruleState_Horizontal_Sensor 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getState_Horizontal_SensorAccess().getAlternatives()); }
+		(rule__State_Horizontal_Sensor__Alternatives)
+		{ after(grammarAccess.getState_Horizontal_SensorAccess().getAlternatives()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+// Entry rule entryRuleState_Ground_Sensor
+entryRuleState_Ground_Sensor
+:
+{ before(grammarAccess.getState_Ground_SensorRule()); }
+	 ruleState_Ground_Sensor
+{ after(grammarAccess.getState_Ground_SensorRule()); } 
+	 EOF 
+;
+
+// Rule State_Ground_Sensor
+ruleState_Ground_Sensor 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getState_Ground_SensorAccess().getAlternatives()); }
+		(rule__State_Ground_Sensor__Alternatives)
+		{ after(grammarAccess.getState_Ground_SensorAccess().getAlternatives()); }
 	)
 ;
 finally {
@@ -849,60 +924,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Sensor__Alternatives_0_4
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getSensorAccess().getProximityKeyword_0_4_0()); }
-		'proximity'
-		{ after(grammarAccess.getSensorAccess().getProximityKeyword_0_4_0()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getSensorAccess().getGroup_0_4_1()); }
-		(rule__Sensor__Group_0_4_1__0)
-		{ after(grammarAccess.getSensorAccess().getGroup_0_4_1()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Sensor__Alternatives_1_4
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getSensorAccess().getProximityKeyword_1_4_0()); }
-		'proximity'
-		{ after(grammarAccess.getSensorAccess().getProximityKeyword_1_4_0()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getSensorAccess().getGroup_1_4_1()); }
-		(rule__Sensor__Group_1_4_1__0)
-		{ after(grammarAccess.getSensorAccess().getGroup_1_4_1()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getSensorAccess().getBlackKeyword_1_4_2()); }
-		'black'
-		{ after(grammarAccess.getSensorAccess().getBlackKeyword_1_4_2()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getSensorAccess().getWhiteKeyword_1_4_3()); }
-		'white'
-		{ after(grammarAccess.getSensorAccess().getWhiteKeyword_1_4_3()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
 rule__Condition__OperatorAlternatives_1_0_0
 	@init {
 		int stackSize = keepStackSize();
@@ -1056,6 +1077,60 @@ rule__Sound__Alternatives
 		{ before(grammarAccess.getSoundAccess().getSound4Keyword_3()); }
 		'sound4'
 		{ after(grammarAccess.getSoundAccess().getSound4Keyword_3()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State_Horizontal_Sensor__Alternatives
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getState_Horizontal_SensorAccess().getProximityKeyword_0()); }
+		'proximity'
+		{ after(grammarAccess.getState_Horizontal_SensorAccess().getProximityKeyword_0()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getState_Horizontal_SensorAccess().getGroup_1()); }
+		(rule__State_Horizontal_Sensor__Group_1__0)
+		{ after(grammarAccess.getState_Horizontal_SensorAccess().getGroup_1()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State_Ground_Sensor__Alternatives
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getState_Ground_SensorAccess().getProximityKeyword_0()); }
+		'proximity'
+		{ after(grammarAccess.getState_Ground_SensorAccess().getProximityKeyword_0()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getState_Ground_SensorAccess().getGroup_1()); }
+		(rule__State_Ground_Sensor__Group_1__0)
+		{ after(grammarAccess.getState_Ground_SensorAccess().getGroup_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getState_Ground_SensorAccess().getBlackKeyword_2()); }
+		'black'
+		{ after(grammarAccess.getState_Ground_SensorAccess().getBlackKeyword_2()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getState_Ground_SensorAccess().getWhiteKeyword_3()); }
+		'white'
+		{ after(grammarAccess.getState_Ground_SensorAccess().getWhiteKeyword_3()); }
 	)
 ;
 finally {
@@ -1623,9 +1698,9 @@ rule__MovementAction__Group_2__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getMovementActionAccess().getDrivingKeyword_2_2()); }
-	'driving'
-	{ after(grammarAccess.getMovementActionAccess().getDrivingKeyword_2_2()); }
+	{ before(grammarAccess.getMovementActionAccess().getDirectionAssignment_2_2()); }
+	(rule__MovementAction__DirectionAssignment_2_2)
+	{ after(grammarAccess.getMovementActionAccess().getDirectionAssignment_2_2()); }
 )
 ;
 finally {
@@ -1704,9 +1779,9 @@ rule__MovementAction__Group_3__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getMovementActionAccess().getTurningKeyword_3_2()); }
-	'turning'
-	{ after(grammarAccess.getMovementActionAccess().getTurningKeyword_3_2()); }
+	{ before(grammarAccess.getMovementActionAccess().getDirectionAssignment_3_2()); }
+	(rule__MovementAction__DirectionAssignment_3_2)
+	{ after(grammarAccess.getMovementActionAccess().getDirectionAssignment_3_2()); }
 )
 ;
 finally {
@@ -2657,9 +2732,9 @@ rule__UpperEvent__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getUpperEventAccess().getButtonsAssignment_1()); }
-	(rule__UpperEvent__ButtonsAssignment_1)
-	{ after(grammarAccess.getUpperEventAccess().getButtonsAssignment_1()); }
+	{ before(grammarAccess.getUpperEventAccess().getButtonAssignment_1()); }
+	(rule__UpperEvent__ButtonAssignment_1)
+	{ after(grammarAccess.getUpperEventAccess().getButtonAssignment_1()); }
 )
 ;
 finally {
@@ -2845,9 +2920,9 @@ rule__UpperEvent__Group_2__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getUpperEventAccess().getButtonsAssignment_2_1()); }
-	(rule__UpperEvent__ButtonsAssignment_2_1)
-	{ after(grammarAccess.getUpperEventAccess().getButtonsAssignment_2_1()); }
+	{ before(grammarAccess.getUpperEventAccess().getButtonAssignment_2_1()); }
+	(rule__UpperEvent__ButtonAssignment_2_1)
+	{ after(grammarAccess.getUpperEventAccess().getButtonAssignment_2_1()); }
 )
 ;
 finally {
@@ -3088,63 +3163,9 @@ rule__Sensor__Group_0__4__Impl
 	}
 :
 (
-	{ before(grammarAccess.getSensorAccess().getAlternatives_0_4()); }
-	(rule__Sensor__Alternatives_0_4)
-	{ after(grammarAccess.getSensorAccess().getAlternatives_0_4()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__Sensor__Group_0_4_1__0
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__Sensor__Group_0_4_1__0__Impl
-	rule__Sensor__Group_0_4_1__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Sensor__Group_0_4_1__0__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getSensorAccess().getNoKeyword_0_4_1_0()); }
-	'no'
-	{ after(grammarAccess.getSensorAccess().getNoKeyword_0_4_1_0()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Sensor__Group_0_4_1__1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__Sensor__Group_0_4_1__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Sensor__Group_0_4_1__1__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getSensorAccess().getProximityKeyword_0_4_1_1()); }
-	'proximity'
-	{ after(grammarAccess.getSensorAccess().getProximityKeyword_0_4_1_1()); }
+	{ before(grammarAccess.getSensorAccess().getStateAssignment_0_4()); }
+	(rule__Sensor__StateAssignment_0_4)
+	{ after(grammarAccess.getSensorAccess().getStateAssignment_0_4()); }
 )
 ;
 finally {
@@ -3277,63 +3298,9 @@ rule__Sensor__Group_1__4__Impl
 	}
 :
 (
-	{ before(grammarAccess.getSensorAccess().getAlternatives_1_4()); }
-	(rule__Sensor__Alternatives_1_4)
-	{ after(grammarAccess.getSensorAccess().getAlternatives_1_4()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__Sensor__Group_1_4_1__0
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__Sensor__Group_1_4_1__0__Impl
-	rule__Sensor__Group_1_4_1__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Sensor__Group_1_4_1__0__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getSensorAccess().getNoKeyword_1_4_1_0()); }
-	'no'
-	{ after(grammarAccess.getSensorAccess().getNoKeyword_1_4_1_0()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Sensor__Group_1_4_1__1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__Sensor__Group_1_4_1__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Sensor__Group_1_4_1__1__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getSensorAccess().getProximityKeyword_1_4_1_1()); }
-	'proximity'
-	{ after(grammarAccess.getSensorAccess().getProximityKeyword_1_4_1_1()); }
+	{ before(grammarAccess.getSensorAccess().getStateAssignment_1_4()); }
+	(rule__Sensor__StateAssignment_1_4)
+	{ after(grammarAccess.getSensorAccess().getStateAssignment_1_4()); }
 )
 ;
 finally {
@@ -3935,6 +3902,114 @@ finally {
 }
 
 
+rule__State_Horizontal_Sensor__Group_1__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__State_Horizontal_Sensor__Group_1__0__Impl
+	rule__State_Horizontal_Sensor__Group_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State_Horizontal_Sensor__Group_1__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getState_Horizontal_SensorAccess().getNoKeyword_1_0()); }
+	'no'
+	{ after(grammarAccess.getState_Horizontal_SensorAccess().getNoKeyword_1_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State_Horizontal_Sensor__Group_1__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__State_Horizontal_Sensor__Group_1__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State_Horizontal_Sensor__Group_1__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getState_Horizontal_SensorAccess().getProximityKeyword_1_1()); }
+	'proximity'
+	{ after(grammarAccess.getState_Horizontal_SensorAccess().getProximityKeyword_1_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__State_Ground_Sensor__Group_1__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__State_Ground_Sensor__Group_1__0__Impl
+	rule__State_Ground_Sensor__Group_1__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State_Ground_Sensor__Group_1__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getState_Ground_SensorAccess().getNoKeyword_1_0()); }
+	'no'
+	{ after(grammarAccess.getState_Ground_SensorAccess().getNoKeyword_1_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State_Ground_Sensor__Group_1__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__State_Ground_Sensor__Group_1__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__State_Ground_Sensor__Group_1__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getState_Ground_SensorAccess().getProximityKeyword_1_1()); }
+	'proximity'
+	{ after(grammarAccess.getState_Ground_SensorAccess().getProximityKeyword_1_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 rule__HorizontalSensors__Group_0__0
 	@init {
 		int stackSize = keepStackSize();
@@ -4418,6 +4493,44 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__MovementAction__DirectionAssignment_2_2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMovementActionAccess().getDirectionDrivingKeyword_2_2_0()); }
+		(
+			{ before(grammarAccess.getMovementActionAccess().getDirectionDrivingKeyword_2_2_0()); }
+			'driving'
+			{ after(grammarAccess.getMovementActionAccess().getDirectionDrivingKeyword_2_2_0()); }
+		)
+		{ after(grammarAccess.getMovementActionAccess().getDirectionDrivingKeyword_2_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MovementAction__DirectionAssignment_3_2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMovementActionAccess().getDirectionTurningKeyword_3_2_0()); }
+		(
+			{ before(grammarAccess.getMovementActionAccess().getDirectionTurningKeyword_3_2_0()); }
+			'turning'
+			{ after(grammarAccess.getMovementActionAccess().getDirectionTurningKeyword_3_2_0()); }
+		)
+		{ after(grammarAccess.getMovementActionAccess().getDirectionTurningKeyword_3_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__SoundAction__SoundAssignment_0_2
 	@init {
 		int stackSize = keepStackSize();
@@ -4493,30 +4606,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__UpperEvent__ButtonsAssignment_1
+rule__UpperEvent__ButtonAssignment_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getUpperEventAccess().getButtonsButtonsParserRuleCall_1_0()); }
-		ruleButtons
-		{ after(grammarAccess.getUpperEventAccess().getButtonsButtonsParserRuleCall_1_0()); }
+		{ before(grammarAccess.getUpperEventAccess().getButtonButtonParserRuleCall_1_0()); }
+		ruleButton
+		{ after(grammarAccess.getUpperEventAccess().getButtonButtonParserRuleCall_1_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__UpperEvent__ButtonsAssignment_2_1
+rule__UpperEvent__ButtonAssignment_2_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getUpperEventAccess().getButtonsButtonsParserRuleCall_2_1_0()); }
-		ruleButtons
-		{ after(grammarAccess.getUpperEventAccess().getButtonsButtonsParserRuleCall_2_1_0()); }
+		{ before(grammarAccess.getUpperEventAccess().getButtonButtonParserRuleCall_2_1_0()); }
+		ruleButton
+		{ after(grammarAccess.getUpperEventAccess().getButtonButtonParserRuleCall_2_1_0()); }
 	)
 ;
 finally {
@@ -4532,6 +4645,21 @@ rule__UpperEvent__StateAssignment_4
 		{ before(grammarAccess.getUpperEventAccess().getStateStateParserRuleCall_4_0()); }
 		ruleState
 		{ after(grammarAccess.getUpperEventAccess().getStateStateParserRuleCall_4_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Button__NameAssignment
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getButtonAccess().getNameButtonsParserRuleCall_0()); }
+		ruleButtons
+		{ after(grammarAccess.getButtonAccess().getNameButtonsParserRuleCall_0()); }
 	)
 ;
 finally {
@@ -4587,6 +4715,21 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__Sensor__StateAssignment_0_4
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getSensorAccess().getStateState_Horizontal_SensorParserRuleCall_0_4_0()); }
+		ruleState_Horizontal_Sensor
+		{ after(grammarAccess.getSensorAccess().getStateState_Horizontal_SensorParserRuleCall_0_4_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__Sensor__DirectionAssignment_1_0
 	@init {
 		int stackSize = keepStackSize();
@@ -4615,6 +4758,21 @@ rule__Sensor__Sensor_typeAssignment_1_1
 			{ after(grammarAccess.getSensorAccess().getSensor_typeGroundKeyword_1_1_0()); }
 		)
 		{ after(grammarAccess.getSensorAccess().getSensor_typeGroundKeyword_1_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Sensor__StateAssignment_1_4
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getSensorAccess().getStateState_Ground_SensorParserRuleCall_1_4_0()); }
+		ruleState_Ground_Sensor
+		{ after(grammarAccess.getSensorAccess().getStateState_Ground_SensorParserRuleCall_1_4_0()); }
 	)
 ;
 finally {

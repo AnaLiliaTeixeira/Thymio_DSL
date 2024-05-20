@@ -30,9 +30,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Action"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClapEvent" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="UpperEvent" eSuperTypes="#//Event">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="buttons" lowerBound="1"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="button" lowerBound="1"
+        upperBound="-1" eType="#//Button" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TapEvent" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Event"/>
@@ -40,6 +40,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sensor_type" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProxEvent" eSuperTypes="#//Event">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sensor" lowerBound="1"
@@ -62,5 +63,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftSensor" lowerBound="1"
         eType="#//Sensor" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Button">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

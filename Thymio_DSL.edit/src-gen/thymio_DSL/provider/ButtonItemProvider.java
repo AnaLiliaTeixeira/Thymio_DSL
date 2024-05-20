@@ -21,16 +21,16 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import thymio_DSL.Sensor;
+import thymio_DSL.Button;
 import thymio_DSL.Thymio_DSLPackage;
 
 /**
- * This is the item provider adapter for a {@link thymio_DSL.Sensor} object.
+ * This is the item provider adapter for a {@link thymio_DSL.Button} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SensorItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
+public class ButtonItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -38,7 +38,7 @@ public class SensorItemProvider extends ItemProviderAdapter implements IEditingD
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SensorItemProvider(AdapterFactory adapterFactory) {
+	public ButtonItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -53,69 +53,35 @@ public class SensorItemProvider extends ItemProviderAdapter implements IEditingD
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSensor_typePropertyDescriptor(object);
-			addDirectionPropertyDescriptor(object);
-			addStatePropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Sensor type feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSensor_typePropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Sensor_sensor_type_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Sensor_sensor_type_feature",
-								"_UI_Sensor_type"),
-						Thymio_DSLPackage.Literals.SENSOR__SENSOR_TYPE, true, false, false,
+						getResourceLocator(), getString("_UI_Button_name_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Button_name_feature", "_UI_Button_type"),
+						Thymio_DSLPackage.Literals.BUTTON__NAME, true, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Direction feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDirectionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Sensor_direction_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Sensor_direction_feature",
-								"_UI_Sensor_type"),
-						Thymio_DSLPackage.Literals.SENSOR__DIRECTION, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the State feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addStatePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_Sensor_state_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_Sensor_state_feature", "_UI_Sensor_type"),
-						Thymio_DSLPackage.Literals.SENSOR__STATE, true, false, false,
-						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
-
-	/**
-	 * This returns Sensor.gif.
+	 * This returns Button.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Sensor"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Button"));
 	}
 
 	/**
@@ -136,9 +102,9 @@ public class SensorItemProvider extends ItemProviderAdapter implements IEditingD
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Sensor) object).getSensor_type();
-		return label == null || label.length() == 0 ? getString("_UI_Sensor_type")
-				: getString("_UI_Sensor_type") + " " + label;
+		String label = ((Button) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_Button_type")
+				: getString("_UI_Button_type") + " " + label;
 	}
 
 	/**
@@ -152,10 +118,8 @@ public class SensorItemProvider extends ItemProviderAdapter implements IEditingD
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Sensor.class)) {
-		case Thymio_DSLPackage.SENSOR__SENSOR_TYPE:
-		case Thymio_DSLPackage.SENSOR__DIRECTION:
-		case Thymio_DSLPackage.SENSOR__STATE:
+		switch (notification.getFeatureID(Button.class)) {
+		case Thymio_DSLPackage.BUTTON__NAME:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		}

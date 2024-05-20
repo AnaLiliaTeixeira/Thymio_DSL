@@ -410,10 +410,20 @@ ruleMovementAction returns [EObject current=null]
 			{
 				newLeafNode(otherlv_8, grammarAccess.getMovementActionAccess().getStopKeyword_2_1());
 			}
-			otherlv_9='driving'
-			{
-				newLeafNode(otherlv_9, grammarAccess.getMovementActionAccess().getDrivingKeyword_2_2());
-			}
+			(
+				(
+					lv_direction_9_0='driving'
+					{
+						newLeafNode(lv_direction_9_0, grammarAccess.getMovementActionAccess().getDirectionDrivingKeyword_2_2_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMovementActionRule());
+						}
+						setWithLastConsumed($current, "direction", lv_direction_9_0, "driving");
+					}
+				)
+			)
 		)
 		    |
 		(
@@ -428,10 +438,20 @@ ruleMovementAction returns [EObject current=null]
 			{
 				newLeafNode(otherlv_11, grammarAccess.getMovementActionAccess().getStopKeyword_3_1());
 			}
-			otherlv_12='turning'
-			{
-				newLeafNode(otherlv_12, grammarAccess.getMovementActionAccess().getTurningKeyword_3_2());
-			}
+			(
+				(
+					lv_direction_12_0='turning'
+					{
+						newLeafNode(lv_direction_12_0, grammarAccess.getMovementActionAccess().getDirectionTurningKeyword_3_2_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getMovementActionRule());
+						}
+						setWithLastConsumed($current, "direction", lv_direction_12_0, "turning");
+					}
+				)
+			)
 		)
 	)
 ;
@@ -766,18 +786,18 @@ ruleUpperEvent returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getUpperEventAccess().getButtonsButtonsParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getUpperEventAccess().getButtonButtonParserRuleCall_1_0());
 				}
-				lv_buttons_1_0=ruleButtons
+				lv_button_1_0=ruleButton
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getUpperEventRule());
 					}
 					add(
 						$current,
-						"buttons",
-						lv_buttons_1_0,
-						"org.xtext.project.tdsl.TDsl.Buttons");
+						"button",
+						lv_button_1_0,
+						"org.xtext.project.tdsl.TDsl.Button");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -790,18 +810,18 @@ ruleUpperEvent returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getUpperEventAccess().getButtonsButtonsParserRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getUpperEventAccess().getButtonButtonParserRuleCall_2_1_0());
 					}
-					lv_buttons_3_0=ruleButtons
+					lv_button_3_0=ruleButton
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getUpperEventRule());
 						}
 						add(
 							$current,
-							"buttons",
-							lv_buttons_3_0,
-							"org.xtext.project.tdsl.TDsl.Buttons");
+							"button",
+							lv_button_3_0,
+							"org.xtext.project.tdsl.TDsl.Button");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -838,6 +858,42 @@ ruleUpperEvent returns [EObject current=null]
 		{
 			newLeafNode(otherlv_7, grammarAccess.getUpperEventAccess().getColonKeyword_6());
 		}
+	)
+;
+
+// Entry rule entryRuleButton
+entryRuleButton returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getButtonRule()); }
+	iv_ruleButton=ruleButton
+	{ $current=$iv_ruleButton.current; }
+	EOF;
+
+// Rule Button
+ruleButton returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getButtonAccess().getNameButtonsParserRuleCall_0());
+			}
+			lv_name_0_0=ruleButtons
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getButtonRule());
+				}
+				set(
+					$current,
+					"name",
+					lv_name_0_0,
+					"org.xtext.project.tdsl.TDsl.Buttons");
+				afterParserOrEnumRuleCall();
+			}
+		)
 	)
 ;
 
@@ -950,19 +1006,21 @@ ruleSensor returns [EObject current=null]
 				newLeafNode(otherlv_3, grammarAccess.getSensorAccess().getDetectingKeyword_0_3());
 			}
 			(
-				otherlv_4='proximity'
-				{
-					newLeafNode(otherlv_4, grammarAccess.getSensorAccess().getProximityKeyword_0_4_0());
-				}
-				    |
 				(
-					otherlv_5='no'
 					{
-						newLeafNode(otherlv_5, grammarAccess.getSensorAccess().getNoKeyword_0_4_1_0());
+						newCompositeNode(grammarAccess.getSensorAccess().getStateState_Horizontal_SensorParserRuleCall_0_4_0());
 					}
-					otherlv_6='proximity'
+					lv_state_4_0=ruleState_Horizontal_Sensor
 					{
-						newLeafNode(otherlv_6, grammarAccess.getSensorAccess().getProximityKeyword_0_4_1_1());
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getSensorRule());
+						}
+						set(
+							$current,
+							"state",
+							lv_state_4_0,
+							"org.xtext.project.tdsl.TDsl.State_Horizontal_Sensor");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -974,7 +1032,7 @@ ruleSensor returns [EObject current=null]
 					{
 						newCompositeNode(grammarAccess.getSensorAccess().getDirectionRightLeftParserRuleCall_1_0_0());
 					}
-					lv_direction_7_0=ruleRightLeft
+					lv_direction_5_0=ruleRightLeft
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getSensorRule());
@@ -982,7 +1040,7 @@ ruleSensor returns [EObject current=null]
 						set(
 							$current,
 							"direction",
-							lv_direction_7_0,
+							lv_direction_5_0,
 							"org.xtext.project.tdsl.TDsl.RightLeft");
 						afterParserOrEnumRuleCall();
 					}
@@ -990,52 +1048,44 @@ ruleSensor returns [EObject current=null]
 			)
 			(
 				(
-					lv_sensor_type_8_0='ground'
+					lv_sensor_type_6_0='ground'
 					{
-						newLeafNode(lv_sensor_type_8_0, grammarAccess.getSensorAccess().getSensor_typeGroundKeyword_1_1_0());
+						newLeafNode(lv_sensor_type_6_0, grammarAccess.getSensorAccess().getSensor_typeGroundKeyword_1_1_0());
 					}
 					{
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getSensorRule());
 						}
-						setWithLastConsumed($current, "sensor_type", lv_sensor_type_8_0, "ground");
+						setWithLastConsumed($current, "sensor_type", lv_sensor_type_6_0, "ground");
 					}
 				)
 			)
-			otherlv_9='sensor'
+			otherlv_7='sensor'
 			{
-				newLeafNode(otherlv_9, grammarAccess.getSensorAccess().getSensorKeyword_1_2());
+				newLeafNode(otherlv_7, grammarAccess.getSensorAccess().getSensorKeyword_1_2());
 			}
-			otherlv_10='detecting'
+			otherlv_8='detecting'
 			{
-				newLeafNode(otherlv_10, grammarAccess.getSensorAccess().getDetectingKeyword_1_3());
+				newLeafNode(otherlv_8, grammarAccess.getSensorAccess().getDetectingKeyword_1_3());
 			}
 			(
-				otherlv_11='proximity'
-				{
-					newLeafNode(otherlv_11, grammarAccess.getSensorAccess().getProximityKeyword_1_4_0());
-				}
-				    |
 				(
-					otherlv_12='no'
 					{
-						newLeafNode(otherlv_12, grammarAccess.getSensorAccess().getNoKeyword_1_4_1_0());
+						newCompositeNode(grammarAccess.getSensorAccess().getStateState_Ground_SensorParserRuleCall_1_4_0());
 					}
-					otherlv_13='proximity'
+					lv_state_9_0=ruleState_Ground_Sensor
 					{
-						newLeafNode(otherlv_13, grammarAccess.getSensorAccess().getProximityKeyword_1_4_1_1());
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getSensorRule());
+						}
+						set(
+							$current,
+							"state",
+							lv_state_9_0,
+							"org.xtext.project.tdsl.TDsl.State_Ground_Sensor");
+						afterParserOrEnumRuleCall();
 					}
 				)
-				    |
-				otherlv_14='black'
-				{
-					newLeafNode(otherlv_14, grammarAccess.getSensorAccess().getBlackKeyword_1_4_2());
-				}
-				    |
-				otherlv_15='white'
-				{
-					newLeafNode(otherlv_15, grammarAccess.getSensorAccess().getWhiteKeyword_1_4_3());
-				}
 			)
 		)
 	)
@@ -1470,6 +1520,92 @@ ruleSound returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 		{
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getSoundAccess().getSound4Keyword_3());
+		}
+	)
+;
+
+// Entry rule entryRuleState_Horizontal_Sensor
+entryRuleState_Horizontal_Sensor returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getState_Horizontal_SensorRule()); }
+	iv_ruleState_Horizontal_Sensor=ruleState_Horizontal_Sensor
+	{ $current=$iv_ruleState_Horizontal_Sensor.current.getText(); }
+	EOF;
+
+// Rule State_Horizontal_Sensor
+ruleState_Horizontal_Sensor returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		kw='proximity'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getState_Horizontal_SensorAccess().getProximityKeyword_0());
+		}
+		    |
+		(
+			kw='no'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getState_Horizontal_SensorAccess().getNoKeyword_1_0());
+			}
+			kw='proximity'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getState_Horizontal_SensorAccess().getProximityKeyword_1_1());
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleState_Ground_Sensor
+entryRuleState_Ground_Sensor returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getState_Ground_SensorRule()); }
+	iv_ruleState_Ground_Sensor=ruleState_Ground_Sensor
+	{ $current=$iv_ruleState_Ground_Sensor.current.getText(); }
+	EOF;
+
+// Rule State_Ground_Sensor
+ruleState_Ground_Sensor returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		kw='proximity'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getState_Ground_SensorAccess().getProximityKeyword_0());
+		}
+		    |
+		(
+			kw='no'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getState_Ground_SensorAccess().getNoKeyword_1_0());
+			}
+			kw='proximity'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getState_Ground_SensorAccess().getProximityKeyword_1_1());
+			}
+		)
+		    |
+		kw='black'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getState_Ground_SensorAccess().getBlackKeyword_2());
+		}
+		    |
+		kw='white'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getState_Ground_SensorAccess().getWhiteKeyword_3());
 		}
 	)
 ;

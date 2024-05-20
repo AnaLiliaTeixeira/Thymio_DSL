@@ -147,6 +147,11 @@ public class Thymio_DSLAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseButton(Button object) {
+			return createButtonAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
@@ -386,6 +391,20 @@ public class Thymio_DSLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConditionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thymio_DSL.Button <em>Button</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thymio_DSL.Button
+	 * @generated
+	 */
+	public Adapter createButtonAdapter() {
 		return null;
 	}
 

@@ -22,6 +22,7 @@ import thymio_DSL.Thymio_DSLPackage;
  * <ul>
  *   <li>{@link thymio_DSL.impl.SensorImpl#getSensor_type <em>Sensor type</em>}</li>
  *   <li>{@link thymio_DSL.impl.SensorImpl#getDirection <em>Direction</em>}</li>
+ *   <li>{@link thymio_DSL.impl.SensorImpl#getState <em>State</em>}</li>
  * </ul>
  *
  * @generated
@@ -66,6 +67,26 @@ public class SensorImpl extends MinimalEObjectImpl.Container implements Sensor {
 	 * @ordered
 	 */
 	protected String direction = DIRECTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getState() <em>State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getState()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STATE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getState() <em>State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getState()
+	 * @generated
+	 * @ordered
+	 */
+	protected String state = STATE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,12 +161,37 @@ public class SensorImpl extends MinimalEObjectImpl.Container implements Sensor {
 	 * @generated
 	 */
 	@Override
+	public String getState() {
+		return state;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setState(String newState) {
+		String oldState = state;
+		state = newState;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Thymio_DSLPackage.SENSOR__STATE, oldState, state));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case Thymio_DSLPackage.SENSOR__SENSOR_TYPE:
 			return getSensor_type();
 		case Thymio_DSLPackage.SENSOR__DIRECTION:
 			return getDirection();
+		case Thymio_DSLPackage.SENSOR__STATE:
+			return getState();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -163,6 +209,9 @@ public class SensorImpl extends MinimalEObjectImpl.Container implements Sensor {
 			return;
 		case Thymio_DSLPackage.SENSOR__DIRECTION:
 			setDirection((String) newValue);
+			return;
+		case Thymio_DSLPackage.SENSOR__STATE:
+			setState((String) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -182,6 +231,9 @@ public class SensorImpl extends MinimalEObjectImpl.Container implements Sensor {
 		case Thymio_DSLPackage.SENSOR__DIRECTION:
 			setDirection(DIRECTION_EDEFAULT);
 			return;
+		case Thymio_DSLPackage.SENSOR__STATE:
+			setState(STATE_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -198,6 +250,8 @@ public class SensorImpl extends MinimalEObjectImpl.Container implements Sensor {
 			return SENSOR_TYPE_EDEFAULT == null ? sensor_type != null : !SENSOR_TYPE_EDEFAULT.equals(sensor_type);
 		case Thymio_DSLPackage.SENSOR__DIRECTION:
 			return DIRECTION_EDEFAULT == null ? direction != null : !DIRECTION_EDEFAULT.equals(direction);
+		case Thymio_DSLPackage.SENSOR__STATE:
+			return STATE_EDEFAULT == null ? state != null : !STATE_EDEFAULT.equals(state);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -217,6 +271,8 @@ public class SensorImpl extends MinimalEObjectImpl.Container implements Sensor {
 		result.append(sensor_type);
 		result.append(", direction: ");
 		result.append(direction);
+		result.append(", state: ");
+		result.append(state);
 		result.append(')');
 		return result.toString();
 	}

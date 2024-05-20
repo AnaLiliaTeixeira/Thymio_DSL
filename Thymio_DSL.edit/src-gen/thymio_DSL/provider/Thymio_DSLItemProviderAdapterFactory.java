@@ -441,6 +441,29 @@ public class Thymio_DSLItemProviderAdapterFactory extends Thymio_DSLAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link thymio_DSL.Button} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ButtonItemProvider buttonItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link thymio_DSL.Button}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createButtonAdapter() {
+		if (buttonItemProvider == null) {
+			buttonItemProvider = new ButtonItemProvider(this);
+		}
+
+		return buttonItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -577,6 +600,8 @@ public class Thymio_DSLItemProviderAdapterFactory extends Thymio_DSLAdapterFacto
 			arithmeticExpressionItemProvider.dispose();
 		if (conditionItemProvider != null)
 			conditionItemProvider.dispose();
+		if (buttonItemProvider != null)
+			buttonItemProvider.dispose();
 	}
 
 }

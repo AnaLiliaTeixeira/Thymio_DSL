@@ -400,22 +400,22 @@ public interface Thymio_DSLPackage extends EPackage {
 	int UPPER_EVENT = 8;
 
 	/**
-	 * The feature id for the '<em><b>Buttons</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UPPER_EVENT__BUTTONS = EVENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UPPER_EVENT__STATE = EVENT_FEATURE_COUNT + 1;
+	int UPPER_EVENT__STATE = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Button</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPPER_EVENT__BUTTON = EVENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Upper Event</em>' class.
@@ -492,13 +492,22 @@ public interface Thymio_DSLPackage extends EPackage {
 	int SENSOR__DIRECTION = 1;
 
 	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR__STATE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Sensor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SENSOR_FEATURE_COUNT = 2;
+	int SENSOR_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Sensor</em>' class.
@@ -703,6 +712,43 @@ public interface Thymio_DSLPackage extends EPackage {
 	int CONDITION_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link thymio_DSL.impl.ButtonImpl <em>Button</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thymio_DSL.impl.ButtonImpl
+	 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getButton()
+	 * @generated
+	 */
+	int BUTTON = 16;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Button</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Button</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON_OPERATION_COUNT = 0;
+
+	/**
 	 * Returns the meta object for class '{@link thymio_DSL.Statement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -892,17 +938,6 @@ public interface Thymio_DSLPackage extends EPackage {
 	EClass getUpperEvent();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link thymio_DSL.UpperEvent#getButtons <em>Buttons</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Buttons</em>'.
-	 * @see thymio_DSL.UpperEvent#getButtons()
-	 * @see #getUpperEvent()
-	 * @generated
-	 */
-	EAttribute getUpperEvent_Buttons();
-
-	/**
 	 * Returns the meta object for the attribute '{@link thymio_DSL.UpperEvent#getState <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -912,6 +947,17 @@ public interface Thymio_DSLPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getUpperEvent_State();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link thymio_DSL.UpperEvent#getButton <em>Button</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Button</em>'.
+	 * @see thymio_DSL.UpperEvent#getButton()
+	 * @see #getUpperEvent()
+	 * @generated
+	 */
+	EReference getUpperEvent_Button();
 
 	/**
 	 * Returns the meta object for class '{@link thymio_DSL.TapEvent <em>Tap Event</em>}'.
@@ -964,6 +1010,17 @@ public interface Thymio_DSLPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSensor_Direction();
+
+	/**
+	 * Returns the meta object for the attribute '{@link thymio_DSL.Sensor#getState <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>State</em>'.
+	 * @see thymio_DSL.Sensor#getState()
+	 * @see #getSensor()
+	 * @generated
+	 */
+	EAttribute getSensor_State();
 
 	/**
 	 * Returns the meta object for class '{@link thymio_DSL.ProxEvent <em>Prox Event</em>}'.
@@ -1103,6 +1160,27 @@ public interface Thymio_DSLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCondition_LeftSensor();
+
+	/**
+	 * Returns the meta object for class '{@link thymio_DSL.Button <em>Button</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Button</em>'.
+	 * @see thymio_DSL.Button
+	 * @generated
+	 */
+	EClass getButton();
+
+	/**
+	 * Returns the meta object for the attribute '{@link thymio_DSL.Button#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see thymio_DSL.Button#getName()
+	 * @see #getButton()
+	 * @generated
+	 */
+	EAttribute getButton_Name();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1290,20 +1368,20 @@ public interface Thymio_DSLPackage extends EPackage {
 		EClass UPPER_EVENT = eINSTANCE.getUpperEvent();
 
 		/**
-		 * The meta object literal for the '<em><b>Buttons</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute UPPER_EVENT__BUTTONS = eINSTANCE.getUpperEvent_Buttons();
-
-		/**
 		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute UPPER_EVENT__STATE = eINSTANCE.getUpperEvent_State();
+
+		/**
+		 * The meta object literal for the '<em><b>Button</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UPPER_EVENT__BUTTON = eINSTANCE.getUpperEvent_Button();
 
 		/**
 		 * The meta object literal for the '{@link thymio_DSL.impl.TapEventImpl <em>Tap Event</em>}' class.
@@ -1350,6 +1428,14 @@ public interface Thymio_DSLPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SENSOR__DIRECTION = eINSTANCE.getSensor_Direction();
+
+		/**
+		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SENSOR__STATE = eINSTANCE.getSensor_State();
 
 		/**
 		 * The meta object literal for the '{@link thymio_DSL.impl.ProxEventImpl <em>Prox Event</em>}' class.
@@ -1462,6 +1548,24 @@ public interface Thymio_DSLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONDITION__LEFT_SENSOR = eINSTANCE.getCondition_LeftSensor();
+
+		/**
+		 * The meta object literal for the '{@link thymio_DSL.impl.ButtonImpl <em>Button</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thymio_DSL.impl.ButtonImpl
+		 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getButton()
+		 * @generated
+		 */
+		EClass BUTTON = eINSTANCE.getButton();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUTTON__NAME = eINSTANCE.getButton_Name();
 
 	}
 

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link thymio_DSL.Sensor#getSensor_type <em>Sensor type</em>}</li>
  *   <li>{@link thymio_DSL.Sensor#getDirection <em>Direction</em>}</li>
+ *   <li>{@link thymio_DSL.Sensor#getState <em>State</em>}</li>
  * </ul>
  *
  * @see thymio_DSL.Thymio_DSLPackage#getSensor()
@@ -65,5 +66,27 @@ public interface Sensor extends EObject {
 	 * @generated
 	 */
 	void setDirection(String value);
+
+	/**
+	 * Returns the value of the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>State</em>' attribute.
+	 * @see #setState(String)
+	 * @see thymio_DSL.Thymio_DSLPackage#getSensor_State()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getState();
+
+	/**
+	 * Sets the value of the '{@link thymio_DSL.Sensor#getState <em>State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>State</em>' attribute.
+	 * @see #getState()
+	 * @generated
+	 */
+	void setState(String value);
 
 } // Sensor

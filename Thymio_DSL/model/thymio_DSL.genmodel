@@ -33,14 +33,15 @@
     <genClasses ecoreClass="thymio_DSL.ecore#//Action"/>
     <genClasses ecoreClass="thymio_DSL.ecore#//ClapEvent"/>
     <genClasses ecoreClass="thymio_DSL.ecore#//UpperEvent">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//UpperEvent/buttons"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//UpperEvent/state"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//UpperEvent/button"/>
     </genClasses>
     <genClasses ecoreClass="thymio_DSL.ecore#//TapEvent"/>
     <genClasses ecoreClass="thymio_DSL.ecore#//Event"/>
     <genClasses ecoreClass="thymio_DSL.ecore#//Sensor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//Sensor/sensor_type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//Sensor/direction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//Sensor/state"/>
     </genClasses>
     <genClasses ecoreClass="thymio_DSL.ecore#//ProxEvent">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//ProxEvent/sensor"/>
@@ -58,6 +59,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//Condition/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//Condition/rightSensor"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference thymio_DSL.ecore#//Condition/leftSensor"/>
+    </genClasses>
+    <genClasses ecoreClass="thymio_DSL.ecore#//Button">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute thymio_DSL.ecore#//Button/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

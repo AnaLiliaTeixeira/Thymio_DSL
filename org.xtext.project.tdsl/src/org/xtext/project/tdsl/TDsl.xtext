@@ -5,85 +5,94 @@ import "http://www.example.org/thymio_DSL"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 ThymioDSL returns ThymioDSL:
-    (statement+=Statement)*;
+	(statement+=Statement)*;
 
 Statement returns Statement:
-        '->' event=Event
-            (ifstatement+=IfStatement | action+=Action)+;
-    
+	'->' event=Event
+	(ifstatement+=IfStatement | action+=Action)+;
+
 Event returns Event:
-    UpperEvent | ProxEvent | TapEvent | ClapEvent;
+	UpperEvent | ProxEvent | TapEvent | ClapEvent;
 
 Action returns Action:
-    '-' (MovementAction | SoundAction | ColorBottomAction | ColorTopAction);
-    
+	'-' (MovementAction | SoundAction | ColorBottomAction | ColorTopAction);
+
 MovementAction returns MovementAction:
-    'drive' direction=("forward"|"backward") ('with' 'speed' speed=ArithmeticExpression)? 
-    | 'turn' direction=RightLeft
-    | {MovementAction} 'stop' 'driving'
-    | {MovementAction} 'stop' 'turning';
+	'drive' direction=("forward" | "backward") ('with' 'speed' speed=ArithmeticExpression)?
+	| 'turn' direction=RightLeft
+	| {MovementAction} 'stop' direction='driving'
+	| {MovementAction} 'stop' direction='turning';
 
 SoundAction returns SoundAction:
-    'play' 'sound' sound=Sound 
-    | {SoundAction} 'stop' 'playing' 'sound';
+	'play' 'sound' sound=Sound
+	| {SoundAction} 'stop' 'playing' 'sound';
 
 ColorBottomAction returns ColorBottomAction:
-    'set' 'bottom' 'color' 'to' color=Color
-    | {ColorBottomAction} 'turn' 'off' 'bottom' 'leds';
+	'set' 'bottom' 'color' 'to' color=Color
+	| {ColorBottomAction} 'turn' 'off' 'bottom' 'leds';
 
 ColorTopAction returns ColorTopAction:
-    'set' 'top' 'color' 'to' color=Color
-    | {ColorTopAction} 'turn' 'off' 'top' 'leds';
+	'set' 'top' 'color' 'to' color=Color
+	| {ColorTopAction} 'turn' 'off' 'top' 'leds';
 
 IfStatement returns IfStatement:
-    'If' condition=Condition ':'
-    (action+=Action)+
-    'End' 'if';
+	'If' condition=Condition ':'
+	(action+=Action)+
+	'End' 'if';
 
 UpperEvent returns UpperEvent:
-    'On' buttons+=Buttons ('and' buttons+=Buttons)* 'button' state=State 'do' ':';
+	'On' button+=Button ('and' button+=Button)* 'button' state=State 'do' ':';
+
+Button returns Button:
+	name = Buttons;
 
 ProxEvent returns ProxEvent:
-    'On' sensor=Sensor 'do' ':';
+	'On' sensor=Sensor 'do' ':';
 
 Sensor returns Sensor:
-    direction = HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' ('proximity'|'no' 'proximity')
-    | direction = RightLeft sensor_type='ground' 'sensor' 'detecting' ('proximity'|'no' 'proximity'|'black'|'white');
+	direction=HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' state = State_Horizontal_Sensor
+	| direction=RightLeft sensor_type='ground' 'sensor' 'detecting' state = State_Ground_Sensor;
+
 
 TapEvent returns Event:
-    {Event} 'On' 'tap' 'do' ':';
+	{Event} 'On' 'tap' 'do' ':';
 
 ClapEvent returns Event:
-    {Event} 'On' 'clap' 'do' ':';
+	{Event} 'On' 'clap' 'do' ':';
 
 Condition returns Condition:
-   leftSensor = Sensor (operator=('and' | 'or') rightSensor = Sensor)?;
-     
+	leftSensor=Sensor (operator=('and' | 'or') rightSensor=Sensor)?;
+
 ArithmeticExpression returns ArithmeticExpression:
-    left=EIntegerObject (operator=('+'|'-'|'*'|'/'|'mod') right=EIntegerObject)?;
+	left=EIntegerObject (operator=('+' | '-' | '*' | '/' | 'mod') right=EIntegerObject)?;
 
 //-----------------------------LITERALS OR CONSTANTS------------------------------------------
-
 EIntegerObject returns ecore::EIntegerObject:
-    '-'? INT;
+	'-'? INT;
 
 EString returns ecore::EString:
-    STRING | ID;
+	STRING | ID;
 
 Color:
-    ('light'|'dark')? ('red' | 'green'|'blue' |'black'|'white'| 'yellow');
+	('light' | 'dark')? ('red' | 'green' | 'blue' | 'black' | 'white' | 'yellow');
 
 Sound:
-    'sound1'|'sound2'|'sound3'|'sound4';
+	'sound1' | 'sound2' | 'sound3' | 'sound4';
+
+State_Horizontal_Sensor:
+	'proximity' | 'no' 'proximity';
+	
+State_Ground_Sensor:
+'proximity' | 'no' 'proximity' | 'black' | 'white';
 
 Buttons:
-    'center' |'right' |'left' |'forward' | 'backward';
+	'center' | 'right' | 'left' | 'forward' | 'backward';
 
 State:
-    'touched' | 'released';
+	'touched' | 'released';
 
 RightLeft:
-    'left'|'right';
+	'left' | 'right';
 
 HorizontalSensors:
-'front' 'left'| 'front' 'left/middle'| 'front' 'middle'| 'front' 'right/middle' |'front' 'right'|'backward' 'left' |'backward' 'right';
+	'front' 'left' | 'front' 'left/middle' | 'front' 'middle' | 'front' 'right/middle' | 'front' 'right' | 'backward' 'left' | 'backward' 'right';

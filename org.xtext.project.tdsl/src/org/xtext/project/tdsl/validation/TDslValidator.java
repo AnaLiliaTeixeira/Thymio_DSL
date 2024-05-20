@@ -3,18 +3,18 @@
  */
 package org.xtext.project.tdsl.validation;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.validation.Check;
 
 import thymio_DSL.Action;
+import thymio_DSL.Button;
 import thymio_DSL.ClapEvent;
 import thymio_DSL.ColorTopAction;
+import thymio_DSL.Condition;
 import thymio_DSL.Event;
 import thymio_DSL.IfStatement;
 import thymio_DSL.ProxEvent;
@@ -53,16 +53,6 @@ public class TDslValidator extends AbstractTDslValidator {
 	}
 
 	public static final String TURN_OFF_TOP_LEDS_WARNING = "turnOffTopLedsWarning";
-	/**
-	 * @Check public void checkTurnOffTopLeds(Statement statement) { boolean
-	 *        setTopColorSeen = false; for (Action action : statement.getAction()) {
-	 *        if (action instanceof ColorTopAction) { ColorTopAction colorTopAction
-	 *        = (ColorTopAction) action; if (colorTopAction.getColor() != null) {
-	 *        setTopColorSeen = true; } else if (setTopColorSeen == false) {
-	 *        warning("Turning off top LEDs without setting the top color first.",
-	 *        Thymio_DSLPackage.Literals.STATEMENT__ACTION,
-	 *        TURN_OFF_TOP_LEDS_WARNING, action.getClass().getSimpleName()); } } } }
-	 */
 
 	public static final String TURN_OFF_BOTTOM_LEDS_WARNING = "turnOffTopLedsWarning";
 
@@ -94,7 +84,6 @@ public class TDslValidator extends AbstractTDslValidator {
 					ColorTopAction colorTopAction = (ColorTopAction) action;
 					if (colorTopAction.getColor() != null) {
 						setTopColorSeen = true;
-						break;
 					}
 				}
 			}
@@ -111,14 +100,15 @@ public class TDslValidator extends AbstractTDslValidator {
 						ColorTopAction colorTopAction = (ColorTopAction) action;
 						if (colorTopAction.getColor() == null) {
 							warning("Turning off top LEDs without setting the top color first.",
-									Thymio_DSLPackage.Literals.STATEMENT__ACTION, TURN_OFF_TOP_LEDS_WARNING,
-									action.getClass().getSimpleName());
+									Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, TURN_OFF_TOP_LEDS_WARNING,
+									colorTopAction.getClass().getSimpleName());
 						}
 					}
 				}
 			}
 		}
 	}
+
 	//////////////////////////////////////////////////////////////////////////////
 	public static final String DUPLICATE_EVENT_WARNING = "duplicateEventWarning";
 
@@ -131,9 +121,9 @@ public class TDslValidator extends AbstractTDslValidator {
 
 			if (event != null) {
 				if (isDuplicateEvent(seenEvents, event)) {
-					warning("This event will not be executed as there is another identical event that will override it.", Thymio_DSLPackage.Literals.STATEMENT__EVENT,
-                            DUPLICATE_EVENT_WARNING);
-				} else	{
+					warning("This event will not be executed as there is another identical event that will override it.",
+							Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, DUPLICATE_EVENT_WARNING);
+				} else {
 					seenEvents.add(event);
 				}
 			}
@@ -168,20 +158,36 @@ public class TDslValidator extends AbstractTDslValidator {
 	}
 
 	private boolean upperEventsAreEqual(UpperEvent event1, UpperEvent event2) {
-		/**if (!event1.getState().equals(event2.getState())) {
+		List<Button> buttons1 = event1.getButton();
+		List<Button> buttons2 = event2.getButton();
+		System.out.println(buttons1);
+		System.out.println(buttons2);
+
+		if (buttons1.size() != buttons2.size()) {
 			return false;
-		}*/
-		if (!event1.getButtons().equals(event2.getButtons())) {
-			return false;
+		}
+
+		for (Button button1 : buttons1) {
+			boolean foundMatch = false;
+			for (Button button2 : buttons2) {
+				if (button1.getName().equals(button2.getName())) {
+					foundMatch = true;
+					break;
+				}
+			}
+			if (!foundMatch) {
+				return false;
+			}
 		}
 		return true;
 	}
 
 	private boolean proxEventsAreEqual(ProxEvent event1, ProxEvent event2) {
-		if (!event1.getSensor().equals(event2.getSensor())) {
-			return false;
+		if (event1.getSensor().getDirection().equals(event2.getSensor().getDirection())
+				&& event1.getSensor().getState().equals(event2.getSensor().getState())) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -190,12 +196,12 @@ public class TDslValidator extends AbstractTDslValidator {
 
 	@Check
 	public void checkDuplicateButtons(UpperEvent upperEvent) {
-
 		Set<String> seenButtons = new HashSet<>();
-		for (String button : upperEvent.getButtons()) {
-			if (!seenButtons.add(button)) {
-				warning("The button '" + button + "' is repeated and does not make any difference, so it is redundant.",
-						Thymio_DSLPackage.Literals.UPPER_EVENT__BUTTONS, DUPLICATE_BUTTON_WARNING, button);
+		for (Button button : upperEvent.getButton()) {
+			if (!seenButtons.add(button.getName())) {
+				warning("The button '" + button.getName()
+						+ "' is repeated and does not make any difference, so it is redundant.",
+						Thymio_DSLPackage.Literals.UPPER_EVENT__BUTTON, DUPLICATE_BUTTON_WARNING);
 			}
 		}
 	}
@@ -215,17 +221,52 @@ public class TDslValidator extends AbstractTDslValidator {
 	public void checkIfStatement(IfStatement ifStatement) {
 		Sensor leftsensor = ifStatement.getCondition().getLeftSensor();
 		Sensor rightsensor = ifStatement.getCondition().getRightSensor();
-		if (leftsensor.getDirection().equals(rightsensor.getDirection())
-				&& leftsensor.getSensor_type().equals(rightsensor.getSensor_type()))
-			warning("The sensor type:'" + leftsensor.getSensor_type() + "' with direction: '"
-					+ leftsensor.getDirection() + "' is repeated and does not make any difference/detection",
-					Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION, DUPLICATE_SENSORIF_WARNING);
 		if (ifStatement.getAction().isEmpty())
 			error("You should write at least one Action", Thymio_DSLPackage.Literals.IF_STATEMENT__ACTION,
 					NO_ACTIONS_ERROR);
-		if (ifStatement.getCondition().getLeftSensor() == null && ifStatement.getCondition().getRightSensor() == null) {
-			warning("You should write a condition", Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION);
+		if (leftsensor == null && rightsensor == null) {
+			error("You should write a condition", Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION);
 		}
+		if (leftsensor.getDirection().equals(rightsensor.getDirection()))
+			if (leftsensor.getState().equals(rightsensor.getState()))
+				warning("The sensor type:'" + leftsensor.getSensor_type() + "' with direction: '"
+						+ leftsensor.getDirection() + "' is repeated and does not make any difference/detection",
+						Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION, DUPLICATE_SENSORIF_WARNING);
+			else if (contradictory(leftsensor.getState(), rightsensor.getState()))
+				warning("This condition will never happen because the two sensors are contradictory",
+						Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION, DUPLICATE_SENSORIF_WARNING);
 	}
 
+	@Check
+	public void checkCondition(Condition condition) {
+		Sensor leftsensor = condition.getLeftSensor();
+		Sensor rightsensor = condition.getRightSensor();
+		if (checkIfDirectionCorrespondToType(rightsensor))
+			error("The direction of the sensor doesn't match with the type " + rightsensor.getSensor_type()
+					+ " sensor.", Thymio_DSLPackage.Literals.CONDITION__RIGHT_SENSOR);
+		if (checkIfDirectionCorrespondToType(leftsensor))
+			error("The direction of the sensor doesn't match with the type " + leftsensor.getSensor_type()
+					+ " sensor.", Thymio_DSLPackage.Literals.CONDITION__LEFT_SENSOR);
+	
+	}
+
+	private boolean contradictory(String state, String state2) {
+		return state.equals("proximity") && state2.equals("no proximity")
+				|| state2.equals("proximity") && state.equals("no proximity")
+				|| state.equals("white") && state2.equals("black") || state2.equals("white") && state.equals("black");
+	}
+
+	private boolean checkIfDirectionCorrespondToType(Sensor sensor) {
+		if ("horizontal".equals(sensor.getSensor_type())) {
+			String direction = sensor.getDirection();
+			return direction.equals("front left") || direction.equals("front left/middle")
+					|| direction.equals("front middle") || direction.equals("front right/middle")
+					|| direction.equals("front right") || direction.equals("backward left")
+					|| direction.equals("backward right");
+		} else if ("ground".equals(sensor.getSensor_type())) {
+			String direction = sensor.getDirection();
+			return direction.equals("left") || direction.equals("right");
+		}
+		return false;
+	}
 }

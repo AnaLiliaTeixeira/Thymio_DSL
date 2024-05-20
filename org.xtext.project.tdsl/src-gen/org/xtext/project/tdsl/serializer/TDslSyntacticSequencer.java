@@ -23,17 +23,11 @@ public class TDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected TDslGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__;
-	protected AbstractElementAlias match_MovementAction___StopKeyword_2_1_DrivingKeyword_2_2___or___StopKeyword_3_1_TurningKeyword_3_2__;
-	protected AbstractElementAlias match_Sensor_BlackKeyword_1_4_2_or_ProximityKeyword_1_4_0_or_WhiteKeyword_1_4_3_or___NoKeyword_1_4_1_0_ProximityKeyword_1_4_1_1__;
-	protected AbstractElementAlias match_Sensor_ProximityKeyword_0_4_0_or___NoKeyword_0_4_1_0_ProximityKeyword_0_4_1_1__;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (TDslGrammarAccess) access;
 		match_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getClapEventAccess().getOnKeyword_1()), new TokenAlias(false, false, grammarAccess.getClapEventAccess().getClapKeyword_2()), new TokenAlias(false, false, grammarAccess.getClapEventAccess().getDoKeyword_3()), new TokenAlias(false, false, grammarAccess.getClapEventAccess().getColonKeyword_4())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getTapEventAccess().getOnKeyword_1()), new TokenAlias(false, false, grammarAccess.getTapEventAccess().getTapKeyword_2()), new TokenAlias(false, false, grammarAccess.getTapEventAccess().getDoKeyword_3()), new TokenAlias(false, false, grammarAccess.getTapEventAccess().getColonKeyword_4())));
-		match_MovementAction___StopKeyword_2_1_DrivingKeyword_2_2___or___StopKeyword_3_1_TurningKeyword_3_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getMovementActionAccess().getStopKeyword_2_1()), new TokenAlias(false, false, grammarAccess.getMovementActionAccess().getDrivingKeyword_2_2())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getMovementActionAccess().getStopKeyword_3_1()), new TokenAlias(false, false, grammarAccess.getMovementActionAccess().getTurningKeyword_3_2())));
-		match_Sensor_BlackKeyword_1_4_2_or_ProximityKeyword_1_4_0_or_WhiteKeyword_1_4_3_or___NoKeyword_1_4_1_0_ProximityKeyword_1_4_1_1__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getSensorAccess().getNoKeyword_1_4_1_0()), new TokenAlias(false, false, grammarAccess.getSensorAccess().getProximityKeyword_1_4_1_1())), new TokenAlias(false, false, grammarAccess.getSensorAccess().getBlackKeyword_1_4_2()), new TokenAlias(false, false, grammarAccess.getSensorAccess().getProximityKeyword_1_4_0()), new TokenAlias(false, false, grammarAccess.getSensorAccess().getWhiteKeyword_1_4_3()));
-		match_Sensor_ProximityKeyword_0_4_0_or___NoKeyword_0_4_1_0_ProximityKeyword_0_4_1_1__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getSensorAccess().getNoKeyword_0_4_1_0()), new TokenAlias(false, false, grammarAccess.getSensorAccess().getProximityKeyword_0_4_1_1())), new TokenAlias(false, false, grammarAccess.getSensorAccess().getProximityKeyword_0_4_0()));
 	}
 	
 	@Override
@@ -50,12 +44,6 @@ public class TDslSyntacticSequencer extends AbstractSyntacticSequencer {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if (match_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__.equals(syntax))
 				emit_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_MovementAction___StopKeyword_2_1_DrivingKeyword_2_2___or___StopKeyword_3_1_TurningKeyword_3_2__.equals(syntax))
-				emit_MovementAction___StopKeyword_2_1_DrivingKeyword_2_2___or___StopKeyword_3_1_TurningKeyword_3_2__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Sensor_BlackKeyword_1_4_2_or_ProximityKeyword_1_4_0_or_WhiteKeyword_1_4_3_or___NoKeyword_1_4_1_0_ProximityKeyword_1_4_1_1__.equals(syntax))
-				emit_Sensor_BlackKeyword_1_4_2_or_ProximityKeyword_1_4_0_or_WhiteKeyword_1_4_3_or___NoKeyword_1_4_1_0_ProximityKeyword_1_4_1_1__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Sensor_ProximityKeyword_0_4_0_or___NoKeyword_0_4_1_0_ProximityKeyword_0_4_1_1__.equals(syntax))
-				emit_Sensor_ProximityKeyword_0_4_0_or___NoKeyword_0_4_1_0_ProximityKeyword_0_4_1_1__(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -71,49 +59,6 @@ public class TDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * </pre>
 	 */
 	protected void emit_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     ('stop' 'driving') | ('stop' 'turning')
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) '-' (ambiguity) (rule start)
-	 *     (rule start) (ambiguity) (rule start)
-	 
-	 * </pre>
-	 */
-	protected void emit_MovementAction___StopKeyword_2_1_DrivingKeyword_2_2___or___StopKeyword_3_1_TurningKeyword_3_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'proximity' | ('no' 'proximity') | 'black' | 'white'
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     sensor_type='ground' 'sensor' 'detecting' (ambiguity) (rule end)
-	 
-	 * </pre>
-	 */
-	protected void emit_Sensor_BlackKeyword_1_4_2_or_ProximityKeyword_1_4_0_or_WhiteKeyword_1_4_3_or___NoKeyword_1_4_1_0_ProximityKeyword_1_4_1_1__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'proximity' | ('no' 'proximity')
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     sensor_type='horizontal' 'sensor' 'detecting' (ambiguity) (rule end)
-	 
-	 * </pre>
-	 */
-	protected void emit_Sensor_ProximityKeyword_0_4_0_or___NoKeyword_0_4_1_0_ProximityKeyword_0_4_1_1__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import thymio_DSL.Action;
 import thymio_DSL.ArithmeticExpression;
+import thymio_DSL.Button;
 import thymio_DSL.ClapEvent;
 import thymio_DSL.ColorBottomAction;
 import thymio_DSL.ColorTopAction;
@@ -146,6 +147,13 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	 * @generated
 	 */
 	private EClass conditionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass buttonEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -397,7 +405,7 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getUpperEvent_Buttons() {
+	public EAttribute getUpperEvent_State() {
 		return (EAttribute) upperEventEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -407,8 +415,8 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getUpperEvent_State() {
-		return (EAttribute) upperEventEClass.getEStructuralFeatures().get(1);
+	public EReference getUpperEvent_Button() {
+		return (EReference) upperEventEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -459,6 +467,16 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	@Override
 	public EAttribute getSensor_Direction() {
 		return (EAttribute) sensorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSensor_State() {
+		return (EAttribute) sensorEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -597,6 +615,26 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	 * @generated
 	 */
 	@Override
+	public EClass getButton() {
+		return buttonEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getButton_Name() {
+		return (EAttribute) buttonEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Thymio_DSLFactory getThymio_DSLFactory() {
 		return (Thymio_DSLFactory) getEFactoryInstance();
 	}
@@ -647,8 +685,8 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 		clapEventEClass = createEClass(CLAP_EVENT);
 
 		upperEventEClass = createEClass(UPPER_EVENT);
-		createEAttribute(upperEventEClass, UPPER_EVENT__BUTTONS);
 		createEAttribute(upperEventEClass, UPPER_EVENT__STATE);
+		createEReference(upperEventEClass, UPPER_EVENT__BUTTON);
 
 		tapEventEClass = createEClass(TAP_EVENT);
 
@@ -657,6 +695,7 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 		sensorEClass = createEClass(SENSOR);
 		createEAttribute(sensorEClass, SENSOR__SENSOR_TYPE);
 		createEAttribute(sensorEClass, SENSOR__DIRECTION);
+		createEAttribute(sensorEClass, SENSOR__STATE);
 
 		proxEventEClass = createEClass(PROX_EVENT);
 		createEReference(proxEventEClass, PROX_EVENT__SENSOR);
@@ -674,6 +713,9 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 		createEAttribute(conditionEClass, CONDITION__OPERATOR);
 		createEReference(conditionEClass, CONDITION__RIGHT_SENSOR);
 		createEReference(conditionEClass, CONDITION__LEFT_SENSOR);
+
+		buttonEClass = createEClass(BUTTON);
+		createEAttribute(buttonEClass, BUTTON__NAME);
 	}
 
 	/**
@@ -765,10 +807,11 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 
 		initEClass(upperEventEClass, UpperEvent.class, "UpperEvent", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUpperEvent_Buttons(), ecorePackage.getEString(), "buttons", null, 1, -1, UpperEvent.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUpperEvent_State(), ecorePackage.getEString(), "state", null, 1, 1, UpperEvent.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUpperEvent_Button(), this.getButton(), null, "button", null, 1, -1, UpperEvent.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tapEventEClass, TapEvent.class, "TapEvent", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -780,6 +823,8 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSensor_Direction(), ecorePackage.getEString(), "direction", null, 0, 1, Sensor.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSensor_State(), ecorePackage.getEString(), "state", null, 1, 1, Sensor.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(proxEventEClass, ProxEvent.class, "ProxEvent", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -818,6 +863,10 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 		initEReference(getCondition_LeftSensor(), this.getSensor(), null, "leftSensor", null, 1, 1, Condition.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(buttonEClass, Button.class, "Button", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getButton_Name(), ecorePackage.getEString(), "name", null, 1, 1, Button.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

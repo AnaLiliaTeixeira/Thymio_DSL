@@ -88,6 +88,8 @@ public class Thymio_DSLFactoryImpl extends EFactoryImpl implements Thymio_DSLFac
 			return createArithmeticExpression();
 		case Thymio_DSLPackage.CONDITION:
 			return createCondition();
+		case Thymio_DSLPackage.BUTTON:
+			return createButton();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -267,6 +269,17 @@ public class Thymio_DSLFactoryImpl extends EFactoryImpl implements Thymio_DSLFac
 	public Condition createCondition() {
 		ConditionImpl condition = new ConditionImpl();
 		return condition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Button createButton() {
+		ButtonImpl button = new ButtonImpl();
+		return button;
 	}
 
 	/**
