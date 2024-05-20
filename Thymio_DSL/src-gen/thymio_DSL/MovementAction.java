@@ -43,25 +43,25 @@ public interface MovementAction extends Action {
 	void setDirection(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Speed</b></em>' attribute.
+	 * Returns the value of the '<em><b>Speed</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Speed</em>' attribute.
-	 * @see #setSpeed(Integer)
+	 * @return the value of the '<em>Speed</em>' containment reference.
+	 * @see #setSpeed(ArithmeticExpression)
 	 * @see thymio_DSL.Thymio_DSLPackage#getMovementAction_Speed()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	Integer getSpeed();
+	ArithmeticExpression getSpeed();
 
 	/**
-	 * Sets the value of the '{@link thymio_DSL.MovementAction#getSpeed <em>Speed</em>}' attribute.
+	 * Sets the value of the '{@link thymio_DSL.MovementAction#getSpeed <em>Speed</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Speed</em>' attribute.
+	 * @param value the new value of the '<em>Speed</em>' containment reference.
 	 * @see #getSpeed()
 	 * @generated
 	 */
-	void setSpeed(Integer value);
+	void setSpeed(ArithmeticExpression value);
 
 } // MovementAction

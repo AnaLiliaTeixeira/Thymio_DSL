@@ -13,8 +13,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link thymio_DSL.Condition#getBooleanexpression <em>Booleanexpression</em>}</li>
- *   <li>{@link thymio_DSL.Condition#getLogicalexpression <em>Logicalexpression</em>}</li>
+ *   <li>{@link thymio_DSL.Condition#getOperator <em>Operator</em>}</li>
+ *   <li>{@link thymio_DSL.Condition#getRightSensor <em>Right Sensor</em>}</li>
+ *   <li>{@link thymio_DSL.Condition#getLeftSensor <em>Left Sensor</em>}</li>
  * </ul>
  *
  * @see thymio_DSL.Thymio_DSLPackage#getCondition()
@@ -23,47 +24,69 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Condition extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Booleanexpression</b></em>' reference.
+	 * Returns the value of the '<em><b>Operator</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Booleanexpression</em>' reference.
-	 * @see #setBooleanexpression(BooleanExpression)
-	 * @see thymio_DSL.Thymio_DSLPackage#getCondition_Booleanexpression()
+	 * @return the value of the '<em>Operator</em>' attribute.
+	 * @see #setOperator(String)
+	 * @see thymio_DSL.Thymio_DSLPackage#getCondition_Operator()
 	 * @model
 	 * @generated
 	 */
-	BooleanExpression getBooleanexpression();
+	String getOperator();
 
 	/**
-	 * Sets the value of the '{@link thymio_DSL.Condition#getBooleanexpression <em>Booleanexpression</em>}' reference.
+	 * Sets the value of the '{@link thymio_DSL.Condition#getOperator <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Booleanexpression</em>' reference.
-	 * @see #getBooleanexpression()
+	 * @param value the new value of the '<em>Operator</em>' attribute.
+	 * @see #getOperator()
 	 * @generated
 	 */
-	void setBooleanexpression(BooleanExpression value);
+	void setOperator(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Logicalexpression</b></em>' reference.
+	 * Returns the value of the '<em><b>Right Sensor</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Logicalexpression</em>' reference.
-	 * @see #setLogicalexpression(LogicalExpression)
-	 * @see thymio_DSL.Thymio_DSLPackage#getCondition_Logicalexpression()
-	 * @model
+	 * @return the value of the '<em>Right Sensor</em>' containment reference.
+	 * @see #setRightSensor(Sensor)
+	 * @see thymio_DSL.Thymio_DSLPackage#getCondition_RightSensor()
+	 * @model containment="true"
 	 * @generated
 	 */
-	LogicalExpression getLogicalexpression();
+	Sensor getRightSensor();
 
 	/**
-	 * Sets the value of the '{@link thymio_DSL.Condition#getLogicalexpression <em>Logicalexpression</em>}' reference.
+	 * Sets the value of the '{@link thymio_DSL.Condition#getRightSensor <em>Right Sensor</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Logicalexpression</em>' reference.
-	 * @see #getLogicalexpression()
+	 * @param value the new value of the '<em>Right Sensor</em>' containment reference.
+	 * @see #getRightSensor()
 	 * @generated
 	 */
-	void setLogicalexpression(LogicalExpression value);
+	void setRightSensor(Sensor value);
+
+	/**
+	 * Returns the value of the '<em><b>Left Sensor</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Left Sensor</em>' containment reference.
+	 * @see #setLeftSensor(Sensor)
+	 * @see thymio_DSL.Thymio_DSLPackage#getCondition_LeftSensor()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	Sensor getLeftSensor();
+
+	/**
+	 * Sets the value of the '{@link thymio_DSL.Condition#getLeftSensor <em>Left Sensor</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Left Sensor</em>' containment reference.
+	 * @see #getLeftSensor()
+	 * @generated
+	 */
+	void setLeftSensor(Sensor value);
 
 } // Condition

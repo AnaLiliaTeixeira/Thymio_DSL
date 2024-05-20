@@ -11,15 +11,12 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import thymio_DSL.Action;
 import thymio_DSL.ArithmeticExpression;
-import thymio_DSL.BooleanExpression;
 import thymio_DSL.ClapEvent;
 import thymio_DSL.ColorBottomAction;
 import thymio_DSL.ColorTopAction;
-import thymio_DSL.ComparisonExpression;
 import thymio_DSL.Condition;
 import thymio_DSL.Event;
 import thymio_DSL.IfStatement;
-import thymio_DSL.LogicalExpression;
 import thymio_DSL.MovementAction;
 import thymio_DSL.ProxEvent;
 import thymio_DSL.Sensor;
@@ -141,35 +138,14 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass conditionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass booleanExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass logicalExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass comparisonExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass arithmeticExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass conditionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -361,8 +337,8 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMovementAction_Speed() {
-		return (EAttribute) movementActionEClass.getEStructuralFeatures().get(1);
+	public EReference getMovementAction_Speed() {
+		return (EReference) movementActionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -521,7 +497,7 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	 * @generated
 	 */
 	@Override
-	public EReference getIfStatement_Condition() {
+	public EReference getIfStatement_Action() {
 		return (EReference) ifStatementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -531,148 +507,8 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	 * @generated
 	 */
 	@Override
-	public EReference getIfStatement_Action() {
+	public EReference getIfStatement_Condition() {
 		return (EReference) ifStatementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getCondition() {
-		return conditionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCondition_Booleanexpression() {
-		return (EReference) conditionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCondition_Logicalexpression() {
-		return (EReference) conditionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getBooleanExpression() {
-		return booleanExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getBooleanExpression_Sensor() {
-		return (EReference) booleanExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getBooleanExpression_Comparisonexpression() {
-		return (EReference) booleanExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getLogicalExpression() {
-		return logicalExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getLogicalExpression_Right() {
-		return (EReference) logicalExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getLogicalExpression_Left() {
-		return (EReference) logicalExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getLogicalExpression_Operator() {
-		return (EAttribute) logicalExpressionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getComparisonExpression() {
-		return comparisonExpressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getComparisonExpression_Operator() {
-		return (EAttribute) comparisonExpressionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getComparisonExpression_Left() {
-		return (EReference) comparisonExpressionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getComparisonExpression_Right() {
-		return (EReference) comparisonExpressionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -721,6 +557,46 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 	 * @generated
 	 */
 	@Override
+	public EClass getCondition() {
+		return conditionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getCondition_Operator() {
+		return (EAttribute) conditionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCondition_RightSensor() {
+		return (EReference) conditionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCondition_LeftSensor() {
+		return (EReference) conditionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Thymio_DSLFactory getThymio_DSLFactory() {
 		return (Thymio_DSLFactory) getEFactoryInstance();
 	}
@@ -761,7 +637,7 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 
 		movementActionEClass = createEClass(MOVEMENT_ACTION);
 		createEAttribute(movementActionEClass, MOVEMENT_ACTION__DIRECTION);
-		createEAttribute(movementActionEClass, MOVEMENT_ACTION__SPEED);
+		createEReference(movementActionEClass, MOVEMENT_ACTION__SPEED);
 
 		colorTopActionEClass = createEClass(COLOR_TOP_ACTION);
 		createEAttribute(colorTopActionEClass, COLOR_TOP_ACTION__COLOR);
@@ -786,31 +662,18 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 		createEReference(proxEventEClass, PROX_EVENT__SENSOR);
 
 		ifStatementEClass = createEClass(IF_STATEMENT);
-		createEReference(ifStatementEClass, IF_STATEMENT__CONDITION);
 		createEReference(ifStatementEClass, IF_STATEMENT__ACTION);
-
-		conditionEClass = createEClass(CONDITION);
-		createEReference(conditionEClass, CONDITION__BOOLEANEXPRESSION);
-		createEReference(conditionEClass, CONDITION__LOGICALEXPRESSION);
-
-		booleanExpressionEClass = createEClass(BOOLEAN_EXPRESSION);
-		createEReference(booleanExpressionEClass, BOOLEAN_EXPRESSION__SENSOR);
-		createEReference(booleanExpressionEClass, BOOLEAN_EXPRESSION__COMPARISONEXPRESSION);
-
-		logicalExpressionEClass = createEClass(LOGICAL_EXPRESSION);
-		createEReference(logicalExpressionEClass, LOGICAL_EXPRESSION__RIGHT);
-		createEReference(logicalExpressionEClass, LOGICAL_EXPRESSION__LEFT);
-		createEAttribute(logicalExpressionEClass, LOGICAL_EXPRESSION__OPERATOR);
-
-		comparisonExpressionEClass = createEClass(COMPARISON_EXPRESSION);
-		createEAttribute(comparisonExpressionEClass, COMPARISON_EXPRESSION__OPERATOR);
-		createEReference(comparisonExpressionEClass, COMPARISON_EXPRESSION__LEFT);
-		createEReference(comparisonExpressionEClass, COMPARISON_EXPRESSION__RIGHT);
+		createEReference(ifStatementEClass, IF_STATEMENT__CONDITION);
 
 		arithmeticExpressionEClass = createEClass(ARITHMETIC_EXPRESSION);
 		createEAttribute(arithmeticExpressionEClass, ARITHMETIC_EXPRESSION__OPERATOR);
 		createEAttribute(arithmeticExpressionEClass, ARITHMETIC_EXPRESSION__RIGHT);
 		createEAttribute(arithmeticExpressionEClass, ARITHMETIC_EXPRESSION__LEFT);
+
+		conditionEClass = createEClass(CONDITION);
+		createEAttribute(conditionEClass, CONDITION__OPERATOR);
+		createEReference(conditionEClass, CONDITION__RIGHT_SENSOR);
+		createEReference(conditionEClass, CONDITION__LEFT_SENSOR);
 	}
 
 	/**
@@ -886,9 +749,9 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 		initEAttribute(getMovementAction_Direction(), ecorePackage.getEString(), "direction", null, 0, 1,
 				MovementAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMovementAction_Speed(), ecorePackage.getEIntegerObject(), "speed", null, 0, 1,
-				MovementAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEReference(getMovementAction_Speed(), this.getArithmeticExpression(), null, "speed", null, 0, 1,
+				MovementAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(colorTopActionEClass, ColorTopAction.class, "ColorTopAction", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -915,7 +778,7 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 		initEClass(sensorEClass, Sensor.class, "Sensor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSensor_Sensor_type(), ecorePackage.getEString(), "sensor_type", null, 1, 1, Sensor.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSensor_Direction(), ecorePackage.getEString(), "direction", null, 1, 1, Sensor.class,
+		initEAttribute(getSensor_Direction(), ecorePackage.getEString(), "direction", null, 0, 1, Sensor.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(proxEventEClass, ProxEvent.class, "ProxEvent", !IS_ABSTRACT, !IS_INTERFACE,
@@ -926,65 +789,34 @@ public class Thymio_DSLPackageImpl extends EPackageImpl implements Thymio_DSLPac
 
 		initEClass(ifStatementEClass, IfStatement.class, "IfStatement", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIfStatement_Action(), this.getAction(), null, "action", null, 1, -1, IfStatement.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIfStatement_Condition(), this.getCondition(), null, "condition", null, 1, 1,
 				IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIfStatement_Action(), this.getAction(), null, "action", null, 1, -1, IfStatement.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+
+		initEClass(arithmeticExpressionEClass, ArithmeticExpression.class, "ArithmeticExpression", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArithmeticExpression_Operator(), ecorePackage.getEString(), "operator", null, 0, 1,
+				ArithmeticExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArithmeticExpression_Right(), ecorePackage.getEIntegerObject(), "right", null, 0, 1,
+				ArithmeticExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArithmeticExpression_Left(), ecorePackage.getEIntegerObject(), "left", null, 1, 1,
+				ArithmeticExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionEClass, Condition.class, "Condition", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCondition_Booleanexpression(), this.getBooleanExpression(), null, "booleanexpression", null,
-				0, 1, Condition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCondition_Logicalexpression(), this.getLogicalExpression(), null, "logicalexpression", null,
-				0, 1, Condition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(booleanExpressionEClass, BooleanExpression.class, "BooleanExpression", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBooleanExpression_Sensor(), this.getSensor(), null, "sensor", null, 0, 1,
-				BooleanExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBooleanExpression_Comparisonexpression(), this.getComparisonExpression(), null,
-				"comparisonexpression", null, 0, 1, BooleanExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(logicalExpressionEClass, LogicalExpression.class, "LogicalExpression", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLogicalExpression_Right(), this.getBooleanExpression(), null, "right", null, 1, 1,
-				LogicalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLogicalExpression_Left(), this.getBooleanExpression(), null, "left", null, 0, 1,
-				LogicalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLogicalExpression_Operator(), ecorePackage.getEString(), "operator", null, 1, 1,
-				LogicalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-
-		initEClass(comparisonExpressionEClass, ComparisonExpression.class, "ComparisonExpression", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getComparisonExpression_Operator(), ecorePackage.getEString(), "operator", null, 1, 1,
-				ComparisonExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+		initEAttribute(getCondition_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, Condition.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCondition_RightSensor(), this.getSensor(), null, "rightSensor", null, 0, 1, Condition.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComparisonExpression_Left(), this.getArithmeticExpression(), null, "left", null, 1, 1,
-				ComparisonExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComparisonExpression_Right(), this.getArithmeticExpression(), null, "right", null, 1, 1,
-				ComparisonExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(arithmeticExpressionEClass, ArithmeticExpression.class, "ArithmeticExpression", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArithmeticExpression_Operator(), ecorePackage.getEString(), "operator", null, 1, 1,
-				ArithmeticExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArithmeticExpression_Right(), ecorePackage.getEIntegerObject(), "right", null, 1, 1,
-				ArithmeticExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArithmeticExpression_Left(), ecorePackage.getEIntegerObject(), "left", null, 0, 1,
-				ArithmeticExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+		initEReference(getCondition_LeftSensor(), this.getSensor(), null, "leftSensor", null, 1, 1, Condition.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

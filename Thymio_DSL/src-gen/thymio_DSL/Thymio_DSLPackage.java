@@ -270,7 +270,7 @@ public interface Thymio_DSLPackage extends EPackage {
 	int MOVEMENT_ACTION__DIRECTION = ACTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Speed</b></em>' attribute.
+	 * The feature id for the '<em><b>Speed</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -557,22 +557,22 @@ public interface Thymio_DSLPackage extends EPackage {
 	int IF_STATEMENT = 13;
 
 	/**
-	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_STATEMENT__CONDITION = 0;
-
-	/**
 	 * The feature id for the '<em><b>Action</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IF_STATEMENT__ACTION = 1;
+	int IF_STATEMENT__ACTION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STATEMENT__CONDITION = 1;
 
 	/**
 	 * The number of structural features of the '<em>If Statement</em>' class.
@@ -593,208 +593,6 @@ public interface Thymio_DSLPackage extends EPackage {
 	int IF_STATEMENT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link thymio_DSL.impl.ConditionImpl <em>Condition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thymio_DSL.impl.ConditionImpl
-	 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getCondition()
-	 * @generated
-	 */
-	int CONDITION = 14;
-
-	/**
-	 * The feature id for the '<em><b>Booleanexpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITION__BOOLEANEXPRESSION = 0;
-
-	/**
-	 * The feature id for the '<em><b>Logicalexpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITION__LOGICALEXPRESSION = 1;
-
-	/**
-	 * The number of structural features of the '<em>Condition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITION_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Condition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITION_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link thymio_DSL.impl.BooleanExpressionImpl <em>Boolean Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thymio_DSL.impl.BooleanExpressionImpl
-	 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getBooleanExpression()
-	 * @generated
-	 */
-	int BOOLEAN_EXPRESSION = 15;
-
-	/**
-	 * The feature id for the '<em><b>Sensor</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_EXPRESSION__SENSOR = 0;
-
-	/**
-	 * The feature id for the '<em><b>Comparisonexpression</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_EXPRESSION__COMPARISONEXPRESSION = 1;
-
-	/**
-	 * The number of structural features of the '<em>Boolean Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_EXPRESSION_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Boolean Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_EXPRESSION_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link thymio_DSL.impl.LogicalExpressionImpl <em>Logical Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thymio_DSL.impl.LogicalExpressionImpl
-	 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getLogicalExpression()
-	 * @generated
-	 */
-	int LOGICAL_EXPRESSION = 16;
-
-	/**
-	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOGICAL_EXPRESSION__RIGHT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOGICAL_EXPRESSION__LEFT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOGICAL_EXPRESSION__OPERATOR = 2;
-
-	/**
-	 * The number of structural features of the '<em>Logical Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOGICAL_EXPRESSION_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Logical Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOGICAL_EXPRESSION_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link thymio_DSL.impl.ComparisonExpressionImpl <em>Comparison Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see thymio_DSL.impl.ComparisonExpressionImpl
-	 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getComparisonExpression()
-	 * @generated
-	 */
-	int COMPARISON_EXPRESSION = 17;
-
-	/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPARISON_EXPRESSION__OPERATOR = 0;
-
-	/**
-	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPARISON_EXPRESSION__LEFT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPARISON_EXPRESSION__RIGHT = 2;
-
-	/**
-	 * The number of structural features of the '<em>Comparison Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPARISON_EXPRESSION_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Comparison Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPARISON_EXPRESSION_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link thymio_DSL.impl.ArithmeticExpressionImpl <em>Arithmetic Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -802,7 +600,7 @@ public interface Thymio_DSLPackage extends EPackage {
 	 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getArithmeticExpression()
 	 * @generated
 	 */
-	int ARITHMETIC_EXPRESSION = 18;
+	int ARITHMETIC_EXPRESSION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -848,6 +646,61 @@ public interface Thymio_DSLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ARITHMETIC_EXPRESSION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link thymio_DSL.impl.ConditionImpl <em>Condition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see thymio_DSL.impl.ConditionImpl
+	 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getCondition()
+	 * @generated
+	 */
+	int CONDITION = 15;
+
+	/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__OPERATOR = 0;
+
+	/**
+	 * The feature id for the '<em><b>Right Sensor</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__RIGHT_SENSOR = 1;
+
+	/**
+	 * The feature id for the '<em><b>Left Sensor</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__LEFT_SENSOR = 2;
+
+	/**
+	 * The number of structural features of the '<em>Condition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Condition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION_OPERATION_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link thymio_DSL.Statement <em>Statement</em>}'.
@@ -977,15 +830,15 @@ public interface Thymio_DSLPackage extends EPackage {
 	EAttribute getMovementAction_Direction();
 
 	/**
-	 * Returns the meta object for the attribute '{@link thymio_DSL.MovementAction#getSpeed <em>Speed</em>}'.
+	 * Returns the meta object for the containment reference '{@link thymio_DSL.MovementAction#getSpeed <em>Speed</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Speed</em>'.
+	 * @return the meta object for the containment reference '<em>Speed</em>'.
 	 * @see thymio_DSL.MovementAction#getSpeed()
 	 * @see #getMovementAction()
 	 * @generated
 	 */
-	EAttribute getMovementAction_Speed();
+	EReference getMovementAction_Speed();
 
 	/**
 	 * Returns the meta object for class '{@link thymio_DSL.ColorTopAction <em>Color Top Action</em>}'.
@@ -1144,17 +997,6 @@ public interface Thymio_DSLPackage extends EPackage {
 	EClass getIfStatement();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link thymio_DSL.IfStatement#getCondition <em>Condition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Condition</em>'.
-	 * @see thymio_DSL.IfStatement#getCondition()
-	 * @see #getIfStatement()
-	 * @generated
-	 */
-	EReference getIfStatement_Condition();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link thymio_DSL.IfStatement#getAction <em>Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1166,154 +1008,15 @@ public interface Thymio_DSLPackage extends EPackage {
 	EReference getIfStatement_Action();
 
 	/**
-	 * Returns the meta object for class '{@link thymio_DSL.Condition <em>Condition</em>}'.
+	 * Returns the meta object for the containment reference '{@link thymio_DSL.IfStatement#getCondition <em>Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Condition</em>'.
-	 * @see thymio_DSL.Condition
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see thymio_DSL.IfStatement#getCondition()
+	 * @see #getIfStatement()
 	 * @generated
 	 */
-	EClass getCondition();
-
-	/**
-	 * Returns the meta object for the reference '{@link thymio_DSL.Condition#getBooleanexpression <em>Booleanexpression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Booleanexpression</em>'.
-	 * @see thymio_DSL.Condition#getBooleanexpression()
-	 * @see #getCondition()
-	 * @generated
-	 */
-	EReference getCondition_Booleanexpression();
-
-	/**
-	 * Returns the meta object for the reference '{@link thymio_DSL.Condition#getLogicalexpression <em>Logicalexpression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Logicalexpression</em>'.
-	 * @see thymio_DSL.Condition#getLogicalexpression()
-	 * @see #getCondition()
-	 * @generated
-	 */
-	EReference getCondition_Logicalexpression();
-
-	/**
-	 * Returns the meta object for class '{@link thymio_DSL.BooleanExpression <em>Boolean Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Boolean Expression</em>'.
-	 * @see thymio_DSL.BooleanExpression
-	 * @generated
-	 */
-	EClass getBooleanExpression();
-
-	/**
-	 * Returns the meta object for the reference '{@link thymio_DSL.BooleanExpression#getSensor <em>Sensor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Sensor</em>'.
-	 * @see thymio_DSL.BooleanExpression#getSensor()
-	 * @see #getBooleanExpression()
-	 * @generated
-	 */
-	EReference getBooleanExpression_Sensor();
-
-	/**
-	 * Returns the meta object for the reference '{@link thymio_DSL.BooleanExpression#getComparisonexpression <em>Comparisonexpression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Comparisonexpression</em>'.
-	 * @see thymio_DSL.BooleanExpression#getComparisonexpression()
-	 * @see #getBooleanExpression()
-	 * @generated
-	 */
-	EReference getBooleanExpression_Comparisonexpression();
-
-	/**
-	 * Returns the meta object for class '{@link thymio_DSL.LogicalExpression <em>Logical Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Logical Expression</em>'.
-	 * @see thymio_DSL.LogicalExpression
-	 * @generated
-	 */
-	EClass getLogicalExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link thymio_DSL.LogicalExpression#getRight <em>Right</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right</em>'.
-	 * @see thymio_DSL.LogicalExpression#getRight()
-	 * @see #getLogicalExpression()
-	 * @generated
-	 */
-	EReference getLogicalExpression_Right();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link thymio_DSL.LogicalExpression#getLeft <em>Left</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left</em>'.
-	 * @see thymio_DSL.LogicalExpression#getLeft()
-	 * @see #getLogicalExpression()
-	 * @generated
-	 */
-	EReference getLogicalExpression_Left();
-
-	/**
-	 * Returns the meta object for the attribute '{@link thymio_DSL.LogicalExpression#getOperator <em>Operator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Operator</em>'.
-	 * @see thymio_DSL.LogicalExpression#getOperator()
-	 * @see #getLogicalExpression()
-	 * @generated
-	 */
-	EAttribute getLogicalExpression_Operator();
-
-	/**
-	 * Returns the meta object for class '{@link thymio_DSL.ComparisonExpression <em>Comparison Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Comparison Expression</em>'.
-	 * @see thymio_DSL.ComparisonExpression
-	 * @generated
-	 */
-	EClass getComparisonExpression();
-
-	/**
-	 * Returns the meta object for the attribute '{@link thymio_DSL.ComparisonExpression#getOperator <em>Operator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Operator</em>'.
-	 * @see thymio_DSL.ComparisonExpression#getOperator()
-	 * @see #getComparisonExpression()
-	 * @generated
-	 */
-	EAttribute getComparisonExpression_Operator();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link thymio_DSL.ComparisonExpression#getLeft <em>Left</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left</em>'.
-	 * @see thymio_DSL.ComparisonExpression#getLeft()
-	 * @see #getComparisonExpression()
-	 * @generated
-	 */
-	EReference getComparisonExpression_Left();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link thymio_DSL.ComparisonExpression#getRight <em>Right</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right</em>'.
-	 * @see thymio_DSL.ComparisonExpression#getRight()
-	 * @see #getComparisonExpression()
-	 * @generated
-	 */
-	EReference getComparisonExpression_Right();
+	EReference getIfStatement_Condition();
 
 	/**
 	 * Returns the meta object for class '{@link thymio_DSL.ArithmeticExpression <em>Arithmetic Expression</em>}'.
@@ -1357,6 +1060,49 @@ public interface Thymio_DSLPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getArithmeticExpression_Left();
+
+	/**
+	 * Returns the meta object for class '{@link thymio_DSL.Condition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Condition</em>'.
+	 * @see thymio_DSL.Condition
+	 * @generated
+	 */
+	EClass getCondition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link thymio_DSL.Condition#getOperator <em>Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Operator</em>'.
+	 * @see thymio_DSL.Condition#getOperator()
+	 * @see #getCondition()
+	 * @generated
+	 */
+	EAttribute getCondition_Operator();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link thymio_DSL.Condition#getRightSensor <em>Right Sensor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Right Sensor</em>'.
+	 * @see thymio_DSL.Condition#getRightSensor()
+	 * @see #getCondition()
+	 * @generated
+	 */
+	EReference getCondition_RightSensor();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link thymio_DSL.Condition#getLeftSensor <em>Left Sensor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Left Sensor</em>'.
+	 * @see thymio_DSL.Condition#getLeftSensor()
+	 * @see #getCondition()
+	 * @generated
+	 */
+	EReference getCondition_LeftSensor();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1488,12 +1234,12 @@ public interface Thymio_DSLPackage extends EPackage {
 		EAttribute MOVEMENT_ACTION__DIRECTION = eINSTANCE.getMovementAction_Direction();
 
 		/**
-		 * The meta object literal for the '<em><b>Speed</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Speed</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MOVEMENT_ACTION__SPEED = eINSTANCE.getMovementAction_Speed();
+		EReference MOVEMENT_ACTION__SPEED = eINSTANCE.getMovementAction_Speed();
 
 		/**
 		 * The meta object literal for the '{@link thymio_DSL.impl.ColorTopActionImpl <em>Color Top Action</em>}' class.
@@ -1634,14 +1380,6 @@ public interface Thymio_DSLPackage extends EPackage {
 		EClass IF_STATEMENT = eINSTANCE.getIfStatement();
 
 		/**
-		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IF_STATEMENT__CONDITION = eINSTANCE.getIfStatement_Condition();
-
-		/**
 		 * The meta object literal for the '<em><b>Action</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1650,124 +1388,12 @@ public interface Thymio_DSLPackage extends EPackage {
 		EReference IF_STATEMENT__ACTION = eINSTANCE.getIfStatement_Action();
 
 		/**
-		 * The meta object literal for the '{@link thymio_DSL.impl.ConditionImpl <em>Condition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see thymio_DSL.impl.ConditionImpl
-		 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getCondition()
-		 * @generated
-		 */
-		EClass CONDITION = eINSTANCE.getCondition();
-
-		/**
-		 * The meta object literal for the '<em><b>Booleanexpression</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONDITION__BOOLEANEXPRESSION = eINSTANCE.getCondition_Booleanexpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Logicalexpression</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONDITION__LOGICALEXPRESSION = eINSTANCE.getCondition_Logicalexpression();
-
-		/**
-		 * The meta object literal for the '{@link thymio_DSL.impl.BooleanExpressionImpl <em>Boolean Expression</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see thymio_DSL.impl.BooleanExpressionImpl
-		 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getBooleanExpression()
-		 * @generated
-		 */
-		EClass BOOLEAN_EXPRESSION = eINSTANCE.getBooleanExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Sensor</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BOOLEAN_EXPRESSION__SENSOR = eINSTANCE.getBooleanExpression_Sensor();
-
-		/**
-		 * The meta object literal for the '<em><b>Comparisonexpression</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BOOLEAN_EXPRESSION__COMPARISONEXPRESSION = eINSTANCE.getBooleanExpression_Comparisonexpression();
-
-		/**
-		 * The meta object literal for the '{@link thymio_DSL.impl.LogicalExpressionImpl <em>Logical Expression</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see thymio_DSL.impl.LogicalExpressionImpl
-		 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getLogicalExpression()
-		 * @generated
-		 */
-		EClass LOGICAL_EXPRESSION = eINSTANCE.getLogicalExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOGICAL_EXPRESSION__RIGHT = eINSTANCE.getLogicalExpression_Right();
-
-		/**
-		 * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOGICAL_EXPRESSION__LEFT = eINSTANCE.getLogicalExpression_Left();
-
-		/**
-		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LOGICAL_EXPRESSION__OPERATOR = eINSTANCE.getLogicalExpression_Operator();
-
-		/**
-		 * The meta object literal for the '{@link thymio_DSL.impl.ComparisonExpressionImpl <em>Comparison Expression</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see thymio_DSL.impl.ComparisonExpressionImpl
-		 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getComparisonExpression()
-		 * @generated
-		 */
-		EClass COMPARISON_EXPRESSION = eINSTANCE.getComparisonExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COMPARISON_EXPRESSION__OPERATOR = eINSTANCE.getComparisonExpression_Operator();
-
-		/**
-		 * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPARISON_EXPRESSION__LEFT = eINSTANCE.getComparisonExpression_Left();
-
-		/**
-		 * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPARISON_EXPRESSION__RIGHT = eINSTANCE.getComparisonExpression_Right();
+		EReference IF_STATEMENT__CONDITION = eINSTANCE.getIfStatement_Condition();
 
 		/**
 		 * The meta object literal for the '{@link thymio_DSL.impl.ArithmeticExpressionImpl <em>Arithmetic Expression</em>}' class.
@@ -1802,6 +1428,40 @@ public interface Thymio_DSLPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ARITHMETIC_EXPRESSION__LEFT = eINSTANCE.getArithmeticExpression_Left();
+
+		/**
+		 * The meta object literal for the '{@link thymio_DSL.impl.ConditionImpl <em>Condition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see thymio_DSL.impl.ConditionImpl
+		 * @see thymio_DSL.impl.Thymio_DSLPackageImpl#getCondition()
+		 * @generated
+		 */
+		EClass CONDITION = eINSTANCE.getCondition();
+
+		/**
+		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONDITION__OPERATOR = eINSTANCE.getCondition_Operator();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Sensor</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONDITION__RIGHT_SENSOR = eINSTANCE.getCondition_RightSensor();
+
+		/**
+		 * The meta object literal for the '<em><b>Left Sensor</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONDITION__LEFT_SENSOR = eINSTANCE.getCondition_LeftSensor();
 
 	}
 

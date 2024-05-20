@@ -137,28 +137,13 @@ public class Thymio_DSLAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseCondition(Condition object) {
-			return createConditionAdapter();
-		}
-
-		@Override
-		public Adapter caseBooleanExpression(BooleanExpression object) {
-			return createBooleanExpressionAdapter();
-		}
-
-		@Override
-		public Adapter caseLogicalExpression(LogicalExpression object) {
-			return createLogicalExpressionAdapter();
-		}
-
-		@Override
-		public Adapter caseComparisonExpression(ComparisonExpression object) {
-			return createComparisonExpressionAdapter();
-		}
-
-		@Override
 		public Adapter caseArithmeticExpression(ArithmeticExpression object) {
 			return createArithmeticExpressionAdapter();
+		}
+
+		@Override
+		public Adapter caseCondition(Condition object) {
+			return createConditionAdapter();
 		}
 
 		@Override
@@ -377,62 +362,6 @@ public class Thymio_DSLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link thymio_DSL.Condition <em>Condition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see thymio_DSL.Condition
-	 * @generated
-	 */
-	public Adapter createConditionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link thymio_DSL.BooleanExpression <em>Boolean Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see thymio_DSL.BooleanExpression
-	 * @generated
-	 */
-	public Adapter createBooleanExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link thymio_DSL.LogicalExpression <em>Logical Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see thymio_DSL.LogicalExpression
-	 * @generated
-	 */
-	public Adapter createLogicalExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link thymio_DSL.ComparisonExpression <em>Comparison Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see thymio_DSL.ComparisonExpression
-	 * @generated
-	 */
-	public Adapter createComparisonExpressionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link thymio_DSL.ArithmeticExpression <em>Arithmetic Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -443,6 +372,20 @@ public class Thymio_DSLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createArithmeticExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link thymio_DSL.Condition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see thymio_DSL.Condition
+	 * @generated
+	 */
+	public Adapter createConditionAdapter() {
 		return null;
 	}
 

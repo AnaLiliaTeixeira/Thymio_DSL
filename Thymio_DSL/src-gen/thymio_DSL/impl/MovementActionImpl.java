@@ -3,11 +3,14 @@
 package thymio_DSL.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import thymio_DSL.ArithmeticExpression;
 import thymio_DSL.MovementAction;
 import thymio_DSL.Thymio_DSLPackage;
 
@@ -47,24 +50,14 @@ public class MovementActionImpl extends ActionImpl implements MovementAction {
 	protected String direction = DIRECTION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getSpeed() <em>Speed</em>}' attribute.
+	 * The cached value of the '{@link #getSpeed() <em>Speed</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSpeed()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer SPEED_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSpeed() <em>Speed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSpeed()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer speed = SPEED_EDEFAULT;
+	protected ArithmeticExpression speed;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -115,7 +108,7 @@ public class MovementActionImpl extends ActionImpl implements MovementAction {
 	 * @generated
 	 */
 	@Override
-	public Integer getSpeed() {
+	public ArithmeticExpression getSpeed() {
 		return speed;
 	}
 
@@ -124,13 +117,55 @@ public class MovementActionImpl extends ActionImpl implements MovementAction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setSpeed(Integer newSpeed) {
-		Integer oldSpeed = speed;
+	public NotificationChain basicSetSpeed(ArithmeticExpression newSpeed, NotificationChain msgs) {
+		ArithmeticExpression oldSpeed = speed;
 		speed = newSpeed;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Thymio_DSLPackage.MOVEMENT_ACTION__SPEED, oldSpeed,
-					speed));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					Thymio_DSLPackage.MOVEMENT_ACTION__SPEED, oldSpeed, newSpeed);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSpeed(ArithmeticExpression newSpeed) {
+		if (newSpeed != speed) {
+			NotificationChain msgs = null;
+			if (speed != null)
+				msgs = ((InternalEObject) speed).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - Thymio_DSLPackage.MOVEMENT_ACTION__SPEED, null, msgs);
+			if (newSpeed != null)
+				msgs = ((InternalEObject) newSpeed).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - Thymio_DSLPackage.MOVEMENT_ACTION__SPEED, null, msgs);
+			msgs = basicSetSpeed(newSpeed, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Thymio_DSLPackage.MOVEMENT_ACTION__SPEED, newSpeed,
+					newSpeed));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case Thymio_DSLPackage.MOVEMENT_ACTION__SPEED:
+			return basicSetSpeed(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -161,7 +196,7 @@ public class MovementActionImpl extends ActionImpl implements MovementAction {
 			setDirection((String) newValue);
 			return;
 		case Thymio_DSLPackage.MOVEMENT_ACTION__SPEED:
-			setSpeed((Integer) newValue);
+			setSpeed((ArithmeticExpression) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,7 +214,7 @@ public class MovementActionImpl extends ActionImpl implements MovementAction {
 			setDirection(DIRECTION_EDEFAULT);
 			return;
 		case Thymio_DSLPackage.MOVEMENT_ACTION__SPEED:
-			setSpeed(SPEED_EDEFAULT);
+			setSpeed((ArithmeticExpression) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -196,7 +231,7 @@ public class MovementActionImpl extends ActionImpl implements MovementAction {
 		case Thymio_DSLPackage.MOVEMENT_ACTION__DIRECTION:
 			return DIRECTION_EDEFAULT == null ? direction != null : !DIRECTION_EDEFAULT.equals(direction);
 		case Thymio_DSLPackage.MOVEMENT_ACTION__SPEED:
-			return SPEED_EDEFAULT == null ? speed != null : !SPEED_EDEFAULT.equals(speed);
+			return speed != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -214,8 +249,6 @@ public class MovementActionImpl extends ActionImpl implements MovementAction {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (direction: ");
 		result.append(direction);
-		result.append(", speed: ");
-		result.append(speed);
 		result.append(')');
 		return result.toString();
 	}

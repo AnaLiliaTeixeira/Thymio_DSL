@@ -31,23 +31,13 @@ import thymio_DSL.Thymio_DSLPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link thymio_DSL.impl.IfStatementImpl#getCondition <em>Condition</em>}</li>
  *   <li>{@link thymio_DSL.impl.IfStatementImpl#getAction <em>Action</em>}</li>
+ *   <li>{@link thymio_DSL.impl.IfStatementImpl#getCondition <em>Condition</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class IfStatementImpl extends MinimalEObjectImpl.Container implements IfStatement {
-	/**
-	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCondition()
-	 * @generated
-	 * @ordered
-	 */
-	protected Condition condition;
-
 	/**
 	 * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -57,6 +47,16 @@ public class IfStatementImpl extends MinimalEObjectImpl.Container implements IfS
 	 * @ordered
 	 */
 	protected EList<Action> action;
+
+	/**
+	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected Condition condition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,6 +75,19 @@ public class IfStatementImpl extends MinimalEObjectImpl.Container implements IfS
 	@Override
 	protected EClass eStaticClass() {
 		return Thymio_DSLPackage.Literals.IF_STATEMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Action> getAction() {
+		if (action == null) {
+			action = new EObjectContainmentEList<Action>(Action.class, this, Thymio_DSLPackage.IF_STATEMENT__ACTION);
+		}
+		return action;
 	}
 
 	/**
@@ -135,25 +148,12 @@ public class IfStatementImpl extends MinimalEObjectImpl.Container implements IfS
 	 * @generated
 	 */
 	@Override
-	public EList<Action> getAction() {
-		if (action == null) {
-			action = new EObjectContainmentEList<Action>(Action.class, this, Thymio_DSLPackage.IF_STATEMENT__ACTION);
-		}
-		return action;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
-			return basicSetCondition(null, msgs);
 		case Thymio_DSLPackage.IF_STATEMENT__ACTION:
 			return ((InternalEList<?>) getAction()).basicRemove(otherEnd, msgs);
+		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
+			return basicSetCondition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -166,10 +166,10 @@ public class IfStatementImpl extends MinimalEObjectImpl.Container implements IfS
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
-			return getCondition();
 		case Thymio_DSLPackage.IF_STATEMENT__ACTION:
 			return getAction();
+		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
+			return getCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -183,12 +183,12 @@ public class IfStatementImpl extends MinimalEObjectImpl.Container implements IfS
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
-			setCondition((Condition) newValue);
-			return;
 		case Thymio_DSLPackage.IF_STATEMENT__ACTION:
 			getAction().clear();
 			getAction().addAll((Collection<? extends Action>) newValue);
+			return;
+		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
+			setCondition((Condition) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -202,11 +202,11 @@ public class IfStatementImpl extends MinimalEObjectImpl.Container implements IfS
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
-			setCondition((Condition) null);
-			return;
 		case Thymio_DSLPackage.IF_STATEMENT__ACTION:
 			getAction().clear();
+			return;
+		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
+			setCondition((Condition) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -220,10 +220,10 @@ public class IfStatementImpl extends MinimalEObjectImpl.Container implements IfS
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
-			return condition != null;
 		case Thymio_DSLPackage.IF_STATEMENT__ACTION:
 			return action != null && !action.isEmpty();
+		case Thymio_DSLPackage.IF_STATEMENT__CONDITION:
+			return condition != null;
 		}
 		return super.eIsSet(featureID);
 	}

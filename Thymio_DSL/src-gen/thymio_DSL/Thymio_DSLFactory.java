@@ -148,42 +148,6 @@ public interface Thymio_DSLFactory extends EFactory {
 	IfStatement createIfStatement();
 
 	/**
-	 * Returns a new object of class '<em>Condition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Condition</em>'.
-	 * @generated
-	 */
-	Condition createCondition();
-
-	/**
-	 * Returns a new object of class '<em>Boolean Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean Expression</em>'.
-	 * @generated
-	 */
-	BooleanExpression createBooleanExpression();
-
-	/**
-	 * Returns a new object of class '<em>Logical Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Logical Expression</em>'.
-	 * @generated
-	 */
-	LogicalExpression createLogicalExpression();
-
-	/**
-	 * Returns a new object of class '<em>Comparison Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Comparison Expression</em>'.
-	 * @generated
-	 */
-	ComparisonExpression createComparisonExpression();
-
-	/**
 	 * Returns a new object of class '<em>Arithmetic Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -191,6 +155,15 @@ public interface Thymio_DSLFactory extends EFactory {
 	 * @generated
 	 */
 	ArithmeticExpression createArithmeticExpression();
+
+	/**
+	 * Returns a new object of class '<em>Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Condition</em>'.
+	 * @generated
+	 */
+	Condition createCondition();
 
 	/**
 	 * Returns the package supported by this factory.

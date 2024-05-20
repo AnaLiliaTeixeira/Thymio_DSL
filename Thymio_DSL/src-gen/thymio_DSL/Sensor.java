@@ -51,7 +51,7 @@ public interface Sensor extends EObject {
 	 * @return the value of the '<em>Direction</em>' attribute.
 	 * @see #setDirection(String)
 	 * @see thymio_DSL.Thymio_DSLPackage#getSensor_Direction()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getDirection();

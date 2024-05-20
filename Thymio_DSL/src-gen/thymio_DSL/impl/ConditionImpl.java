@@ -3,6 +3,7 @@
 package thymio_DSL.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -10,9 +11,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import thymio_DSL.BooleanExpression;
 import thymio_DSL.Condition;
-import thymio_DSL.LogicalExpression;
+import thymio_DSL.Sensor;
 import thymio_DSL.Thymio_DSLPackage;
 
 /**
@@ -23,32 +23,53 @@ import thymio_DSL.Thymio_DSLPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link thymio_DSL.impl.ConditionImpl#getBooleanexpression <em>Booleanexpression</em>}</li>
- *   <li>{@link thymio_DSL.impl.ConditionImpl#getLogicalexpression <em>Logicalexpression</em>}</li>
+ *   <li>{@link thymio_DSL.impl.ConditionImpl#getOperator <em>Operator</em>}</li>
+ *   <li>{@link thymio_DSL.impl.ConditionImpl#getRightSensor <em>Right Sensor</em>}</li>
+ *   <li>{@link thymio_DSL.impl.ConditionImpl#getLeftSensor <em>Left Sensor</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ConditionImpl extends MinimalEObjectImpl.Container implements Condition {
 	/**
-	 * The cached value of the '{@link #getBooleanexpression() <em>Booleanexpression</em>}' reference.
+	 * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBooleanexpression()
+	 * @see #getOperator()
 	 * @generated
 	 * @ordered
 	 */
-	protected BooleanExpression booleanexpression;
+	protected static final String OPERATOR_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLogicalexpression() <em>Logicalexpression</em>}' reference.
+	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLogicalexpression()
+	 * @see #getOperator()
 	 * @generated
 	 * @ordered
 	 */
-	protected LogicalExpression logicalexpression;
+	protected String operator = OPERATOR_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRightSensor() <em>Right Sensor</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRightSensor()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sensor rightSensor;
+
+	/**
+	 * The cached value of the '{@link #getLeftSensor() <em>Left Sensor</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLeftSensor()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sensor leftSensor;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,26 +96,8 @@ public class ConditionImpl extends MinimalEObjectImpl.Container implements Condi
 	 * @generated
 	 */
 	@Override
-	public BooleanExpression getBooleanexpression() {
-		if (booleanexpression != null && booleanexpression.eIsProxy()) {
-			InternalEObject oldBooleanexpression = (InternalEObject) booleanexpression;
-			booleanexpression = (BooleanExpression) eResolveProxy(oldBooleanexpression);
-			if (booleanexpression != oldBooleanexpression) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							Thymio_DSLPackage.CONDITION__BOOLEANEXPRESSION, oldBooleanexpression, booleanexpression));
-			}
-		}
-		return booleanexpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BooleanExpression basicGetBooleanexpression() {
-		return booleanexpression;
+	public String getOperator() {
+		return operator;
 	}
 
 	/**
@@ -103,12 +106,12 @@ public class ConditionImpl extends MinimalEObjectImpl.Container implements Condi
 	 * @generated
 	 */
 	@Override
-	public void setBooleanexpression(BooleanExpression newBooleanexpression) {
-		BooleanExpression oldBooleanexpression = booleanexpression;
-		booleanexpression = newBooleanexpression;
+	public void setOperator(String newOperator) {
+		String oldOperator = operator;
+		operator = newOperator;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Thymio_DSLPackage.CONDITION__BOOLEANEXPRESSION,
-					oldBooleanexpression, booleanexpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, Thymio_DSLPackage.CONDITION__OPERATOR, oldOperator,
+					operator));
 	}
 
 	/**
@@ -117,26 +120,27 @@ public class ConditionImpl extends MinimalEObjectImpl.Container implements Condi
 	 * @generated
 	 */
 	@Override
-	public LogicalExpression getLogicalexpression() {
-		if (logicalexpression != null && logicalexpression.eIsProxy()) {
-			InternalEObject oldLogicalexpression = (InternalEObject) logicalexpression;
-			logicalexpression = (LogicalExpression) eResolveProxy(oldLogicalexpression);
-			if (logicalexpression != oldLogicalexpression) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							Thymio_DSLPackage.CONDITION__LOGICALEXPRESSION, oldLogicalexpression, logicalexpression));
-			}
+	public Sensor getRightSensor() {
+		return rightSensor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRightSensor(Sensor newRightSensor, NotificationChain msgs) {
+		Sensor oldRightSensor = rightSensor;
+		rightSensor = newRightSensor;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					Thymio_DSLPackage.CONDITION__RIGHT_SENSOR, oldRightSensor, newRightSensor);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
-		return logicalexpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LogicalExpression basicGetLogicalexpression() {
-		return logicalexpression;
+		return msgs;
 	}
 
 	/**
@@ -145,12 +149,89 @@ public class ConditionImpl extends MinimalEObjectImpl.Container implements Condi
 	 * @generated
 	 */
 	@Override
-	public void setLogicalexpression(LogicalExpression newLogicalexpression) {
-		LogicalExpression oldLogicalexpression = logicalexpression;
-		logicalexpression = newLogicalexpression;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Thymio_DSLPackage.CONDITION__LOGICALEXPRESSION,
-					oldLogicalexpression, logicalexpression));
+	public void setRightSensor(Sensor newRightSensor) {
+		if (newRightSensor != rightSensor) {
+			NotificationChain msgs = null;
+			if (rightSensor != null)
+				msgs = ((InternalEObject) rightSensor).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - Thymio_DSLPackage.CONDITION__RIGHT_SENSOR, null, msgs);
+			if (newRightSensor != null)
+				msgs = ((InternalEObject) newRightSensor).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - Thymio_DSLPackage.CONDITION__RIGHT_SENSOR, null, msgs);
+			msgs = basicSetRightSensor(newRightSensor, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Thymio_DSLPackage.CONDITION__RIGHT_SENSOR,
+					newRightSensor, newRightSensor));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Sensor getLeftSensor() {
+		return leftSensor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLeftSensor(Sensor newLeftSensor, NotificationChain msgs) {
+		Sensor oldLeftSensor = leftSensor;
+		leftSensor = newLeftSensor;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					Thymio_DSLPackage.CONDITION__LEFT_SENSOR, oldLeftSensor, newLeftSensor);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setLeftSensor(Sensor newLeftSensor) {
+		if (newLeftSensor != leftSensor) {
+			NotificationChain msgs = null;
+			if (leftSensor != null)
+				msgs = ((InternalEObject) leftSensor).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - Thymio_DSLPackage.CONDITION__LEFT_SENSOR, null, msgs);
+			if (newLeftSensor != null)
+				msgs = ((InternalEObject) newLeftSensor).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - Thymio_DSLPackage.CONDITION__LEFT_SENSOR, null, msgs);
+			msgs = basicSetLeftSensor(newLeftSensor, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Thymio_DSLPackage.CONDITION__LEFT_SENSOR,
+					newLeftSensor, newLeftSensor));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case Thymio_DSLPackage.CONDITION__RIGHT_SENSOR:
+			return basicSetRightSensor(null, msgs);
+		case Thymio_DSLPackage.CONDITION__LEFT_SENSOR:
+			return basicSetLeftSensor(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -161,14 +242,12 @@ public class ConditionImpl extends MinimalEObjectImpl.Container implements Condi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case Thymio_DSLPackage.CONDITION__BOOLEANEXPRESSION:
-			if (resolve)
-				return getBooleanexpression();
-			return basicGetBooleanexpression();
-		case Thymio_DSLPackage.CONDITION__LOGICALEXPRESSION:
-			if (resolve)
-				return getLogicalexpression();
-			return basicGetLogicalexpression();
+		case Thymio_DSLPackage.CONDITION__OPERATOR:
+			return getOperator();
+		case Thymio_DSLPackage.CONDITION__RIGHT_SENSOR:
+			return getRightSensor();
+		case Thymio_DSLPackage.CONDITION__LEFT_SENSOR:
+			return getLeftSensor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -181,11 +260,14 @@ public class ConditionImpl extends MinimalEObjectImpl.Container implements Condi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case Thymio_DSLPackage.CONDITION__BOOLEANEXPRESSION:
-			setBooleanexpression((BooleanExpression) newValue);
+		case Thymio_DSLPackage.CONDITION__OPERATOR:
+			setOperator((String) newValue);
 			return;
-		case Thymio_DSLPackage.CONDITION__LOGICALEXPRESSION:
-			setLogicalexpression((LogicalExpression) newValue);
+		case Thymio_DSLPackage.CONDITION__RIGHT_SENSOR:
+			setRightSensor((Sensor) newValue);
+			return;
+		case Thymio_DSLPackage.CONDITION__LEFT_SENSOR:
+			setLeftSensor((Sensor) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -199,11 +281,14 @@ public class ConditionImpl extends MinimalEObjectImpl.Container implements Condi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case Thymio_DSLPackage.CONDITION__BOOLEANEXPRESSION:
-			setBooleanexpression((BooleanExpression) null);
+		case Thymio_DSLPackage.CONDITION__OPERATOR:
+			setOperator(OPERATOR_EDEFAULT);
 			return;
-		case Thymio_DSLPackage.CONDITION__LOGICALEXPRESSION:
-			setLogicalexpression((LogicalExpression) null);
+		case Thymio_DSLPackage.CONDITION__RIGHT_SENSOR:
+			setRightSensor((Sensor) null);
+			return;
+		case Thymio_DSLPackage.CONDITION__LEFT_SENSOR:
+			setLeftSensor((Sensor) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -217,12 +302,31 @@ public class ConditionImpl extends MinimalEObjectImpl.Container implements Condi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case Thymio_DSLPackage.CONDITION__BOOLEANEXPRESSION:
-			return booleanexpression != null;
-		case Thymio_DSLPackage.CONDITION__LOGICALEXPRESSION:
-			return logicalexpression != null;
+		case Thymio_DSLPackage.CONDITION__OPERATOR:
+			return OPERATOR_EDEFAULT == null ? operator != null : !OPERATOR_EDEFAULT.equals(operator);
+		case Thymio_DSLPackage.CONDITION__RIGHT_SENSOR:
+			return rightSensor != null;
+		case Thymio_DSLPackage.CONDITION__LEFT_SENSOR:
+			return leftSensor != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (operator: ");
+		result.append(operator);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ConditionImpl

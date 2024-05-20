@@ -180,37 +180,16 @@ public class Thymio_DSLSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case Thymio_DSLPackage.CONDITION: {
-			Condition condition = (Condition) theEObject;
-			T result = caseCondition(condition);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case Thymio_DSLPackage.BOOLEAN_EXPRESSION: {
-			BooleanExpression booleanExpression = (BooleanExpression) theEObject;
-			T result = caseBooleanExpression(booleanExpression);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case Thymio_DSLPackage.LOGICAL_EXPRESSION: {
-			LogicalExpression logicalExpression = (LogicalExpression) theEObject;
-			T result = caseLogicalExpression(logicalExpression);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case Thymio_DSLPackage.COMPARISON_EXPRESSION: {
-			ComparisonExpression comparisonExpression = (ComparisonExpression) theEObject;
-			T result = caseComparisonExpression(comparisonExpression);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case Thymio_DSLPackage.ARITHMETIC_EXPRESSION: {
 			ArithmeticExpression arithmeticExpression = (ArithmeticExpression) theEObject;
 			T result = caseArithmeticExpression(arithmeticExpression);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case Thymio_DSLPackage.CONDITION: {
+			Condition condition = (Condition) theEObject;
+			T result = caseCondition(condition);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -431,66 +410,6 @@ public class Thymio_DSLSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Condition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Condition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCondition(Condition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBooleanExpression(BooleanExpression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Logical Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Logical Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLogicalExpression(LogicalExpression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Comparison Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Comparison Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseComparisonExpression(ComparisonExpression object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Arithmetic Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -502,6 +421,21 @@ public class Thymio_DSLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseArithmeticExpression(ArithmeticExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCondition(Condition object) {
 		return null;
 	}
 

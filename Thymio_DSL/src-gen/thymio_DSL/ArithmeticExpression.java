@@ -30,7 +30,7 @@ public interface ArithmeticExpression extends EObject {
 	 * @return the value of the '<em>Operator</em>' attribute.
 	 * @see #setOperator(String)
 	 * @see thymio_DSL.Thymio_DSLPackage#getArithmeticExpression_Operator()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getOperator();
@@ -52,7 +52,7 @@ public interface ArithmeticExpression extends EObject {
 	 * @return the value of the '<em>Right</em>' attribute.
 	 * @see #setRight(Integer)
 	 * @see thymio_DSL.Thymio_DSLPackage#getArithmeticExpression_Right()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Integer getRight();
@@ -74,7 +74,7 @@ public interface ArithmeticExpression extends EObject {
 	 * @return the value of the '<em>Left</em>' attribute.
 	 * @see #setLeft(Integer)
 	 * @see thymio_DSL.Thymio_DSLPackage#getArithmeticExpression_Left()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	Integer getLeft();

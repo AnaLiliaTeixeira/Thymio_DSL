@@ -84,16 +84,10 @@ public class Thymio_DSLFactoryImpl extends EFactoryImpl implements Thymio_DSLFac
 			return createProxEvent();
 		case Thymio_DSLPackage.IF_STATEMENT:
 			return createIfStatement();
-		case Thymio_DSLPackage.CONDITION:
-			return createCondition();
-		case Thymio_DSLPackage.BOOLEAN_EXPRESSION:
-			return createBooleanExpression();
-		case Thymio_DSLPackage.LOGICAL_EXPRESSION:
-			return createLogicalExpression();
-		case Thymio_DSLPackage.COMPARISON_EXPRESSION:
-			return createComparisonExpression();
 		case Thymio_DSLPackage.ARITHMETIC_EXPRESSION:
 			return createArithmeticExpression();
+		case Thymio_DSLPackage.CONDITION:
+			return createCondition();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -259,53 +253,20 @@ public class Thymio_DSLFactoryImpl extends EFactoryImpl implements Thymio_DSLFac
 	 * @generated
 	 */
 	@Override
-	public Condition createCondition() {
-		ConditionImpl condition = new ConditionImpl();
-		return condition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public BooleanExpression createBooleanExpression() {
-		BooleanExpressionImpl booleanExpression = new BooleanExpressionImpl();
-		return booleanExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public LogicalExpression createLogicalExpression() {
-		LogicalExpressionImpl logicalExpression = new LogicalExpressionImpl();
-		return logicalExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ComparisonExpression createComparisonExpression() {
-		ComparisonExpressionImpl comparisonExpression = new ComparisonExpressionImpl();
-		return comparisonExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public ArithmeticExpression createArithmeticExpression() {
 		ArithmeticExpressionImpl arithmeticExpression = new ArithmeticExpressionImpl();
 		return arithmeticExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Condition createCondition() {
+		ConditionImpl condition = new ConditionImpl();
+		return condition;
 	}
 
 	/**

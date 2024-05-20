@@ -5,7 +5,7 @@
     <semanticResources>thymio_DSL.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_h_sr0BZ-Ee-ieMHtzDwh5w">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_iAcSsBZ-Ee-ieMHtzDwh5w" name="thymio_DSL" repPath="#_iAXaMBZ-Ee-ieMHtzDwh5w" changeId="1716205973064">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_iAcSsBZ-Ee-ieMHtzDwh5w" name="thymio_DSL" repPath="#_iAXaMBZ-Ee-ieMHtzDwh5w" changeId="1716212999830">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="thymio_DSL.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -829,8 +829,8 @@
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_e5i9wBZ_Ee-ieMHtzDwh5w" name="direction : EString" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="thymio_DSL.ecore#//Sensor/direction"/>
         <semanticElements xmi:type="ecore:EAttribute" href="thymio_DSL.ecore#//Sensor/direction"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_mDHoghZ_Ee-ieMHtzDwh5w" labelAlignment="LEFT" description="_YnTjoBZ_Ee-ieMHtzDwh5w">
-          <labelFormat>bold</labelFormat>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_d94fkRanEe-VDpYP1rgWZQ" labelAlignment="LEFT">
+          <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>

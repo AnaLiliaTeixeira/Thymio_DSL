@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link thymio_DSL.IfStatement#getCondition <em>Condition</em>}</li>
  *   <li>{@link thymio_DSL.IfStatement#getAction <em>Action</em>}</li>
+ *   <li>{@link thymio_DSL.IfStatement#getCondition <em>Condition</em>}</li>
  * </ul>
  *
  * @see thymio_DSL.Thymio_DSLPackage#getIfStatement()
@@ -24,6 +24,18 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface IfStatement extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Action</b></em>' containment reference list.
+	 * The list contents are of type {@link thymio_DSL.Action}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Action</em>' containment reference list.
+	 * @see thymio_DSL.Thymio_DSLPackage#getIfStatement_Action()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	EList<Action> getAction();
+
 	/**
 	 * Returns the value of the '<em><b>Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -45,17 +57,5 @@ public interface IfStatement extends EObject {
 	 * @generated
 	 */
 	void setCondition(Condition value);
-
-	/**
-	 * Returns the value of the '<em><b>Action</b></em>' containment reference list.
-	 * The list contents are of type {@link thymio_DSL.Action}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Action</em>' containment reference list.
-	 * @see thymio_DSL.Thymio_DSLPackage#getIfStatement_Action()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	EList<Action> getAction();
 
 } // IfStatement
