@@ -17,6 +17,7 @@ import thymio_DSL.ProxEvent
 import thymio_DSL.TapEvent
 import thymio_DSL.ClapEvent
 import thymio_DSL.Sensor
+import com.google.inject.Inject
 
 /**
  * Generates code from your model files on save.
@@ -24,6 +25,8 @@ import thymio_DSL.Sensor
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class TDslGenerator extends AbstractGenerator {
+	
+	@Inject TDslInterpreter interpreter
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		resource.allContents.toIterable.filter(typeof(ThymioDSL)).forEach[generate(it, fsa)]
@@ -105,9 +108,20 @@ class TDslGenerator extends AbstractGenerator {
 			} else if (action.direction == 'left') {
 				return 'motor.left.target = 0\n        motor.right.target = 500\n        emit pair_run 0'
 			} else if (action.direction == 'forward') {
-				return 'motor.left.target = 500\n        motor.right.target = 500\n        emit pair_run 0'
+				if(action.speed === null)
+					return 'motor.left.target = 500\n        motor.right.target = 500\n        emit pair_run 0'
+				else{
+					var speed = interpreter.interpret(action.speed)
+					return 'motor.left.target = '+speed+'\n        motor.right.target = '+speed+'\n        emit pair_run 0'
+					
+				}
 			} else if (action.direction == 'backward') {
-				return 'motor.left.target = -500\n        motor.right.target = -500\n        emit pair_run 0'
+				if(action.speed === null)
+					return 'motor.left.target = -500\n        motor.right.target = -500\n        emit pair_run 0'
+				else{
+					var speed = interpreter.interpret(action.speed)
+					return 'motor.left.target = '+speed+'\n        motor.right.target = '+speed+'\n        emit pair_run 0'
+				}	
 			}
 		}
 		return ''

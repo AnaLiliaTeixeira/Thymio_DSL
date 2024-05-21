@@ -12,7 +12,7 @@ import thymio_DSL.ArithmeticExpression
  */
 class TDslInterpreter {
 
-	def Object interpret(ArithmeticExpression e) {
+	def Integer interpret(ArithmeticExpression e) {
 //		if (e.left == null || e.right == null) {
 //			throw new IllegalArgumentException("Arithmetic expression cannot have null operands")
 //		}
@@ -67,7 +67,7 @@ class TDslInterpreter {
 
 			}
 			default: {
-				throw new IllegalArgumentException("Unsupported operator: " + e.operator)
+				left
 			}
 		}
 	}

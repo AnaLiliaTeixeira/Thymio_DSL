@@ -241,10 +241,10 @@ public class TDslValidator extends AbstractTDslValidator {
 	public void checkCondition(Condition condition) {
 		Sensor leftsensor = condition.getLeftSensor();
 		Sensor rightsensor = condition.getRightSensor();
-		if (checkIfDirectionCorrespondToType(rightsensor))
+		if (!checkIfDirectionCorrespondToType(rightsensor))
 			error("The direction of the sensor doesn't match with the type " + rightsensor.getSensor_type()
 					+ " sensor.", Thymio_DSLPackage.Literals.CONDITION__RIGHT_SENSOR);
-		if (checkIfDirectionCorrespondToType(leftsensor))
+		if (!checkIfDirectionCorrespondToType(leftsensor))
 			error("The direction of the sensor doesn't match with the type " + leftsensor.getSensor_type()
 					+ " sensor.", Thymio_DSLPackage.Literals.CONDITION__LEFT_SENSOR);
 	
