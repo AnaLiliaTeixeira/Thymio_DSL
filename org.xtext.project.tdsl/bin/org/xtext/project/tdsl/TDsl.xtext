@@ -74,7 +74,7 @@ EString returns ecore::EString:
 	STRING | ID;
 
 Color:
-	('light' | 'dark')? ('red' | 'green' | 'blue' | 'black' | 'white' | 'yellow');
+	('red' | 'green' | 'blue' | 'black' | 'white' | 'yellow' | 'pink' | 'orange');
 
 Sound:
 	'sound1' | 'sound2' | 'sound3' | 'sound4';

@@ -3,21 +3,24 @@
  */
 package org.xtext.project.tdsl.generator
 
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import thymio_DSL.Action
 import thymio_DSL.Button
+import thymio_DSL.ClapEvent
+import thymio_DSL.ColorBottomAction
+import thymio_DSL.ColorTopAction
 import thymio_DSL.MovementAction
+import thymio_DSL.ProxEvent
+import thymio_DSL.Sensor
+import thymio_DSL.SoundAction
 import thymio_DSL.Statement
+import thymio_DSL.TapEvent
 import thymio_DSL.ThymioDSL
 import thymio_DSL.UpperEvent
-import thymio_DSL.ProxEvent
-import thymio_DSL.TapEvent
-import thymio_DSL.ClapEvent
-import thymio_DSL.Sensor
-import com.google.inject.Inject
 
 /**
  * Generates code from your model files on save.
@@ -36,21 +39,68 @@ class TDslGenerator extends AbstractGenerator {
 		val code = model.toThymioCode
 		fsa.generateFile('thymio.aesl', code)
 	}
+	
+	var nStatement = 0
 
 	def String toThymioCode(ThymioDSL model) {
 		val builder = new StringBuilder
+		val soundConfigured = newArrayList(false) 
+		
+		nStatement = 0
 		model.statement.forEach [ statement |
+				statement.action.forEach[action |
+					if (action instanceof SoundAction && !soundConfigured.get(0)) {
+						builder.append('# variables for notes\n'+
+									'var notes[6]\n'+
+									'var durations[6]\n'+
+									'var note_index = 6\n'+
+									'var note_count = 6\n'+
+									'var wave[142]\n'+
+									'var i\n'+
+									'var wave_phase\n'+
+									'var wave_intensity\n\n'+			
+									'# compute a sinus wave for sound\n'+
+									'for i in 0:141 do\n'+
+									'	wave_phase = (i-70)*468\n'+
+									'	call math.cos(wave_intensity, wave_phase)\n'+
+									'	wave[i] = wave_intensity/256\n'+
+									'end\n'+
+									'call sound.wave(wave)')
+						soundConfigured.set(0, true)
+					}
+				]
+			builder.append('\n')
+		]
+		builder.append('# reset outputs \n' +
+				'call sound.system(-1)\n' +
+				'call leds.top(0,0,0)\n' +
+				'call leds.bottom.left(0,0,0)\n' +
+				'call leds.bottom.right(0,0,0)\n' +
+				'call leds.circle(0,0,0,0,0,0,0,0)\n\n')
+		
+		if (soundConfigured.get(0)) {
+			builder.append('# when a note is finished, play the next note\n'+
+					'onevent sound.finished \n' +
+					'	if note_index != note_count then\n' +
+					'		call sound.freq(notes[note_index], durations[note_index])\n' +
+					'		note_index += 1\n'+
+					'	end\n\n')
+		}
+		model.statement.forEach [ statement |
+			statement.action.forEach[action |]
 			builder.append(statement.toThymioCode)
 			builder.append('\n')
+			nStatement = nStatement + 1
 		]
 		builder.toString
 	}
 
 	def String toThymioCode(Statement statement) {
 		val eventCode = new StringBuilder
+		eventCode.append('onevent ');
 		if (statement.event instanceof UpperEvent) {
 			val upperEvent = statement.event as UpperEvent
-			eventCode.append('onevent buttons\n')
+			eventCode.append('buttons\n')
 			eventCode.append('    when ')
 			// Iterate through buttons and append conditions
 			for (var i = 0; i < upperEvent.button.size(); i++) {
@@ -60,69 +110,124 @@ class TDslGenerator extends AbstractGenerator {
 				}
 				eventCode.append('button.' + button.name + ' == 1')
 			}
-			eventCode.append(' do\n')
 
-			// Append the actions
-			for (Action action : statement.action) {
-				eventCode.append('        ' + action.toThymioCode() + '\n')
-			}
-			eventCode.append('    end')
 		} else if (statement.event instanceof ProxEvent) {
 			val proxEvent = statement.event as ProxEvent
-			eventCode.append('onevent prox\n')
+			eventCode.append('prox\n')
 			eventCode.append('    when ')
 			eventCode.append(
 				proxEvent.sensor.direction + ' ' + diretionToThymioSensor(proxEvent.sensor) + ' ' +
-					stateToThymioSensor(proxEvent.sensor) + ' do\n')
-			// Append the actions
-			for (Action action : statement.action) {
-				eventCode.append('        ' + action.toThymioCode() + '\n')
-			}
-			eventCode.append('    end')
+					stateToThymioSensor(proxEvent.sensor))
+
 		} else if (statement.event instanceof TapEvent) {
-			eventCode.append('onevent tap\n')
-			eventCode.append('    when tap do\n')
+			eventCode.append('mic\n')
 
-			// Append the actions
-			for (Action action : statement.action) {
-				eventCode.append('        ' + action.toThymioCode() + '\n')
-			}
-			eventCode.append('    end')
 		} else if (statement.event instanceof ClapEvent) {
-			eventCode.append('onevent clap\n')
-			eventCode.append('    when clap do\n')
-
-			// Append the actions
-			for (Action action : statement.action) {
-				eventCode.append('        ' + action.toThymioCode() + '\n')
-			}
-			eventCode.append('    end')
+			eventCode.append('clap\n')
+			eventCode.append('    when clap')
 		}
+		
+		eventCode.append(' do\n')	
+		
+		// Append the actions
+		for (Action action : statement.action) {
+			eventCode.append('        ' + action.toThymioCode() + '\n')
+		}
+		
+		eventCode.append('    	emit pair_run ' + nStatement + ' \n    end')
 		eventCode.toString
 	}
 
 	def String toThymioCode(Action action) {
 		if (action instanceof MovementAction) {
 			if (action.direction == 'right') {
-				return 'motor.left.target = 500\n        motor.right.target = 0\n        emit pair_run 0'
+				return 'motor.left.target = 500\n        motor.right.target = 0'
 			} else if (action.direction == 'left') {
-				return 'motor.left.target = 0\n        motor.right.target = 500\n        emit pair_run 0'
+				return 'motor.left.target = 0\n        motor.right.target = 500'
 			} else if (action.direction == 'forward') {
 				if(action.speed === null)
-					return 'motor.left.target = 500\n        motor.right.target = 500\n        emit pair_run 0'
+					return 'motor.left.target = 500\n        motor.right.target = 500'
 				else{
 					var speed = interpreter.interpret(action.speed)
-					return 'motor.left.target = '+speed+'\n        motor.right.target = '+speed+'\n        emit pair_run 0'
+					return 'motor.left.target = '+speed+'\n        motor.right.target = '+speed
 					
 				}
 			} else if (action.direction == 'backward') {
 				if(action.speed === null)
-					return 'motor.left.target = -500\n        motor.right.target = -500\n        emit pair_run 0'
+					return 'motor.left.target = -500\n        motor.right.target = -500'
 				else{
 					var speed = interpreter.interpret(action.speed)
-					return 'motor.left.target = '+speed+'\n        motor.right.target = '+speed+'\n        emit pair_run 0'
+					return 'motor.left.target = '+speed+'\n        motor.right.target = '+speed
 				}	
 			}
+		}
+		else if (action instanceof ColorTopAction) {
+			if (action.color == 'red') {
+				return 'call leds.top(32,0,0)        '
+			} else if (action.color == 'green') {
+				return 'call leds.top(0,32,0)        '
+			} else if (action.color == 'blue') {
+				return 'call leds.top(0,0,32)        '
+			} else if (action.color == 'white') {
+				return 'call leds.top(32,32,32)        '
+			} else if (action.color == 'black') {
+				return 'call leds.top(0,0,0)        '
+			} else if (action.color == 'pink') {
+				return 'call leds.top(32,0,32)        '
+			} else if (action.color == 'yellow') {
+				return 'call leds.top(32,32,0)        '
+			} else if (action.color == 'orange') {
+				return 'call leds.top(32,16,0)        '
+			}
+		}
+		else if (action instanceof ColorBottomAction) {
+			if (action.color == 'red') {
+				return 'call leds.bottom(32,0,0)        '
+			} else if (action.color == 'green') {
+				return 'call leds.bottom(0,32,0)        '
+			} else if (action.color == 'blue') {
+				return 'call leds.bottom(0,0,32)        '
+			} else if (action.color == 'white') {
+				return 'call leds.bottom(32,32,32)        '
+			} else if (action.color == 'black') {
+				return 'call leds.bottom(0,0,0)        '
+			} else if (action.color == 'pink') {
+				return 'call leds.bottom(32,0,32)        '
+			} else if (action.color == 'yellow') {
+				return 'call leds.bottom(32,32,0)        '
+			} else if (action.color == 'orange') {
+				return 'call leds.bottom(32,16,0)        '
+			}
+		}
+		else if (action instanceof SoundAction) {
+			if (action.sound == 'sound1') {
+				return '	call math.copy(notes[0:5], [524, 440, 370, 311, 440, 262]) \n' +
+					   '	call math.copy(durations[0:5], [7, 7, 7, 7, 7, 7]) \n' +
+					   '	note_index = 1 \n'+
+					   '	note_count = 6 \n' +
+					   '	call sound.freq(notes[0], durations[0])\n'		
+			} 
+			else if (action.sound == 'sound2') {
+				return '	call math.copy(notes[0:5], [311, 440, 311, 524, 440, 311]) \n' +
+					   '	call math.copy(durations[0:5], [7, 14, 14, 14, 14, 14]) \n' +
+					   '	note_index = 1 \n'+
+					   '	note_count = 6 \n' +
+					   '	call sound.freq(notes[0], durations[0])\n'		
+			} 
+			else if (action.sound == 'sound3') {
+				return '	call math.copy(notes[0:5], [311, 440, 370, 0, 440, 311]) \n' +
+					   '	call math.copy(durations[0:5], [7, 14, 7, 14, 7, 14]) \n' +
+					   '	note_index = 1 \n'+
+					   '	note_count = 6 \n' +
+					   '	call sound.freq(notes[0], durations[0])\n'		
+			} 
+			else if (action.sound == 'sound4') {
+				return '	call math.copy(notes[0:5], [262, 440, 524, 311, 370, 262]) \n' +
+					   '	call math.copy(durations[0:5], [7, 14, 14, 7, 14, 14]) \n' +
+					   '	note_index = 1 \n'+
+					   '	note_count = 6 \n' +
+					   '	call sound.freq(notes[0], durations[0])\n'		
+			} 
 		}
 		return ''
 	}
@@ -137,6 +242,7 @@ class TDslGenerator extends AbstractGenerator {
 			default: ''
 		}
 	}
+	
 
 	def String diretionToThymioSensor(Sensor sensor) {
 		if (sensor.sensor_type.equals("ground")) {
@@ -188,5 +294,4 @@ class TDslGenerator extends AbstractGenerator {
 		}
 		return ''
 	}
-
 }

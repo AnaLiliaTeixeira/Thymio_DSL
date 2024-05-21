@@ -3,7 +3,6 @@
  */
 package org.xtext.project.tdsl.validation;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,12 +10,14 @@ import java.util.Set;
 import org.eclipse.xtext.validation.Check;
 
 import thymio_DSL.Action;
+import thymio_DSL.ArithmeticExpression;
 import thymio_DSL.Button;
 import thymio_DSL.ClapEvent;
 import thymio_DSL.ColorTopAction;
 import thymio_DSL.Condition;
 import thymio_DSL.Event;
 import thymio_DSL.IfStatement;
+import thymio_DSL.MovementAction;
 import thymio_DSL.ProxEvent;
 import thymio_DSL.Sensor;
 import thymio_DSL.Statement;
@@ -160,8 +161,6 @@ public class TDslValidator extends AbstractTDslValidator {
 	private boolean upperEventsAreEqual(UpperEvent event1, UpperEvent event2) {
 		List<Button> buttons1 = event1.getButton();
 		List<Button> buttons2 = event2.getButton();
-		System.out.println(buttons1);
-		System.out.println(buttons2);
 
 		if (buttons1.size() != buttons2.size()) {
 			return false;
@@ -249,6 +248,24 @@ public class TDslValidator extends AbstractTDslValidator {
 					+ " sensor.", Thymio_DSLPackage.Literals.CONDITION__LEFT_SENSOR);
 	
 	}
+	
+	public static final String NEGATIVE_SPEED_WARNING = "negativeSpeedWarning";
+	public static final String SPEED_GT_500_WARNING = "speedGreaterThan500Warning";
+
+	@Check
+	public void checkSpeed(MovementAction movementAction) {
+		ArithmeticExpression speed = movementAction.getSpeed();
+		if (speed.getOperator() == null)
+			if (speed.getLeft() < 0) {		
+				warning("The speed should be a positive number",
+						Thymio_DSLPackage.Literals.MOVEMENT_ACTION__SPEED, NEGATIVE_SPEED_WARNING);
+			}
+			else if (speed.getLeft() > 500) {			
+				warning("The speed should not exceed 500",
+						Thymio_DSLPackage.Literals.MOVEMENT_ACTION__SPEED, SPEED_GT_500_WARNING);
+			}
+	}
+
 
 	private boolean contradictory(String state, String state2) {
 		return state.equals("proximity") && state2.equals("no proximity")
