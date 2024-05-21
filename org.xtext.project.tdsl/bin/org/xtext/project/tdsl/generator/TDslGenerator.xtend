@@ -7,6 +7,16 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import thymio_DSL.Action
+import thymio_DSL.Button
+import thymio_DSL.MovementAction
+import thymio_DSL.Statement
+import thymio_DSL.ThymioDSL
+import thymio_DSL.UpperEvent
+import thymio_DSL.ProxEvent
+import thymio_DSL.TapEvent
+import thymio_DSL.ClapEvent
+import thymio_DSL.Sensor
 
 /**
  * Generates code from your model files on save.
@@ -16,10 +26,153 @@ import org.eclipse.xtext.generator.IGeneratorContext
 class TDslGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
+		resource.allContents.toIterable.filter(typeof(ThymioDSL)).forEach[generate(it, fsa)]
 	}
+
+	def generate(ThymioDSL model, IFileSystemAccess2 fsa) {
+		val code = model.toThymioCode
+		fsa.generateFile('thymio.aesl', code)
+	}
+
+	def String toThymioCode(ThymioDSL model) {
+		val builder = new StringBuilder
+		model.statement.forEach [ statement |
+			builder.append(statement.toThymioCode)
+			builder.append('\n')
+		]
+		builder.toString
+	}
+
+	def String toThymioCode(Statement statement) {
+		val eventCode = new StringBuilder
+		if (statement.event instanceof UpperEvent) {
+			val upperEvent = statement.event as UpperEvent
+			eventCode.append('onevent buttons\n')
+			eventCode.append('    when ')
+			// Iterate through buttons and append conditions
+			for (var i = 0; i < upperEvent.button.size(); i++) {
+				val button = upperEvent.button.get(i)
+				if (i > 0) {
+					eventCode.append(' and ')
+				}
+				eventCode.append('button.' + button.name + ' == 1')
+			}
+			eventCode.append(' do\n')
+
+			// Append the actions
+			for (Action action : statement.action) {
+				eventCode.append('        ' + action.toThymioCode() + '\n')
+			}
+			eventCode.append('    end')
+		} else if (statement.event instanceof ProxEvent) {
+			val proxEvent = statement.event as ProxEvent
+			eventCode.append('onevent prox\n')
+			eventCode.append('    when ')
+			eventCode.append(
+				proxEvent.sensor.direction + ' ' + diretionToThymioSensor(proxEvent.sensor) + ' ' +
+					stateToThymioSensor(proxEvent.sensor) + ' do\n')
+			// Append the actions
+			for (Action action : statement.action) {
+				eventCode.append('        ' + action.toThymioCode() + '\n')
+			}
+			eventCode.append('    end')
+		} else if (statement.event instanceof TapEvent) {
+			eventCode.append('onevent tap\n')
+			eventCode.append('    when tap do\n')
+
+			// Append the actions
+			for (Action action : statement.action) {
+				eventCode.append('        ' + action.toThymioCode() + '\n')
+			}
+			eventCode.append('    end')
+		} else if (statement.event instanceof ClapEvent) {
+			eventCode.append('onevent clap\n')
+			eventCode.append('    when clap do\n')
+
+			// Append the actions
+			for (Action action : statement.action) {
+				eventCode.append('        ' + action.toThymioCode() + '\n')
+			}
+			eventCode.append('    end')
+		}
+		eventCode.toString
+	}
+
+	def String toThymioCode(Action action) {
+		if (action instanceof MovementAction) {
+			if (action.direction == 'right') {
+				return 'motor.left.target = 500\n        motor.right.target = 0\n        emit pair_run 0'
+			} else if (action.direction == 'left') {
+				return 'motor.left.target = 0\n        motor.right.target = 500\n        emit pair_run 0'
+			} else if (action.direction == 'forward') {
+				return 'motor.left.target = 500\n        motor.right.target = 500\n        emit pair_run 0'
+			} else if (action.direction == 'backward') {
+				return 'motor.left.target = -500\n        motor.right.target = -500\n        emit pair_run 0'
+			}
+		}
+		return ''
+	}
+
+	def String toThymioCode(Button button) {
+		switch button {
+			case 'center': 'center'
+			case 'left': 'left'
+			case 'right': 'right'
+			case 'forward': 'forward'
+			case 'backward': 'backward'
+			default: ''
+		}
+	}
+
+	def String diretionToThymioSensor(Sensor sensor) {
+		if (sensor.sensor_type.equals("ground")) {
+			if (sensor.direction.equals("left")) {
+				return "prox.ground.delta[0]"
+			} else if (sensor.direction.equals("right")) {
+				return "prox.ground.delta[1]"
+			}
+
+		} else if (sensor.sensor_type.equals("horizontal")) {
+			if (sensor.direction.equals("left")) {
+			} else if (sensor.direction.contains("left/middle")) {
+				return "prox.horizontal[1]"
+			} else if (sensor.direction.contains("right/middle")) {
+				return "prox.ground.delta[3]"
+			} else if (sensor.direction.contains("front left")) {
+				return "prox.ground.delta[0]"
+			} else if (sensor.direction.contains("front right")) {
+				return "prox.ground.delta[4]"
+			} else if (sensor.direction.contains("front middle")) {
+				return "prox.ground.delta[2]"
+			} else if (sensor.direction.contains("backward left")) {
+				return "prox.ground.delta[5]"
+			} else if (sensor.direction.contains("backward right")) {
+				return "prox.ground.delta[6]"
+			}
+		}
+		return ''
+	}
+
+	def String stateToThymioSensor(Sensor sensor) {
+		if (sensor.sensor_type.equals("ground")) {
+			if (sensor.state.equals("white")) {
+				return "> 450"
+			} else if (sensor.state.equals("black")) {
+				return "< 400"
+			} else if (sensor.state.contains("no proximity")) {
+				return "<= 400"
+			} else if (sensor.state.equals("proximity")) {
+				return ">= 450"
+			}
+
+		} else if (sensor.sensor_type == "horizontal") {
+			if (sensor.state.contains("no proximity")) {
+				return "<= 1000"
+			} else if (sensor.state.equals("proximity")) {
+				return ">= 2000"
+			}
+		}
+		return ''
+	}
+
 }

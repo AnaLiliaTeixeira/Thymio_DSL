@@ -3,10 +3,27 @@
  */
 package org.xtext.project.tdsl.generator;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import java.util.function.Consumer;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import thymio_DSL.Action;
+import thymio_DSL.Button;
+import thymio_DSL.ClapEvent;
+import thymio_DSL.Event;
+import thymio_DSL.MovementAction;
+import thymio_DSL.ProxEvent;
+import thymio_DSL.Sensor;
+import thymio_DSL.Statement;
+import thymio_DSL.TapEvent;
+import thymio_DSL.ThymioDSL;
+import thymio_DSL.UpperEvent;
 
 /**
  * Generates code from your model files on save.
@@ -17,5 +34,282 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class TDslGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    final Consumer<ThymioDSL> _function = (ThymioDSL it) -> {
+      this.generate(it, fsa);
+    };
+    Iterables.<ThymioDSL>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), ThymioDSL.class).forEach(_function);
+  }
+
+  public void generate(final ThymioDSL model, final IFileSystemAccess2 fsa) {
+    final String code = this.toThymioCode(model);
+    fsa.generateFile("thymio.aesl", code);
+  }
+
+  public String toThymioCode(final ThymioDSL model) {
+    String _xblockexpression = null;
+    {
+      final StringBuilder builder = new StringBuilder();
+      final Consumer<Statement> _function = (Statement statement) -> {
+        builder.append(this.toThymioCode(statement));
+        builder.append("\n");
+      };
+      model.getStatement().forEach(_function);
+      _xblockexpression = builder.toString();
+    }
+    return _xblockexpression;
+  }
+
+  public String toThymioCode(final Statement statement) {
+    String _xblockexpression = null;
+    {
+      final StringBuilder eventCode = new StringBuilder();
+      Event _event = statement.getEvent();
+      if ((_event instanceof UpperEvent)) {
+        Event _event_1 = statement.getEvent();
+        final UpperEvent upperEvent = ((UpperEvent) _event_1);
+        eventCode.append("onevent buttons\n");
+        eventCode.append("    when ");
+        for (int i = 0; (i < upperEvent.getButton().size()); i++) {
+          {
+            final Button button = upperEvent.getButton().get(i);
+            if ((i > 0)) {
+              eventCode.append(" and ");
+            }
+            String _name = button.getName();
+            String _plus = ("button." + _name);
+            String _plus_1 = (_plus + " == 1");
+            eventCode.append(_plus_1);
+          }
+        }
+        eventCode.append(" do\n");
+        EList<Action> _action = statement.getAction();
+        for (final Action action : _action) {
+          String _thymioCode = this.toThymioCode(action);
+          String _plus = ("        " + _thymioCode);
+          String _plus_1 = (_plus + "\n");
+          eventCode.append(_plus_1);
+        }
+        eventCode.append("    end");
+      } else {
+        Event _event_2 = statement.getEvent();
+        if ((_event_2 instanceof ProxEvent)) {
+          Event _event_3 = statement.getEvent();
+          final ProxEvent proxEvent = ((ProxEvent) _event_3);
+          eventCode.append("onevent prox\n");
+          eventCode.append("    when ");
+          String _direction = proxEvent.getSensor().getDirection();
+          String _plus_2 = (_direction + " ");
+          String _diretionToThymioSensor = this.diretionToThymioSensor(proxEvent.getSensor());
+          String _plus_3 = (_plus_2 + _diretionToThymioSensor);
+          String _plus_4 = (_plus_3 + " ");
+          String _stateToThymioSensor = this.stateToThymioSensor(proxEvent.getSensor());
+          String _plus_5 = (_plus_4 + _stateToThymioSensor);
+          String _plus_6 = (_plus_5 + " do\n");
+          eventCode.append(_plus_6);
+          EList<Action> _action_1 = statement.getAction();
+          for (final Action action_1 : _action_1) {
+            String _thymioCode_1 = this.toThymioCode(action_1);
+            String _plus_7 = ("        " + _thymioCode_1);
+            String _plus_8 = (_plus_7 + "\n");
+            eventCode.append(_plus_8);
+          }
+          eventCode.append("    end");
+        } else {
+          Event _event_4 = statement.getEvent();
+          if ((_event_4 instanceof TapEvent)) {
+            eventCode.append("onevent tap\n");
+            eventCode.append("    when tap do\n");
+            EList<Action> _action_2 = statement.getAction();
+            for (final Action action_2 : _action_2) {
+              String _thymioCode_2 = this.toThymioCode(action_2);
+              String _plus_9 = ("        " + _thymioCode_2);
+              String _plus_10 = (_plus_9 + "\n");
+              eventCode.append(_plus_10);
+            }
+            eventCode.append("    end");
+          } else {
+            Event _event_5 = statement.getEvent();
+            if ((_event_5 instanceof ClapEvent)) {
+              eventCode.append("onevent clap\n");
+              eventCode.append("    when clap do\n");
+              EList<Action> _action_3 = statement.getAction();
+              for (final Action action_3 : _action_3) {
+                String _thymioCode_3 = this.toThymioCode(action_3);
+                String _plus_11 = ("        " + _thymioCode_3);
+                String _plus_12 = (_plus_11 + "\n");
+                eventCode.append(_plus_12);
+              }
+              eventCode.append("    end");
+            }
+          }
+        }
+      }
+      _xblockexpression = eventCode.toString();
+    }
+    return _xblockexpression;
+  }
+
+  public String toThymioCode(final Action action) {
+    if ((action instanceof MovementAction)) {
+      String _direction = ((MovementAction)action).getDirection();
+      boolean _equals = Objects.equal(_direction, "right");
+      if (_equals) {
+        return "motor.left.target = 500\n        motor.right.target = 0\n        emit pair_run 0";
+      } else {
+        String _direction_1 = ((MovementAction)action).getDirection();
+        boolean _equals_1 = Objects.equal(_direction_1, "left");
+        if (_equals_1) {
+          return "motor.left.target = 0\n        motor.right.target = 500\n        emit pair_run 0";
+        } else {
+          String _direction_2 = ((MovementAction)action).getDirection();
+          boolean _equals_2 = Objects.equal(_direction_2, "forward");
+          if (_equals_2) {
+            return "motor.left.target = 500\n        motor.right.target = 500\n        emit pair_run 0";
+          } else {
+            String _direction_3 = ((MovementAction)action).getDirection();
+            boolean _equals_3 = Objects.equal(_direction_3, "backward");
+            if (_equals_3) {
+              return "motor.left.target = -500\n        motor.right.target = -500\n        emit pair_run 0";
+            }
+          }
+        }
+      }
+    }
+    return "";
+  }
+
+  public String toThymioCode(final Button button) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (Objects.equal(button, "center")) {
+      _matched=true;
+      _switchResult = "center";
+    }
+    if (!_matched) {
+      if (Objects.equal(button, "left")) {
+        _matched=true;
+        _switchResult = "left";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(button, "right")) {
+        _matched=true;
+        _switchResult = "right";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(button, "forward")) {
+        _matched=true;
+        _switchResult = "forward";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(button, "backward")) {
+        _matched=true;
+        _switchResult = "backward";
+      }
+    }
+    if (!_matched) {
+      _switchResult = "";
+    }
+    return _switchResult;
+  }
+
+  public String diretionToThymioSensor(final Sensor sensor) {
+    boolean _equals = sensor.getSensor_type().equals("ground");
+    if (_equals) {
+      boolean _equals_1 = sensor.getDirection().equals("left");
+      if (_equals_1) {
+        return "prox.ground.delta[0]";
+      } else {
+        boolean _equals_2 = sensor.getDirection().equals("right");
+        if (_equals_2) {
+          return "prox.ground.delta[1]";
+        }
+      }
+    } else {
+      boolean _equals_3 = sensor.getSensor_type().equals("horizontal");
+      if (_equals_3) {
+        boolean _equals_4 = sensor.getDirection().equals("left");
+        if (_equals_4) {
+        } else {
+          boolean _contains = sensor.getDirection().contains("left/middle");
+          if (_contains) {
+            return "prox.horizontal[1]";
+          } else {
+            boolean _contains_1 = sensor.getDirection().contains("right/middle");
+            if (_contains_1) {
+              return "prox.ground.delta[3]";
+            } else {
+              boolean _contains_2 = sensor.getDirection().contains("front left");
+              if (_contains_2) {
+                return "prox.ground.delta[0]";
+              } else {
+                boolean _contains_3 = sensor.getDirection().contains("front right");
+                if (_contains_3) {
+                  return "prox.ground.delta[4]";
+                } else {
+                  boolean _contains_4 = sensor.getDirection().contains("front middle");
+                  if (_contains_4) {
+                    return "prox.ground.delta[2]";
+                  } else {
+                    boolean _contains_5 = sensor.getDirection().contains("backward left");
+                    if (_contains_5) {
+                      return "prox.ground.delta[5]";
+                    } else {
+                      boolean _contains_6 = sensor.getDirection().contains("backward right");
+                      if (_contains_6) {
+                        return "prox.ground.delta[6]";
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return "";
+  }
+
+  public String stateToThymioSensor(final Sensor sensor) {
+    boolean _equals = sensor.getSensor_type().equals("ground");
+    if (_equals) {
+      boolean _equals_1 = sensor.getState().equals("white");
+      if (_equals_1) {
+        return "> 450";
+      } else {
+        boolean _equals_2 = sensor.getState().equals("black");
+        if (_equals_2) {
+          return "< 400";
+        } else {
+          boolean _contains = sensor.getState().contains("no proximity");
+          if (_contains) {
+            return "<= 400";
+          } else {
+            boolean _equals_3 = sensor.getState().equals("proximity");
+            if (_equals_3) {
+              return ">= 450";
+            }
+          }
+        }
+      }
+    } else {
+      String _sensor_type = sensor.getSensor_type();
+      boolean _equals_4 = Objects.equal(_sensor_type, "horizontal");
+      if (_equals_4) {
+        boolean _contains_1 = sensor.getState().contains("no proximity");
+        if (_contains_1) {
+          return "<= 1000";
+        } else {
+          boolean _equals_5 = sensor.getState().equals("proximity");
+          if (_equals_5) {
+            return ">= 2000";
+          }
+        }
+      }
+    }
+    return "";
   }
 }
