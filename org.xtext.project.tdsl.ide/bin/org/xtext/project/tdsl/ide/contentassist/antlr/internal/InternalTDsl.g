@@ -515,9 +515,9 @@ ruleColor
 	}
 	:
 	(
-		{ before(grammarAccess.getColorAccess().getGroup()); }
-		(rule__Color__Group__0)
-		{ after(grammarAccess.getColorAccess().getGroup()); }
+		{ before(grammarAccess.getColorAccess().getAlternatives()); }
+		(rule__Color__Alternatives)
+		{ after(grammarAccess.getColorAccess().getAlternatives()); }
 	)
 ;
 finally {
@@ -984,66 +984,57 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Color__Alternatives_0
+rule__Color__Alternatives
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getColorAccess().getLightKeyword_0_0()); }
-		'light'
-		{ after(grammarAccess.getColorAccess().getLightKeyword_0_0()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getColorAccess().getDarkKeyword_0_1()); }
-		'dark'
-		{ after(grammarAccess.getColorAccess().getDarkKeyword_0_1()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Color__Alternatives_1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getColorAccess().getRedKeyword_1_0()); }
+		{ before(grammarAccess.getColorAccess().getRedKeyword_0()); }
 		'red'
-		{ after(grammarAccess.getColorAccess().getRedKeyword_1_0()); }
+		{ after(grammarAccess.getColorAccess().getRedKeyword_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getColorAccess().getGreenKeyword_1_1()); }
+		{ before(grammarAccess.getColorAccess().getGreenKeyword_1()); }
 		'green'
-		{ after(grammarAccess.getColorAccess().getGreenKeyword_1_1()); }
+		{ after(grammarAccess.getColorAccess().getGreenKeyword_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getColorAccess().getBlueKeyword_1_2()); }
+		{ before(grammarAccess.getColorAccess().getBlueKeyword_2()); }
 		'blue'
-		{ after(grammarAccess.getColorAccess().getBlueKeyword_1_2()); }
+		{ after(grammarAccess.getColorAccess().getBlueKeyword_2()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getColorAccess().getBlackKeyword_1_3()); }
+		{ before(grammarAccess.getColorAccess().getBlackKeyword_3()); }
 		'black'
-		{ after(grammarAccess.getColorAccess().getBlackKeyword_1_3()); }
+		{ after(grammarAccess.getColorAccess().getBlackKeyword_3()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getColorAccess().getWhiteKeyword_1_4()); }
+		{ before(grammarAccess.getColorAccess().getWhiteKeyword_4()); }
 		'white'
-		{ after(grammarAccess.getColorAccess().getWhiteKeyword_1_4()); }
+		{ after(grammarAccess.getColorAccess().getWhiteKeyword_4()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getColorAccess().getYellowKeyword_1_5()); }
+		{ before(grammarAccess.getColorAccess().getYellowKeyword_5()); }
 		'yellow'
-		{ after(grammarAccess.getColorAccess().getYellowKeyword_1_5()); }
+		{ after(grammarAccess.getColorAccess().getYellowKeyword_5()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getColorAccess().getPinkKeyword_6()); }
+		'pink'
+		{ after(grammarAccess.getColorAccess().getPinkKeyword_6()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getColorAccess().getOrangeKeyword_7()); }
+		'orange'
+		{ after(grammarAccess.getColorAccess().getOrangeKeyword_7()); }
 	)
 ;
 finally {
@@ -3841,60 +3832,6 @@ rule__EIntegerObject__Group__1__Impl
 	{ before(grammarAccess.getEIntegerObjectAccess().getINTTerminalRuleCall_1()); }
 	RULE_INT
 	{ after(grammarAccess.getEIntegerObjectAccess().getINTTerminalRuleCall_1()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__Color__Group__0
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__Color__Group__0__Impl
-	rule__Color__Group__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Color__Group__0__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getColorAccess().getAlternatives_0()); }
-	(rule__Color__Alternatives_0)?
-	{ after(grammarAccess.getColorAccess().getAlternatives_0()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Color__Group__1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__Color__Group__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Color__Group__1__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getColorAccess().getAlternatives_1()); }
-	(rule__Color__Alternatives_1)
-	{ after(grammarAccess.getColorAccess().getAlternatives_1()); }
 )
 ;
 finally {

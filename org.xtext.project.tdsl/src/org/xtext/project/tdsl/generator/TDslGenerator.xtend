@@ -21,6 +21,7 @@ import thymio_DSL.Statement
 import thymio_DSL.TapEvent
 import thymio_DSL.ThymioDSL
 import thymio_DSL.UpperEvent
+import java.util.ArrayList
 
 /**
  * Generates code from your model files on save.
@@ -86,21 +87,67 @@ class TDslGenerator extends AbstractGenerator {
 					'		note_index += 1\n'+
 					'	end\n\n')
 		}
-		model.statement.forEach [ statement |
-			statement.action.forEach[action |]
-			builder.append(statement.toThymioCode)
-			builder.append('\n')
-			nStatement = nStatement + 1
-		]
-		builder.toString
+		// Separate the statements by event type
+    val upperEvents = new ArrayList<Statement>
+    val proxEvents = new ArrayList<Statement>
+    val tapEvents = new ArrayList<Statement>
+    val clapEvents = new ArrayList<Statement>
+    
+    model.statement.forEach [ statement |
+        if (statement.event instanceof UpperEvent) {
+            upperEvents.add(statement)
+        } else if (statement.event instanceof ProxEvent) {
+            proxEvents.add(statement)
+        } else if (statement.event instanceof TapEvent) {
+            tapEvents.add(statement)
+        } else if (statement.event instanceof ClapEvent) {
+            clapEvents.add(statement)
+        }
+    ]
+    
+    // Process UpperEvents
+    upperEvents.forEach [ statement |
+    	if(upperEvents.indexOf(statement) == 0)
+        	builder.append('onevent buttons\n')
+        builder.append(statement.toThymioCode)
+        builder.append('\n')
+        	
+    ]
+    
+    // Process ProxEvents
+    proxEvents.forEach [ statement |
+    	if(proxEvents.indexOf(statement) == 0)
+        	builder.append('onevent prox\n')
+        builder.append(statement.toThymioCode)
+        builder.append('\n')
+        
+    ]
+    
+    // Process TapEvents
+    tapEvents.forEach [ statement |
+    	if(tapEvents.indexOf(statement) == 0)
+        	builder.append('onevent mic\n')
+        builder.append(statement.toThymioCode)
+        builder.append('\n')
+    ]
+    
+ 
+    clapEvents.forEach [ statement |
+    	if(upperEvents.indexOf(statement) == 0)
+        	builder.append('onevent clap\n')
+        builder.append(statement.toThymioCode)
+        builder.append('\n')
+    ]
+    
+    builder.toString
 	}
 
 	def String toThymioCode(Statement statement) {
 		val eventCode = new StringBuilder
-		eventCode.append('onevent ');
+		
 		if (statement.event instanceof UpperEvent) {
 			val upperEvent = statement.event as UpperEvent
-			eventCode.append('buttons\n')
+			
 			eventCode.append('    when ')
 			// Iterate through buttons and append conditions
 			for (var i = 0; i < upperEvent.button.size(); i++) {
@@ -113,17 +160,16 @@ class TDslGenerator extends AbstractGenerator {
 
 		} else if (statement.event instanceof ProxEvent) {
 			val proxEvent = statement.event as ProxEvent
-			eventCode.append('prox\n')
+
 			eventCode.append('    when ')
-			eventCode.append(
-				proxEvent.sensor.direction + ' ' + diretionToThymioSensor(proxEvent.sensor) + ' ' +
+			eventCode.append(diretionToThymioSensor(proxEvent.sensor) + ' ' +
 					stateToThymioSensor(proxEvent.sensor))
 
 		} else if (statement.event instanceof TapEvent) {
-			eventCode.append('mic\n')
+			
 
 		} else if (statement.event instanceof ClapEvent) {
-			eventCode.append('clap\n')
+			
 			eventCode.append('    when clap')
 		}
 		
@@ -133,17 +179,17 @@ class TDslGenerator extends AbstractGenerator {
 		for (Action action : statement.action) {
 			eventCode.append('        ' + action.toThymioCode() + '\n')
 		}
+		eventCode.append('		end\n')
 		
-		eventCode.append('    	emit pair_run ' + nStatement + ' \n    end')
 		eventCode.toString
 	}
 
 	def String toThymioCode(Action action) {
 		if (action instanceof MovementAction) {
 			if (action.direction == 'right') {
-				return 'motor.left.target = 500\n        motor.right.target = 0'
+				return 'motor.left.target = 500\n        motor.right.target = -500'
 			} else if (action.direction == 'left') {
-				return 'motor.left.target = 0\n        motor.right.target = 500'
+				return 'motor.left.target = -500\n        motor.right.target = 500'
 			} else if (action.direction == 'forward') {
 				if(action.speed === null)
 					return 'motor.left.target = 500\n        motor.right.target = 500'
@@ -159,6 +205,8 @@ class TDslGenerator extends AbstractGenerator {
 					var speed = interpreter.interpret(action.speed)
 					return 'motor.left.target = '+speed+'\n        motor.right.target = '+speed
 				}	
+			} else if (action.direction == 'driving' || action.direction == 'turning'){
+				return 'motor.left.target = 0\n        motor.right.target = 0'
 			}
 		}
 		else if (action instanceof ColorTopAction) {
@@ -182,21 +230,21 @@ class TDslGenerator extends AbstractGenerator {
 		}
 		else if (action instanceof ColorBottomAction) {
 			if (action.color == 'red') {
-				return 'call leds.bottom(32,0,0)        '
+				return 'call leds.bottom.left(32,0,0)\n call leds.bottom.right(32,0,0)       '
 			} else if (action.color == 'green') {
-				return 'call leds.bottom(0,32,0)        '
+				return 'call leds.bottom.left(0,32,0)        '
 			} else if (action.color == 'blue') {
-				return 'call leds.bottom(0,0,32)        '
+				return 'call leds.bottom.left(0,0,32)        '
 			} else if (action.color == 'white') {
-				return 'call leds.bottom(32,32,32)        '
+				return 'call leds.bottom.left(32,32,32)        '
 			} else if (action.color == 'black') {
-				return 'call leds.bottom(0,0,0)        '
+				return 'call leds.bottom.left(0,0,0)        '
 			} else if (action.color == 'pink') {
-				return 'call leds.bottom(32,0,32)        '
+				return 'call leds.bottom.left(32,0,32)        '
 			} else if (action.color == 'yellow') {
-				return 'call leds.bottom(32,32,0)        '
+				return 'call leds.bottom.left(32,32,0)        '
 			} else if (action.color == 'orange') {
-				return 'call leds.bottom(32,16,0)        '
+				return 'call leds.bottom.left(32,16,0)        '
 			}
 		}
 		else if (action instanceof SoundAction) {
@@ -257,17 +305,17 @@ class TDslGenerator extends AbstractGenerator {
 			} else if (sensor.direction.contains("left/middle")) {
 				return "prox.horizontal[1]"
 			} else if (sensor.direction.contains("right/middle")) {
-				return "prox.ground.delta[3]"
+				return "prox.horizontal[3]"
 			} else if (sensor.direction.contains("front left")) {
-				return "prox.ground.delta[0]"
+				return "prox.horizontal[0]"
 			} else if (sensor.direction.contains("front right")) {
-				return "prox.ground.delta[4]"
+				return "prox.horizontal[4]"
 			} else if (sensor.direction.contains("front middle")) {
-				return "prox.ground.delta[2]"
+				return "prox.horizontal[2]"
 			} else if (sensor.direction.contains("backward left")) {
-				return "prox.ground.delta[5]"
+				return "prox.horizontal[5]"
 			} else if (sensor.direction.contains("backward right")) {
-				return "prox.ground.delta[6]"
+				return "prox.horizontal[6]"
 			}
 		}
 		return ''
