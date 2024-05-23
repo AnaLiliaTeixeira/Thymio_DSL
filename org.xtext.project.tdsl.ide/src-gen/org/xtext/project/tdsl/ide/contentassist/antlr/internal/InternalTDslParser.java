@@ -10372,13 +10372,13 @@ public class InternalTDslParser extends AbstractInternalContentAssistParser {
             // InternalTDsl.g:3319:1: ( () )
             // InternalTDsl.g:3320:2: ()
             {
-             before(grammarAccess.getTapEventAccess().getEventAction_0()); 
+             before(grammarAccess.getTapEventAccess().getTapEventAction_0()); 
             // InternalTDsl.g:3321:2: ()
             // InternalTDsl.g:3321:3: 
             {
             }
 
-             after(grammarAccess.getTapEventAccess().getEventAction_0()); 
+             after(grammarAccess.getTapEventAccess().getTapEventAction_0()); 
 
             }
 
@@ -10742,13 +10742,13 @@ public class InternalTDslParser extends AbstractInternalContentAssistParser {
             // InternalTDsl.g:3454:1: ( () )
             // InternalTDsl.g:3455:2: ()
             {
-             before(grammarAccess.getClapEventAccess().getEventAction_0()); 
+             before(grammarAccess.getClapEventAccess().getClapEventAction_0()); 
             // InternalTDsl.g:3456:2: ()
             // InternalTDsl.g:3456:3: 
             {
             }
 
-             after(grammarAccess.getClapEventAccess().getEventAction_0()); 
+             after(grammarAccess.getClapEventAccess().getClapEventAction_0()); 
 
             }
 

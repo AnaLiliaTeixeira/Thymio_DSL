@@ -17,16 +17,17 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import org.xtext.project.tdsl.services.TDslGrammarAccess;
 import thymio_DSL.ArithmeticExpression;
 import thymio_DSL.Button;
+import thymio_DSL.ClapEvent;
 import thymio_DSL.ColorBottomAction;
 import thymio_DSL.ColorTopAction;
 import thymio_DSL.Condition;
-import thymio_DSL.Event;
 import thymio_DSL.IfStatement;
 import thymio_DSL.MovementAction;
 import thymio_DSL.ProxEvent;
 import thymio_DSL.Sensor;
 import thymio_DSL.SoundAction;
 import thymio_DSL.Statement;
+import thymio_DSL.TapEvent;
 import thymio_DSL.ThymioDSL;
 import thymio_DSL.Thymio_DSLPackage;
 import thymio_DSL.UpperEvent;
@@ -51,6 +52,9 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case Thymio_DSLPackage.BUTTON:
 				sequence_Button(context, (Button) semanticObject); 
 				return; 
+			case Thymio_DSLPackage.CLAP_EVENT:
+				sequence_ClapEvent(context, (ClapEvent) semanticObject); 
+				return; 
 			case Thymio_DSLPackage.COLOR_BOTTOM_ACTION:
 				sequence_ColorBottomAction(context, (ColorBottomAction) semanticObject); 
 				return; 
@@ -59,9 +63,6 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case Thymio_DSLPackage.CONDITION:
 				sequence_Condition(context, (Condition) semanticObject); 
-				return; 
-			case Thymio_DSLPackage.EVENT:
-				sequence_ClapEvent_TapEvent(context, (Event) semanticObject); 
 				return; 
 			case Thymio_DSLPackage.IF_STATEMENT:
 				sequence_IfStatement(context, (IfStatement) semanticObject); 
@@ -80,6 +81,9 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case Thymio_DSLPackage.STATEMENT:
 				sequence_Statement(context, (Statement) semanticObject); 
+				return; 
+			case Thymio_DSLPackage.TAP_EVENT:
+				sequence_TapEvent(context, (TapEvent) semanticObject); 
 				return; 
 			case Thymio_DSLPackage.THYMIO_DSL:
 				sequence_ThymioDSL(context, (ThymioDSL) semanticObject); 
@@ -129,15 +133,14 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Event returns Event
-	 *     TapEvent returns Event
-	 *     ClapEvent returns Event
+	 *     Event returns ClapEvent
+	 *     ClapEvent returns ClapEvent
 	 *
 	 * Constraint:
-	 *     {Event}
+	 *     {ClapEvent}
 	 * </pre>
 	 */
-	protected void sequence_ClapEvent_TapEvent(ISerializationContext context, Event semanticObject) {
+	protected void sequence_ClapEvent(ISerializationContext context, ClapEvent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -278,6 +281,21 @@ public class TDslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * </pre>
 	 */
 	protected void sequence_Statement(ISerializationContext context, Statement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Event returns TapEvent
+	 *     TapEvent returns TapEvent
+	 *
+	 * Constraint:
+	 *     {TapEvent}
+	 * </pre>
+	 */
+	protected void sequence_TapEvent(ISerializationContext context, TapEvent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

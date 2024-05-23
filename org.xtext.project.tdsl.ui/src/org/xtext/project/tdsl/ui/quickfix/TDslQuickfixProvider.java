@@ -4,6 +4,8 @@
 package org.xtext.project.tdsl.ui.quickfix;
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.Fix;
+import org.xtext.project.tdsl.validation.TDslValidator;
 
 /**
  * Custom quickfixes.
@@ -12,7 +14,7 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
  */
 public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 
-//	@Fix(TDslValidator.INVALID_NAME)
+//	@Fix(TDslValidator.)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
 //		acceptor.accept(issue, "Capitalize name", "Capitalize the name.", "upcase.png", new IModification() {
 //			public void apply(IModificationContext context) throws BadLocationException {

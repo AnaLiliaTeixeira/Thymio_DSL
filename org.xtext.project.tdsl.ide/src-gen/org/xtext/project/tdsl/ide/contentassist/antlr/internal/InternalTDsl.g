@@ -3317,9 +3317,9 @@ rule__TapEvent__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getTapEventAccess().getEventAction_0()); }
+	{ before(grammarAccess.getTapEventAccess().getTapEventAction_0()); }
 	()
-	{ after(grammarAccess.getTapEventAccess().getEventAction_0()); }
+	{ after(grammarAccess.getTapEventAccess().getTapEventAction_0()); }
 )
 ;
 finally {
@@ -3452,9 +3452,9 @@ rule__ClapEvent__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClapEventAccess().getEventAction_0()); }
+	{ before(grammarAccess.getClapEventAccess().getClapEventAction_0()); }
 	()
-	{ after(grammarAccess.getClapEventAccess().getEventAction_0()); }
+	{ after(grammarAccess.getClapEventAccess().getClapEventAction_0()); }
 )
 ;
 finally {

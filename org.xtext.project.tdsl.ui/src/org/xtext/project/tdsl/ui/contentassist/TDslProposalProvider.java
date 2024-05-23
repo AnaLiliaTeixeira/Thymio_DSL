@@ -3,10 +3,278 @@
  */
 package org.xtext.project.tdsl.ui.contentassist;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.
  */
 public class TDslProposalProvider extends AbstractTDslProposalProvider {
+
+	    @Override
+	    public void complete_Statement(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	    	String[] parts = context.getPrefix().split("\\s+");
+	    	acceptor.accept(createCompletionProposal("->", context));
+	    	if (parts.length == 1 && parts[0].equalsIgnoreCase("->")) {
+		        acceptor.accept(createCompletionProposal("On", context));
+	        }else if(parts.length == 2 && parts[1].equalsIgnoreCase("On")) {
+	        	acceptor.accept(createCompletionProposal("forward", context));
+	            acceptor.accept(createCompletionProposal("backward", context));
+	            acceptor.accept(createCompletionProposal("left", context));
+	            acceptor.accept(createCompletionProposal("right", context));
+	            acceptor.accept(createCompletionProposal("center", context));
+	            acceptor.accept(createCompletionProposal("front left", context));
+	            acceptor.accept(createCompletionProposal("front left/middle", context));
+	            acceptor.accept(createCompletionProposal("front right", context));
+	            acceptor.accept(createCompletionProposal("front right/middle", context));
+	            acceptor.accept(createCompletionProposal("front middle", context));
+	            acceptor.accept(createCompletionProposal("backward left", context));
+	            acceptor.accept(createCompletionProposal("backward right", context));
+	            acceptor.accept(createCompletionProposal("clap do :", context));
+	            acceptor.accept(createCompletionProposal("tap do :", context));
+	        }
+
+	    }
+
+	    @Override
+	    public void complete_Event(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	    	
+	    }
+
+	    @Override
+	    public void complete_UpperEvent(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	    	acceptor.accept(createCompletionProposal("forward", context));
+            acceptor.accept(createCompletionProposal("backward", context));
+            acceptor.accept(createCompletionProposal("left", context));
+            acceptor.accept(createCompletionProposal("right", context));
+            acceptor.accept(createCompletionProposal("center", context));
+	    }
+
+	    @Override
+	    public void complete_ProxEvent(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        String[] parts = context.getPrefix().split("\\s+");
+	        if (parts.length == 1) {
+	            acceptor.accept(createCompletionProposal("front left", context));
+	            acceptor.accept(createCompletionProposal("front left/middle", context));
+	            acceptor.accept(createCompletionProposal("front right", context));
+	            acceptor.accept(createCompletionProposal("front right/middle", context));
+	            acceptor.accept(createCompletionProposal("front middle", context));
+	            acceptor.accept(createCompletionProposal("backward left", context));
+	            acceptor.accept(createCompletionProposal("backward right", context));
+	        } else if (parts.length > 2 && parts[parts.length - 1].matches("front left|front left/middle|front right|front right/middle|backward left|backward right")) {
+	        	acceptor.accept(createCompletionProposal("horizontal sensor detecting", context));	        
+	    	} else if (parts.length > 3 && parts[parts.length - 1].equalsIgnoreCase("button")) {   	
+	    		acceptor.accept(createCompletionProposal("proximity", context));
+	    		acceptor.accept(createCompletionProposal("no proximity", context));
+	    	} else if (parts.length > 4 && parts[parts.length - 1].matches("proximity|no proximity")) {
+	    		acceptor.accept(createCompletionProposal("do :\n", context));	    		
+	    	}
+	    }
+	    
+
+	    @Override
+	    public void complete_ClapEvent(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	    	String[] parts = context.getPrefix().split("\\s+");
+	        if (parts.length == 1) {
+	        	acceptor.accept(createCompletionProposal("clap do :", context));
+	        }
+	    }
+	    
+	    @Override
+	    public void complete_TapEvent(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	    	String[] parts = context.getPrefix().split("\\s+");
+	        if (parts.length == 1) {
+	        	acceptor.accept(createCompletionProposal("tap do :", context));
+	        }
+	    }
+
+	    @Override
+	    public void complete_Action(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        String[] parts = context.getPrefix().split("\\s+");
+            acceptor.accept(createCompletionProposal("-", context));
+
+	        if (parts.length == 1) {
+	            acceptor.accept(createCompletionProposal("drive", context));
+	            acceptor.accept(createCompletionProposal("turn", context));
+	            acceptor.accept(createCompletionProposal("play", context));
+	            acceptor.accept(createCompletionProposal("set", context));
+	            acceptor.accept(createCompletionProposal("stop", context));
+	        } else if (parts.length == 2 && parts[1].equalsIgnoreCase("drive")) {
+	            acceptor.accept(createCompletionProposal("forward", context));
+	            acceptor.accept(createCompletionProposal("backward", context));
+	        } else if (parts.length == 2 && parts[1].equalsIgnoreCase("turn")) {
+	            acceptor.accept(createCompletionProposal("left", context));
+	            acceptor.accept(createCompletionProposal("right", context));
+	        } else if (parts.length == 2 && parts[1].equalsIgnoreCase("play")) {
+	            acceptor.accept(createCompletionProposal("sound", context));
+	        } else if (parts.length == 2 && parts[1].equalsIgnoreCase("turn")) {
+	            acceptor.accept(createCompletionProposal("off leds", context));
+	        } else if (parts.length == 2 && parts[1].equalsIgnoreCase("set")) {
+	            acceptor.accept(createCompletionProposal("bottom color to", context));
+	            acceptor.accept(createCompletionProposal("top color to", context));
+	        } else if (parts.length == 2 && parts[1].equalsIgnoreCase("stop")) {
+	            acceptor.accept(createCompletionProposal("driving", context));
+	            acceptor.accept(createCompletionProposal("turning", context));
+	            acceptor.accept(createCompletionProposal("playing sound", context));
+	        } else if (parts.length == 3 && (parts[1].equalsIgnoreCase("forward") || parts[1].equalsIgnoreCase("backward"))) {
+	            acceptor.accept(createCompletionProposal("with speed", context));
+	        } else if (parts.length == 3 && parts[1].equalsIgnoreCase("play") && parts[2].equalsIgnoreCase("sound")) {
+	            acceptor.accept(createCompletionProposal("sound1", context));
+	            acceptor.accept(createCompletionProposal("sound2", context));
+	            acceptor.accept(createCompletionProposal("sound3", context));
+	            acceptor.accept(createCompletionProposal("sound4", context));
+	        } else if (parts.length == 3 && parts[1].equalsIgnoreCase("set") && (parts[2].equalsIgnoreCase("bottom") || parts[2].equalsIgnoreCase("top"))) {
+	            acceptor.accept(createCompletionProposal("red", context));
+	            acceptor.accept(createCompletionProposal("green", context));
+	            acceptor.accept(createCompletionProposal("blue", context));
+	            acceptor.accept(createCompletionProposal("black", context));
+	            acceptor.accept(createCompletionProposal("white", context));
+	            acceptor.accept(createCompletionProposal("yellow", context));
+	            acceptor.accept(createCompletionProposal("pink", context));
+	            acceptor.accept(createCompletionProposal("orange", context));
+	        } 
+	    }
+	    
+	    @Override
+	    public void complete_IfStatement(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        acceptor.accept(createCompletionProposal("If", context));
+	        acceptor.accept(createCompletionProposal("End if", context));
+
+	    }
+
+	    @Override
+	    public void complete_Condition(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        acceptor.accept(createCompletionProposal("proximity", context));
+	        acceptor.accept(createCompletionProposal("no proximity", context));
+	        acceptor.accept(createCompletionProposal("black", context));
+	        acceptor.accept(createCompletionProposal("white", context));
+	    }
+	    @Override
+	    public void completeStatement_Event(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeStatement_Ifstatement(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeStatement_Action(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeMovementAction_Direction(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        if (assignment.getTerminal() instanceof Alternatives) {
+	            // subclasses may override
+	        }
+	        if (assignment.getTerminal() instanceof RuleCall) {
+	            completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	        }
+	        if (assignment.getTerminal() instanceof Keyword) {
+	            // subclasses may override
+	        }
+	    }
+
+	    @Override
+	    public void completeMovementAction_Speed(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeSoundAction_Sound(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeColorBottomAction_Color(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeColorTopAction_Color(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeIfStatement_Condition(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeIfStatement_Action(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeUpperEvent_Button(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeUpperEvent_State(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeButton_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeProxEvent_Sensor(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeSensor_Direction(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeSensor_Sensor_type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        // subclasses may override
+	    }
+
+	    @Override
+	    public void completeSensor_State(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeCondition_LeftSensor(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeCondition_Operator(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        // subclasses may override
+	    }
+
+	    @Override
+	    public void completeCondition_RightSensor(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeArithmeticExpression_Left(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
+
+	    @Override
+	    public void completeArithmeticExpression_Operator(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        // subclasses may override
+	    }
+
+	    @Override
+	    public void completeArithmeticExpression_Right(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	        completeRuleCall(((RuleCall) assignment.getTerminal()), context, acceptor);
+	    }
 }

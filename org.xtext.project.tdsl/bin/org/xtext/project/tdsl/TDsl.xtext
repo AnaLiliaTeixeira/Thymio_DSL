@@ -55,10 +55,10 @@ Sensor returns Sensor:
 
 
 TapEvent returns Event:
-	{Event} 'On' 'tap' 'do' ':';
+	{TapEvent} 'On' 'tap' 'do' ':';
 
 ClapEvent returns Event:
-	{Event} 'On' 'clap' 'do' ':';
+	{ClapEvent} 'On' 'clap' 'do' ':';
 
 Condition returns Condition:
 	leftSensor=Sensor (operator=('and' | 'or') rightSensor=Sensor)?;

@@ -10,10 +10,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.xtext.project.tdsl.services.TDslGrammarAccess;
@@ -22,12 +18,10 @@ import org.xtext.project.tdsl.services.TDslGrammarAccess;
 public class TDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected TDslGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (TDslGrammarAccess) access;
-		match_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getClapEventAccess().getOnKeyword_1()), new TokenAlias(false, false, grammarAccess.getClapEventAccess().getClapKeyword_2()), new TokenAlias(false, false, grammarAccess.getClapEventAccess().getDoKeyword_3()), new TokenAlias(false, false, grammarAccess.getClapEventAccess().getColonKeyword_4())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getTapEventAccess().getOnKeyword_1()), new TokenAlias(false, false, grammarAccess.getTapEventAccess().getTapKeyword_2()), new TokenAlias(false, false, grammarAccess.getTapEventAccess().getDoKeyword_3()), new TokenAlias(false, false, grammarAccess.getTapEventAccess().getColonKeyword_4())));
 	}
 	
 	@Override
@@ -42,24 +36,8 @@ public class TDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__.equals(syntax))
-				emit_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else acceptNodes(getLastNavigableState(), syntaxNodes);
+			acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     ('On' 'tap' 'do' ':') | ('On' 'clap' 'do' ':')
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) (rule start)
-	 
-	 * </pre>
-	 */
-	protected void emit_ClapEvent_TapEvent___OnKeyword_1_ClapKeyword_2_DoKeyword_3_ColonKeyword_4___or___OnKeyword_1_TapKeyword_2_DoKeyword_3_ColonKeyword_4__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 }

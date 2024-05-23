@@ -1110,7 +1110,7 @@ ruleTapEvent returns [EObject current=null]
 		(
 			{
 				$current = forceCreateModelElement(
-					grammarAccess.getTapEventAccess().getEventAction_0(),
+					grammarAccess.getTapEventAccess().getTapEventAction_0(),
 					$current);
 			}
 		)
@@ -1152,7 +1152,7 @@ ruleClapEvent returns [EObject current=null]
 		(
 			{
 				$current = forceCreateModelElement(
-					grammarAccess.getClapEventAccess().getEventAction_0(),
+					grammarAccess.getClapEventAccess().getClapEventAction_0(),
 					$current);
 			}
 		)

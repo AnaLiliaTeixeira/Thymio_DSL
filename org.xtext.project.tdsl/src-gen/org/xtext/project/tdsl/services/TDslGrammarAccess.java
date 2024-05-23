@@ -685,21 +685,21 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	public class TapEventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.TapEvent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cEventAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cTapEventAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cOnKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cTapKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cDoKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//TapEvent returns Event:
-		//    {Event} 'On' 'tap' 'do' ':';
+		//    {TapEvent} 'On' 'tap' 'do' ':';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Event} 'On' 'tap' 'do' ':'
+		//{TapEvent} 'On' 'tap' 'do' ':'
 		public Group getGroup() { return cGroup; }
 		
-		//{Event}
-		public Action getEventAction_0() { return cEventAction_0; }
+		//{TapEvent}
+		public Action getTapEventAction_0() { return cTapEventAction_0; }
 		
 		//'On'
 		public Keyword getOnKeyword_1() { return cOnKeyword_1; }
@@ -716,21 +716,21 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	public class ClapEventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.project.tdsl.TDsl.ClapEvent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cEventAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cClapEventAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cOnKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cClapKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Keyword cDoKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//ClapEvent returns Event:
-		//    {Event} 'On' 'clap' 'do' ':';
+		//    {ClapEvent} 'On' 'clap' 'do' ':';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Event} 'On' 'clap' 'do' ':'
+		//{ClapEvent} 'On' 'clap' 'do' ':'
 		public Group getGroup() { return cGroup; }
 		
-		//{Event}
-		public Action getEventAction_0() { return cEventAction_0; }
+		//{ClapEvent}
+		public Action getClapEventAction_0() { return cClapEventAction_0; }
 		
 		//'On'
 		public Keyword getOnKeyword_1() { return cOnKeyword_1; }
@@ -1421,7 +1421,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//TapEvent returns Event:
-	//    {Event} 'On' 'tap' 'do' ':';
+	//    {TapEvent} 'On' 'tap' 'do' ':';
 	public TapEventElements getTapEventAccess() {
 		return pTapEvent;
 	}
@@ -1431,7 +1431,7 @@ public class TDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//ClapEvent returns Event:
-	//    {Event} 'On' 'clap' 'do' ':';
+	//    {ClapEvent} 'On' 'clap' 'do' ':';
 	public ClapEventElements getClapEventAccess() {
 		return pClapEvent;
 	}

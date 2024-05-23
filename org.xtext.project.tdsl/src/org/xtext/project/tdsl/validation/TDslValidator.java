@@ -57,23 +57,6 @@ public class TDslValidator extends AbstractTDslValidator {
 
 	public static final String TURN_OFF_BOTTOM_LEDS_WARNING = "turnOffTopLedsWarning";
 
-//    @Check
-//    public void checkTurnOffBottomLeds(Statement statement) {
-//        boolean setBottomColorSeen = false;
-//        for (Action action : statement.getAction()) {
-//            if (action instanceof ColorBottomAction) {
-//            	ColorBottomAction colorBottomAction = (ColorBottomAction) action;
-//                if (colorBottomAction.getColor() != null) {
-//                    setBottomColorSeen = true;
-//                } else if (setBottomColorSeen == false) {
-//                    warning("Turning off bottom LEDs without setting the bottom color first.",
-//                            Thymio_DSLPackage.Literals.STATEMENT__ACTION,
-//                            TURN_OFF_BOTTOM_LEDS_WARNING,
-//                            action.getClass().getSimpleName());
-//                }
-//            }
-//        }
-//    }
 	@Check
 	public void checkTurnOffTopLeds(ThymioDSL model) {
 		boolean setTopColorSeen = false;
