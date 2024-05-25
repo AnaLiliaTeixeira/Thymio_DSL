@@ -1480,7 +1480,8 @@ public interface Thymio_DSLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference IF_STATEMENT__CONDITION = eINSTANCE.getIfStatement_Condition();
-
+		
+//		EReference IF_STATEMENT__CONDITION__SENSOR_LEFT = (EReference) ((Condition) eINSTANCE.getIfStatement_Condition()).getLeftSensor();
 		/**
 		 * The meta object literal for the '{@link thymio_DSL.impl.ArithmeticExpressionImpl <em>Arithmetic Expression</em>}' class.
 		 * <!-- begin-user-doc -->

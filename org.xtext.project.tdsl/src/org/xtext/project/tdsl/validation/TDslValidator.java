@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.validation.Check;
+import org.xtext.project.tdsl.generator.TDslInterpreter;
+
+import com.google.inject.Inject;
 
 import thymio_DSL.Action;
 import thymio_DSL.ArithmeticExpression;
@@ -35,6 +38,8 @@ import thymio_DSL.UpperEvent;
  * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class TDslValidator extends AbstractTDslValidator {
+
+	@Inject TDslInterpreter interpreter;
 
 	public static final String DUPLICATE_ACTION_WARNING = "duplicateActionWarning";
 	public static final String CONTRADICTORY_ACTION_ERROR = "contradictoryActionError";
@@ -73,7 +78,7 @@ public class TDslValidator extends AbstractTDslValidator {
 	public void checkTurnOffTopLeds(ThymioDSL model) {
 		boolean setTopColorSeen = false;
 
-		// Iterate through all statements in the model
+		// Iterating through all statements in the model
 		for (Statement statement : model.getStatement()) {
 			for (Action action : statement.getAction()) {
 				if (action instanceof ColorTopAction) {
@@ -94,11 +99,10 @@ public class TDslValidator extends AbstractTDslValidator {
 			for (int i = 0; i < statements.size(); i++) {
 				for (Action action : statements.get(i).getAction()) {
 					if (action instanceof ColorTopAction) {
-						ColorTopAction colorTopAction = (ColorTopAction) action;
-						if (colorTopAction.getColor() == null) {
+						if (((ColorTopAction) action).getColor() == null) {
 							warning("Turning off top LEDs without setting the top color first.",
 									Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, i, TURN_OFF_TOP_LEDS_WARNING,
-									colorTopAction.getClass().getSimpleName());
+									action.getClass().getSimpleName());
 						}
 					}
 				}
@@ -111,12 +115,12 @@ public class TDslValidator extends AbstractTDslValidator {
 	public void checkTurnOffBottomLeds(ThymioDSL model) {
 		boolean setBottomColorSeen = false;
 
-		// Iterate through all statements in the model
+		// Iterating through all statements in the model
 		for (Statement statement : model.getStatement()) {
 			for (Action action : statement.getAction()) {
+				System.out.println("Action class: " + action.getClass().getSimpleName());
 				if (action instanceof ColorBottomAction) {
-					ColorBottomAction colorBottomAction = (ColorBottomAction) action;
-					if (colorBottomAction.getColor() != null) {
+					if (((ColorBottomAction) action).getColor() != null) {
 						setBottomColorSeen = true;
 					}
 				}
@@ -126,23 +130,50 @@ public class TDslValidator extends AbstractTDslValidator {
 			}
 		}
 
-		// If no set bottom color action was found, check for turn off bottom leds actions
+		// If no set top color action was found, check for turn off top leds actions
 		if (!setBottomColorSeen) {
 			List<Statement> statements = model.getStatement();
 			for (int i = 0; i < statements.size(); i++) {
+//				for (IfStatement ifStatement : statements.get(i).getIfstatement()) {
+//					for (Action action :ifStatement.getAction()) {
+//						System.out.println("Action class if stat: " + action.getClass().getSimpleName());
+//
+//						if (action instanceof ColorBottomAction) {
+//							if (((ColorBottomAction) action).getColor() == null) {
+//								warning("Turning off top LEDs without setting the top color first.",
+//										Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, i, TURN_OFF_BOTTOM_LEDS_WARNING,
+//										action.getClass().getSimpleName());
+//							}
+//						}
+//					}
+//				}
+				
 				for (Action action : statements.get(i).getAction()) {
+					System.out.println("Action class action normal: " + action.getClass().getSimpleName());
+
 					if (action instanceof ColorBottomAction) {
-						ColorBottomAction colorBottomAction = (ColorBottomAction) action;
-						if (colorBottomAction.getColor() == null) {
-							warning("Turning off bottom LEDs without setting the bottom color first.",
+						if (((ColorBottomAction) action).getColor() == null) {
+							warning("Turning off top LEDs without setting the top color first.",
 									Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, i, TURN_OFF_BOTTOM_LEDS_WARNING,
-									colorBottomAction.getClass().getSimpleName());
+									action.getClass().getSimpleName());
 						}
 					}
 				}
 			}
 		}
 	}
+
+//    private List<Action> getAllActionsInStatement(Statement statement) {
+//        List<Action> allActions = statement.getAction();  // Adiciona ações diretas do Statement
+//
+//        // Adiciona ações de todos os IfStatements do statement corrente
+//        for (IfStatement ifStatement : statement.getIfstatement()) {
+//            allActions.addAll(ifStatement.getAction());
+//        }
+//
+//        return allActions;
+//    }
+
 
 	//////////////////////////////////////////////////////////////////////////////
 	public static final String DUPLICATE_EVENT_WARNING = "duplicateEventWarning";
@@ -175,12 +206,14 @@ public class TDslValidator extends AbstractTDslValidator {
 	@Check
 	public void checkDuplicateButtons(UpperEvent upperEvent) {
 	    Set<String> seenButtons = new HashSet<>();
-	    for (Button button : upperEvent.getButton()) {
+	    List<Button> buttons =  upperEvent.getButton();
+	    for (int i = 0; i < buttons.size();i++) {
+	    	Button button = buttons.get(i);
 	        if (!seenButtons.add(button.getName())) {
 	            int buttonIndex = upperEvent.getButton().indexOf(button);
 	            warning("The button '" + button.getName()
 	                    + "' is repeated and does not make any difference, so it is redundant.",
-	                    Thymio_DSLPackage.Literals.UPPER_EVENT__BUTTON, DUPLICATE_BUTTON_WARNING, Integer.toString(buttonIndex));
+	                    Thymio_DSLPackage.Literals.UPPER_EVENT__BUTTON, i, DUPLICATE_BUTTON_WARNING, Integer.toString(buttonIndex));
 	        }
 	    }
 	}
@@ -195,6 +228,7 @@ public class TDslValidator extends AbstractTDslValidator {
 	}
 
 	public static final String DUPLICATE_SENSORIF_WARNING = "duplicateSensorIfWarning";
+	public static final String CONTRADICTORY_IF_WARNING = "contradictoryIfWarning";
 
 	@Check
 	public void checkIfStatement(IfStatement ifStatement) {
@@ -213,7 +247,7 @@ public class TDslValidator extends AbstractTDslValidator {
 						Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION, DUPLICATE_SENSORIF_WARNING);
 			else if (contradictory(leftsensor.getState(), rightsensor.getState()))
 				warning("This condition will never happen because the two sensors are contradictory",
-						Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION, DUPLICATE_SENSORIF_WARNING);
+						Thymio_DSLPackage.Literals.IF_STATEMENT__CONDITION, CONTRADICTORY_IF_WARNING);
 	}
 
 	@Check
@@ -235,15 +269,16 @@ public class TDslValidator extends AbstractTDslValidator {
 	@Check
 	public void checkSpeed(MovementAction movementAction) {
 		ArithmeticExpression speed = movementAction.getSpeed();
-		if (speed.getOperator() == null)
-			if (speed.getLeft() < 0) {		
-				warning("The speed should be a positive number",
-						Thymio_DSLPackage.Literals.MOVEMENT_ACTION__SPEED, NEGATIVE_SPEED_WARNING);
-			}
-			else if (speed.getLeft() > 500) {			
-				warning("The speed should not exceed 500",
-						Thymio_DSLPackage.Literals.MOVEMENT_ACTION__SPEED, SPEED_GT_500_WARNING);
-			}
+		int calculatedSpeed = speed.getOperator() == null ? speed.getLeft() : interpreter.interpret(speed);
+		
+		if (calculatedSpeed < 0) {		
+			warning("The speed should be a positive number",
+					Thymio_DSLPackage.Literals.MOVEMENT_ACTION__SPEED, NEGATIVE_SPEED_WARNING);
+		}
+		else if (calculatedSpeed > 500) {			
+			warning("The speed should not exceed 500",
+					Thymio_DSLPackage.Literals.MOVEMENT_ACTION__SPEED, SPEED_GT_500_WARNING);
+		}
 	}
 	
 	public static final String DUPLICATED_IF_STATEMENT_WARNING = "duplicateIfStatementWarning";
@@ -322,7 +357,7 @@ public class TDslValidator extends AbstractTDslValidator {
 		List<Button> buttons1 = event1.getButton();
 		List<Button> buttons2 = event2.getButton();
 
-		if (buttons1.size() != buttons2.size()) {
+		if (buttons1.size() != buttons2.size() || !event1.getState().equals(event2.getState())) {
 			return false;
 		}
 
