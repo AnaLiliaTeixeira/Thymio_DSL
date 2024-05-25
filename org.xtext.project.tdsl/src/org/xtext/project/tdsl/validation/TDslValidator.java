@@ -37,27 +37,37 @@ import thymio_DSL.UpperEvent;
 public class TDslValidator extends AbstractTDslValidator {
 
 	public static final String DUPLICATE_ACTION_WARNING = "duplicateActionWarning";
+	public static final String CONTRADICTORY_ACTION_ERROR = "contradictoryActionError";
 
 	@Check
 	public void checkForDuplicateActions(Statement statement) {
-		Set<Class<?>> seenActions = new HashSet<>();
-		List<Action> actions = statement.getAction();
-		for (int i = 0; i < actions.size(); i++) {
-			Action action = actions.get(i);
-			Class<?> actionClass = action.getClass();
-			if (seenActions.contains(actionClass)) {
-				warning("This action will not be executed as there is another action of the same type that will override it.",
-						Thymio_DSLPackage.Literals.STATEMENT__ACTION, i, DUPLICATE_ACTION_WARNING,
-						actionClass.getSimpleName());
-			} else {
-				seenActions.add(actionClass);
-			}
-		}
+	    Set<Action> seenActions = new HashSet<>();
+	    List<Action> actions = statement.getAction();
+	    for (int i = 0; i < actions.size(); i++) {
+	        Action action = actions.get(i);
+	        boolean isDuplicate = false;
+	        for (Action seenAction : seenActions) {
+	            if (seenAction.getClass().getSimpleName().equals(action.getClass().getSimpleName())) {
+	                if (actionsAreEqual(seenAction, action)) {
+	                    warning("This action will not be executed as there is another action of the same type that will override it.",
+	                            Thymio_DSLPackage.Literals.STATEMENT__ACTION, i, DUPLICATE_ACTION_WARNING,
+	                            action.getClass().getSimpleName());
+	                    isDuplicate = true;
+	                } else  {
+	                    error("This is a contradictory action.",
+	                            Thymio_DSLPackage.Literals.STATEMENT__ACTION, i, CONTRADICTORY_ACTION_ERROR,
+	                            action.getClass().getSimpleName());
+	                    isDuplicate = true;
+	                }
+	            }
+	        }
+	        if (!isDuplicate) {
+	            seenActions.add(action);
+	        }
+	    }
 	}
 
 	public static final String TURN_OFF_TOP_LEDS_WARNING = "turnOffTopLedsWarning";
-
-	public static final String TURN_OFF_BOTTOM_LEDS_WARNING = "turnOffTopLedsWarning";
 
 	@Check
 	public void checkTurnOffTopLeds(ThymioDSL model) {
@@ -80,14 +90,53 @@ public class TDslValidator extends AbstractTDslValidator {
 
 		// If no set top color action was found, check for turn off top leds actions
 		if (!setTopColorSeen) {
-			for (Statement statement : model.getStatement()) {
-				for (Action action : statement.getAction()) {
+			List<Statement> statements = model.getStatement();
+			for (int i = 0; i < statements.size(); i++) {
+				for (Action action : statements.get(i).getAction()) {
 					if (action instanceof ColorTopAction) {
 						ColorTopAction colorTopAction = (ColorTopAction) action;
 						if (colorTopAction.getColor() == null) {
 							warning("Turning off top LEDs without setting the top color first.",
-									Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, TURN_OFF_TOP_LEDS_WARNING,
+									Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, i, TURN_OFF_TOP_LEDS_WARNING,
 									colorTopAction.getClass().getSimpleName());
+						}
+					}
+				}
+			}
+		}
+	}
+	public static final String TURN_OFF_BOTTOM_LEDS_WARNING = "turnOffTopLedsWarning";
+
+	@Check
+	public void checkTurnOffBottomLeds(ThymioDSL model) {
+		boolean setBottomColorSeen = false;
+
+		// Iterate through all statements in the model
+		for (Statement statement : model.getStatement()) {
+			for (Action action : statement.getAction()) {
+				if (action instanceof ColorBottomAction) {
+					ColorBottomAction colorBottomAction = (ColorBottomAction) action;
+					if (colorBottomAction.getColor() != null) {
+						setBottomColorSeen = true;
+					}
+				}
+			}
+			if (setBottomColorSeen) {
+				break;
+			}
+		}
+
+		// If no set bottom color action was found, check for turn off bottom leds actions
+		if (!setBottomColorSeen) {
+			List<Statement> statements = model.getStatement();
+			for (int i = 0; i < statements.size(); i++) {
+				for (Action action : statements.get(i).getAction()) {
+					if (action instanceof ColorBottomAction) {
+						ColorBottomAction colorBottomAction = (ColorBottomAction) action;
+						if (colorBottomAction.getColor() == null) {
+							warning("Turning off bottom LEDs without setting the bottom color first.",
+									Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, i, TURN_OFF_BOTTOM_LEDS_WARNING,
+									colorBottomAction.getClass().getSimpleName());
 						}
 					}
 				}
@@ -327,7 +376,6 @@ public class TDslValidator extends AbstractTDslValidator {
     			 && sensorsAreEqual(cond1.getRightSensor(), cond2.getRightSensor());
 	    	
 	}
-
 	
 	private boolean equalActions(List<Action> actions1, List<Action> actions2) {
 

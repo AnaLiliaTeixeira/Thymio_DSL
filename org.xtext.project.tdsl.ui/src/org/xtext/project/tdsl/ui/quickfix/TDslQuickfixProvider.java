@@ -31,6 +31,13 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 	    	removeRepeated(context.getXtextDocument(), issue, "");
 	    });
 	}
+	
+	@Fix(TDslValidator.CONTRADICTORY_ACTION_ERROR)
+	public void removeContradictoryAction(final Issue issue, IssueResolutionAcceptor acceptor) {
+	    acceptor.accept(issue, "Remove contradictory action", "Removed contradictory action", null, context -> {
+	    	removeRepeated(context.getXtextDocument(), issue, "");
+	    });
+	}
 
 	@Fix(TDslValidator.DUPLICATE_SENSORIF_WARNING)
 	public void removeDuplicateSensor(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -66,8 +73,22 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 	    acceptor.accept(issue, "Remove repeated if statement", "Removed repeated if statement", null, context -> {
 	    	removeRepeated(context.getXtextDocument(), issue, "");
 	    });
+	}	
+
+	@Fix(TDslValidator.TURN_OFF_TOP_LEDS_WARNING)
+	public void removeTurnOffTopLeds(final Issue issue, IssueResolutionAcceptor acceptor) {
+	    acceptor.accept(issue, "Remove turn off top leds", "Removed turn off top leds", null, context -> {
+	    	removeRepeated(context.getXtextDocument(), issue, "");
+	    });
 	}
 	
+
+	@Fix(TDslValidator.TURN_OFF_BOTTOM_LEDS_WARNING)
+	public void removeTurnOffBottomLeds(final Issue issue, IssueResolutionAcceptor acceptor) {
+	    acceptor.accept(issue, "Remove turn off bottom leds", "Removed turn off bottom leds", null, context -> {
+	    	removeRepeated(context.getXtextDocument(), issue, "");
+	    });
+	}	
 
 	protected void removeRepeated(IXtextDocument iXtextDocument, Issue issue, String newSpecifier) throws BadLocationException {
         iXtextDocument.replace(issue.getOffset(), issue.getLength(), newSpecifier);
