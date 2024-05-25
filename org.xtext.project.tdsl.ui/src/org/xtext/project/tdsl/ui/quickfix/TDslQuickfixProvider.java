@@ -3,13 +3,20 @@
  */
 package org.xtext.project.tdsl.ui.quickfix;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.xtext.project.tdsl.validation.TDslValidator;
+
+import thymio_DSL.Statement;
 
 /**
  * Custom quickfixes.
@@ -36,6 +43,14 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 	    });
 	}
 	
+	
+	@Fix(TDslValidator.DUPLICATE_EVENT_WARNING)
+	public void removeDuplicateEvent(final Issue issue, IssueResolutionAcceptor acceptor) {
+	    acceptor.accept(issue, "Remove repeted event", "Removed repeted event", null, context -> {
+	    	removeRepeted(context.getXtextDocument(), issue, "");
+	    });
+	}
+	
 	@Fix(TDslValidator.DUPLICATE_SENSORIF_WARNING)
 	public void removeDuplicateSensor(final Issue issue, IssueResolutionAcceptor acceptor) {
 	    acceptor.accept(issue, "Remove repeted sensor", "Removed repeted sensor", null, context -> {
@@ -58,8 +73,6 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 	}
 	
 
-	
-	
 	@Fix(TDslValidator.NEGATIVE_SPEED_WARNING)
 	public void updateNegativeValues(final Issue issue, IssueResolutionAcceptor acceptor) {
 	    acceptor.accept(issue, "Insert a positive value", "Inserte a positive value", null, context -> {
