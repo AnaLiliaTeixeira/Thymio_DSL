@@ -49,12 +49,12 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 	    });
 	}
 	
-//	@Fix(TDslValidator.CONTRADICTORY_IF_WARNING)
-//	public void removeDuplicateSensor(final Issue issue, IssueResolutionAcceptor acceptor) {
-//	    acceptor.accept(issue, "Remove repeated sensor", "Removed repeated sensor", null, context -> {
-//	    	removeRepeated(context.getXtextDocument(), issue, "");
-//	    });
-//	}
+	@Fix(TDslValidator.CONTRADICTORY_IF_WARNING)
+	public void removeContradictorySensor(final Issue issue, IssueResolutionAcceptor acceptor) {
+	    acceptor.accept(issue, "Remove repeated sensor", "Removed repeated sensor", null, context -> {
+	    	removeRepeated(context.getXtextDocument(), issue, "");
+	    });
+	}
 	
 	@Fix(TDslValidator.DUPLICATE_BUTTON_WARNING)
 	public void removeDuplicateButtonSensor(final Issue issue, IssueResolutionAcceptor acceptor) {

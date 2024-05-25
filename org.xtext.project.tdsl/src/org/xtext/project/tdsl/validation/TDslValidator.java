@@ -3,6 +3,7 @@
  */
 package org.xtext.project.tdsl.validation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -73,106 +74,78 @@ public class TDslValidator extends AbstractTDslValidator {
 	}
 
 	public static final String TURN_OFF_TOP_LEDS_WARNING = "turnOffTopLedsWarning";
+	
+	@Check
+	public void checkTurnOffTopLeds(Statement statement) {
+		ThymioDSL model = (ThymioDSL) statement.eContainer();
+		
+		 List<Action> allActions = getAllActionsInModel(model);
+		 boolean setTopColor = false;
+		 for (Action action : allActions) {
+			 if (action instanceof ColorTopAction) {
+				 if (((ColorTopAction) action).getColor() != null)
+					 setTopColor = true;
+				 break;
+			 }
+		 }
+		 if (!setTopColor)	{		 
+			 for (int i = 0; i < statement.getAction().size(); i++) {
+				 Action action = statement.getAction().get(i);
+				 if (action instanceof ColorTopAction) {
+					 if (((ColorTopAction) action).getColor() == null) {
+						 warning("Turning off top LEDs without setting the top color first.",
+								 Thymio_DSLPackage.Literals.STATEMENT__ACTION, i, TURN_OFF_TOP_LEDS_WARNING,
+								 action.getClass().getSimpleName());
+					 }
+				 }
+			 }
+		 }
+	}
+	
+	public static final String TURN_OFF_BOTTOM_LEDS_WARNING = "turnOffBottomLedsWarning";
 
 	@Check
-	public void checkTurnOffTopLeds(ThymioDSL model) {
-		boolean setTopColorSeen = false;
-
-		// Iterating through all statements in the model
-		for (Statement statement : model.getStatement()) {
-			for (Action action : statement.getAction()) {
-				if (action instanceof ColorTopAction) {
-					ColorTopAction colorTopAction = (ColorTopAction) action;
-					if (colorTopAction.getColor() != null) {
-						setTopColorSeen = true;
-					}
-				}
-			}
-			if (setTopColorSeen) {
-				break;
-			}
-		}
-
-		// If no set top color action was found, check for turn off top leds actions
-		if (!setTopColorSeen) {
-			List<Statement> statements = model.getStatement();
-			for (int i = 0; i < statements.size(); i++) {
-				for (Action action : statements.get(i).getAction()) {
-					if (action instanceof ColorTopAction) {
-						if (((ColorTopAction) action).getColor() == null) {
-							warning("Turning off top LEDs without setting the top color first.",
-									Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, i, TURN_OFF_TOP_LEDS_WARNING,
-									action.getClass().getSimpleName());
-						}
-					}
-				}
-			}
-		}
-	}
-	public static final String TURN_OFF_BOTTOM_LEDS_WARNING = "turnOffTopLedsWarning";
-
-	@Check
-	public void checkTurnOffBottomLeds(ThymioDSL model) {
-		boolean setBottomColorSeen = false;
-
-		// Iterating through all statements in the model
-		for (Statement statement : model.getStatement()) {
-			for (Action action : statement.getAction()) {
-				System.out.println("Action class: " + action.getClass().getSimpleName());
-				if (action instanceof ColorBottomAction) {
-					if (((ColorBottomAction) action).getColor() != null) {
-						setBottomColorSeen = true;
-					}
-				}
-			}
-			if (setBottomColorSeen) {
-				break;
-			}
-		}
-
-		// If no set top color action was found, check for turn off top leds actions
-		if (!setBottomColorSeen) {
-			List<Statement> statements = model.getStatement();
-			for (int i = 0; i < statements.size(); i++) {
-//				for (IfStatement ifStatement : statements.get(i).getIfstatement()) {
-//					for (Action action :ifStatement.getAction()) {
-//						System.out.println("Action class if stat: " + action.getClass().getSimpleName());
-//
-//						if (action instanceof ColorBottomAction) {
-//							if (((ColorBottomAction) action).getColor() == null) {
-//								warning("Turning off top LEDs without setting the top color first.",
-//										Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, i, TURN_OFF_BOTTOM_LEDS_WARNING,
-//										action.getClass().getSimpleName());
-//							}
-//						}
-//					}
-//				}
-				
-				for (Action action : statements.get(i).getAction()) {
-					System.out.println("Action class action normal: " + action.getClass().getSimpleName());
-
-					if (action instanceof ColorBottomAction) {
-						if (((ColorBottomAction) action).getColor() == null) {
-							warning("Turning off top LEDs without setting the top color first.",
-									Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, i, TURN_OFF_BOTTOM_LEDS_WARNING,
-									action.getClass().getSimpleName());
-						}
-					}
-				}
-			}
-		}
+	public void checkTurnOffBottomLeds(Statement statement) {
+		 ThymioDSL model = (ThymioDSL) statement.eContainer();
+		
+		 List<Action> allActions = getAllActionsInModel(model);
+		 boolean setBottomColor = false;
+		 for (Action action : allActions) {
+			 if (action instanceof ColorBottomAction) {
+				 if (((ColorBottomAction) action).getColor() != null)
+					 setBottomColor = true;
+				 break;
+			 }
+		 }
+		 if (!setBottomColor)	{		 
+			 for (int i = 0; i < statement.getAction().size(); i++) {
+				 Action action = statement.getAction().get(i);
+				 if (action instanceof ColorBottomAction) {
+					 if (((ColorBottomAction) action).getColor() == null) {
+						 warning("Turning off bottom LEDs without setting the bottom color first.",
+								 Thymio_DSLPackage.Literals.STATEMENT__ACTION, i, TURN_OFF_BOTTOM_LEDS_WARNING,
+								 action.getClass().getSimpleName());
+					 }
+				 }
+			 }
+		 }
 	}
 
-//    private List<Action> getAllActionsInStatement(Statement statement) {
-//        List<Action> allActions = statement.getAction();  // Adiciona ações diretas do Statement
-//
-//        // Adiciona ações de todos os IfStatements do statement corrente
-//        for (IfStatement ifStatement : statement.getIfstatement()) {
-//            allActions.addAll(ifStatement.getAction());
-//        }
-//
-//        return allActions;
-//    }
+    private List<Action> getAllActionsInModel(ThymioDSL model) {
+    	
+        List<Action> allActions = new ArrayList<>(); 
+        for (Statement statement : model.getStatement()) {
+        	
+        	// Adiciona ações de todos os IfStatements do statement corrente
+        	for (IfStatement ifStatement : statement.getIfstatement())
+        		allActions.addAll(ifStatement.getAction());
+
+    		allActions.addAll(statement.getAction());
+
+        }
+
+        return allActions;
+    }
 
 
 	//////////////////////////////////////////////////////////////////////////////
