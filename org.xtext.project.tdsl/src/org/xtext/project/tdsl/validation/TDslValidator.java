@@ -101,80 +101,22 @@ public class TDslValidator extends AbstractTDslValidator {
 	@Check
 	public void checkSameEvents(ThymioDSL model) {
 		Set<Event> seenEvents = new HashSet<>();
+		List<Statement> statements = model.getStatement();
 
-		for (Statement statement : model.getStatement()) {
-			Event event = statement.getEvent();
+		for (int i = 0; i < statements.size(); i++) {
+			Event event = statements.get(i).getEvent();
 
 			if (event != null) {
 				if (isDuplicateEvent(seenEvents, event)) {
 					warning("This event will not be executed as there is another identical event that will override it.",
-							Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, DUPLICATE_EVENT_WARNING);
+							Thymio_DSLPackage.Literals.THYMIO_DSL__STATEMENT, i, DUPLICATE_EVENT_WARNING,
+							event.getClass().getSimpleName());
+					
 				} else {
 					seenEvents.add(event);
 				}
 			}
 		}
-	}
-
-	private boolean isDuplicateEvent(Set<Event> seenEvents, Event newEvent) {
-		for (Event seenEvent : seenEvents) {
-			if (eventsAreEqual(seenEvent, newEvent)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private boolean eventsAreEqual(Event event1, Event event2) {
-		if (event1.getClass() != event2.getClass()) {
-			return false;
-		}
-
-		if (event1 instanceof UpperEvent && event2 instanceof UpperEvent) {
-			return upperEventsAreEqual((UpperEvent) event1, (UpperEvent) event2);
-		} else if (event1 instanceof ProxEvent && event2 instanceof ProxEvent) {
-			return proxEventsAreEqual((ProxEvent) event1, (ProxEvent) event2);
-		} else if (event1 instanceof TapEvent && event2 instanceof TapEvent) {
-			return true;
-		} else if (event1 instanceof ClapEvent && event2 instanceof ClapEvent) {
-			return true;
-		}
-
-		return false;
-	}
-
-	private boolean upperEventsAreEqual(UpperEvent event1, UpperEvent event2) {
-		List<Button> buttons1 = event1.getButton();
-		List<Button> buttons2 = event2.getButton();
-
-		if (buttons1.size() != buttons2.size()) {
-			return false;
-		}
-
-		for (Button button1 : buttons1) {
-			boolean foundMatch = false;
-			for (Button button2 : buttons2) {
-				if (button1.getName().equals(button2.getName())) {
-					foundMatch = true;
-					break;
-				}
-			}
-			if (!foundMatch) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean proxEventsAreEqual(ProxEvent event1, ProxEvent event2) {
-		return sensorsAreEqual(event1.getSensor(), event2.getSensor());
-	}
-	
-	private boolean sensorsAreEqual(Sensor sensor1, Sensor sensor2) {
-		return sensor1.getDirection().equals(sensor2.getDirection())
-				&& sensor1.getState().equals(sensor2.getState())
-				&& sensor1.getSensor_type().equals(sensor2.getSensor_type());
-
 	}
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -254,13 +196,37 @@ public class TDslValidator extends AbstractTDslValidator {
 						Thymio_DSLPackage.Literals.MOVEMENT_ACTION__SPEED, SPEED_GT_500_WARNING);
 			}
 	}
+	
+	public static final String DUPLICATED_IF_STATEMENT_WARNING = "duplicateIfStatementWarning";
 
+	@Check
+	public void checkDuplicateIfStatements(Statement statement) {
+	    
+		Set<IfStatement> seenIfStatements = new HashSet<>();
+		List<IfStatement> ifStatements = statement.getIfstatement();
+
+		for (int i = 0; i < ifStatements.size(); i++) {
+			IfStatement ifStatement = ifStatements.get(i);
+
+			if (isDuplicateIfSatement(seenIfStatements, ifStatement)) {
+				warning("The if statement is repeated and does not make any difference, so it is redundant.",
+						Thymio_DSLPackage.Literals.STATEMENT__IFSTATEMENT, i, DUPLICATED_IF_STATEMENT_WARNING,
+						ifStatement.getClass().getSimpleName());
+			} else {
+				seenIfStatements.add(ifStatement);
+			}
+
+		}   
+	}
+	
+	///////////////////////////////
+	// PRIVATE METHODS	
 
 	private boolean contradictory(String state, String state2) {
 		return state.equals("proximity") && state2.equals("no proximity")
 				|| state2.equals("proximity") && state.equals("no proximity")
 				|| state.equals("white") && state2.equals("black") || state2.equals("white") && state.equals("black");
-	}
+	}	
 
 	private boolean checkIfDirectionCorrespondToType(Sensor sensor) {
 		if ("horizontal".equals(sensor.getSensor_type())) {
@@ -276,26 +242,65 @@ public class TDslValidator extends AbstractTDslValidator {
 		return false;
 	}
 	
-	public static final String DUPLICATE_IF_STATEMENT_WARNING = "duplicateIfStatementWarning";
-
-	@Check
-	public void checkDuplicateIfStatements(Statement statement) {
-	    
-		Set<IfStatement> seenIfStatements = new HashSet<>();
-		List<IfStatement> ifStatements = statement.getIfstatement();
-
-		for (int i = 0; i < ifStatements.size(); i++) {
-			IfStatement ifStatement = ifStatements.get(i);
-
-			if (isDuplicateIfSatement(seenIfStatements, ifStatement)) {
-				warning("The if statement is repeated and does not make any difference, so it is redundant.",
-						Thymio_DSLPackage.Literals.STATEMENT__IFSTATEMENT, i, DUPLICATE_IF_STATEMENT_WARNING,
-						ifStatement.getClass().getSimpleName());
-			} else {
-				seenIfStatements.add(ifStatement);
+	private boolean isDuplicateEvent(Set<Event> seenEvents, Event newEvent) {
+		for (Event seenEvent : seenEvents) {
+			if (eventsAreEqual(seenEvent, newEvent)) {
+				return true;
 			}
+		}
+		return false;
+	}
 
-		}   
+	private boolean eventsAreEqual(Event event1, Event event2) {
+		if (event1.getClass() != event2.getClass()) {
+			return false;
+		}
+
+		if (event1 instanceof UpperEvent && event2 instanceof UpperEvent) {
+			return upperEventsAreEqual((UpperEvent) event1, (UpperEvent) event2);
+		} else if (event1 instanceof ProxEvent && event2 instanceof ProxEvent) {
+			return proxEventsAreEqual((ProxEvent) event1, (ProxEvent) event2);
+		} else if (event1 instanceof TapEvent && event2 instanceof TapEvent) {
+			return true;
+		} else if (event1 instanceof ClapEvent && event2 instanceof ClapEvent) {
+			return true;
+		}
+
+		return false;
+	}
+
+	private boolean upperEventsAreEqual(UpperEvent event1, UpperEvent event2) {
+		List<Button> buttons1 = event1.getButton();
+		List<Button> buttons2 = event2.getButton();
+
+		if (buttons1.size() != buttons2.size()) {
+			return false;
+		}
+
+		for (Button button1 : buttons1) {
+			boolean foundMatch = false;
+			for (Button button2 : buttons2) {
+				if (button1.getName().equals(button2.getName())) {
+					foundMatch = true;
+					break;
+				}
+			}
+			if (!foundMatch) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean proxEventsAreEqual(ProxEvent event1, ProxEvent event2) {
+		return sensorsAreEqual(event1.getSensor(), event2.getSensor());
+	}
+	
+	private boolean sensorsAreEqual(Sensor sensor1, Sensor sensor2) {
+		return sensor1.getDirection().equals(sensor2.getDirection())
+				&& sensor1.getState().equals(sensor2.getState())
+				&& sensor1.getSensor_type().equals(sensor2.getSensor_type());
+
 	}
 	
 	private boolean isDuplicateIfSatement(Set<IfStatement> seenIfStatements, IfStatement newIfStatement) {
