@@ -12,7 +12,7 @@ Statement returns Statement:
 	(ifstatement+=IfStatement | action+=Action)+;
 
 Event returns Event:
-	UpperEvent | ProxEvent | TapEvent | ClapEvent;
+	'On' (UpperEvent | ProxEvent | TapEvent | ClapEvent) 'do' ':';
 
 Action returns Action:
 	'-' (MovementAction | SoundAction | ColorBottomAction | ColorTopAction);
@@ -41,13 +41,13 @@ IfStatement returns IfStatement:
 	'End' 'if';
 
 UpperEvent returns UpperEvent:
-	'On' button+=Button ('and' button+=Button)* 'button' state=State 'do' ':';
+	button+=Button ('and' button+=Button)* 'button' state=State ;
 
 Button returns Button:
 	name = Buttons;
 
 ProxEvent returns ProxEvent:
-	'On' sensor=Sensor 'do' ':';
+	 sensor=Sensor;
 
 Sensor returns Sensor:
 	direction=HorizontalSensors sensor_type='horizontal' 'sensor' 'detecting' state = State_Horizontal_Sensor
@@ -55,10 +55,10 @@ Sensor returns Sensor:
 
 
 TapEvent returns Event:
-	{TapEvent} 'On' 'tap' 'do' ':';
+	{TapEvent} 'tap' ;
 
 ClapEvent returns Event:
-	{ClapEvent} 'On' 'clap' 'do' ':';
+	{ClapEvent} 'clap';
 
 Condition returns Condition:
 	leftSensor=Sensor (operator=('and' | 'or') rightSensor=Sensor)?;

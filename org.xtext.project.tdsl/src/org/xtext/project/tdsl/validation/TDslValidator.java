@@ -131,24 +131,6 @@ public class TDslValidator extends AbstractTDslValidator {
 		 }
 	}
 
-    private List<Action> getAllActionsInModel(ThymioDSL model) {
-    	
-        List<Action> allActions = new ArrayList<>(); 
-        for (Statement statement : model.getStatement()) {
-        	
-        	// Adiciona ações de todos os IfStatements do statement corrente
-        	for (IfStatement ifStatement : statement.getIfstatement())
-        		allActions.addAll(ifStatement.getAction());
-
-    		allActions.addAll(statement.getAction());
-
-        }
-
-        return allActions;
-    }
-
-
-	//////////////////////////////////////////////////////////////////////////////
 	public static final String DUPLICATE_EVENT_WARNING = "duplicateEventWarning";
 
 	@Check
@@ -171,8 +153,6 @@ public class TDslValidator extends AbstractTDslValidator {
 			}
 		}
 	}
-
-	//////////////////////////////////////////////////////////////////////////////
 
 	public static final String DUPLICATE_BUTTON_WARNING = "duplicateButtonWarning";
 
@@ -276,7 +256,7 @@ public class TDslValidator extends AbstractTDslValidator {
 		}   
 	}
 	
-	///////////////////////////////
+	///////////////////////////////////////////////////
 	// PRIVATE METHODS	
 
 	private boolean contradictory(String state, String state2) {
@@ -454,4 +434,19 @@ public class TDslValidator extends AbstractTDslValidator {
 		return action1.getColor().equals(action2.getColor());
 	}
 	
+    private List<Action> getAllActionsInModel(ThymioDSL model) {
+    	
+        List<Action> allActions = new ArrayList<>(); 
+        for (Statement statement : model.getStatement()) {
+        	
+        	// Adiciona ações de todos os IfStatements do statement corrente
+        	for (IfStatement ifStatement : statement.getIfstatement())
+        		allActions.addAll(ifStatement.getAction());
+
+    		allActions.addAll(statement.getAction());
+
+        }
+
+        return allActions;
+    }
 }
