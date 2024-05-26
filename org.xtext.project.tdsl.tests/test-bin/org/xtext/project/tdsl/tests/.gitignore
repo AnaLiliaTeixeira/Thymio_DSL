@@ -3,3 +3,7 @@
 /TDslParsingTest.java
 /.TDslValidatorTest.java._trace
 /.TDslCodeGenTest.java._trace
+/.TDslCodeGenTest.xtendbin
+/.TDslValidatorTest.xtendbin
+/TDslCodeGenTest.java
+/TDslValidatorTest.java

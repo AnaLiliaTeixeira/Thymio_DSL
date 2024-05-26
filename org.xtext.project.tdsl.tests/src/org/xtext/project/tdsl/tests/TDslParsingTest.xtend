@@ -11,12 +11,14 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 import thymio_DSL.ThymioDSL
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 
 @ExtendWith(InjectionExtension)
 @InjectWith(TDslInjectorProvider)
 class TDslParsingTest {
 	@Inject
 	ParseHelper<ThymioDSL> parseHelper
+	
     
 	@Test
 	def void loadModel() {
@@ -28,4 +30,106 @@ class TDslParsingTest {
 		val errors = result.eResource.errors
 		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 	}
+	
+	 @Test
+    def void testValidSoundAction() {
+        val result = parseHelper.parse('''
+            -> On center button touched do:
+            - play sound sound1
+        ''')
+        Assertions.assertNotNull(result)
+        val errors = result.eResource.errors
+        Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+    }
+
+    @Test
+    def void testValidColorBottomAction() {
+        val result = parseHelper.parse('''
+            -> On center button touched do:
+            - set bottom color to red
+        ''')
+        Assertions.assertNotNull(result)
+        val errors = result.eResource.errors
+        Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+    }
+
+    @Test
+    def void testValidIfStatement() {
+        val result = parseHelper.parse('''
+            -> On center button touched do:
+            - drive forward
+            If front left horizontal sensor detecting proximity :
+            - stop driving
+            End if
+        ''')
+        Assertions.assertNotNull(result)
+        val errors = result.eResource.errors
+        Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+    }
+
+    @Test
+    def void testValidTapEvent() {
+        val result = parseHelper.parse('''
+            -> On tap do:
+            - drive forward
+        ''')
+        Assertions.assertNotNull(result)
+        val errors = result.eResource.errors
+        Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+    }
+
+    @Test
+    def void testValidClapEvent() {
+        val result = parseHelper.parse('''
+            -> On clap do:
+            - play sound sound2
+        ''')
+        Assertions.assertNotNull(result)
+        val errors = result.eResource.errors
+        Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+    }
+
+    @Test
+    def void testInvalidEventWithoutOnKeyword() {
+        val result = parseHelper.parse('''
+            -> center button touched do:
+            - drive forward
+        ''')
+        Assertions.assertNotNull(result)
+        val errors = result.eResource.errors
+        Assertions.assertFalse(errors.isEmpty, "Expected errors")
+    }
+
+    @Test
+    def void testInvalidButtonState() {
+        val result = parseHelper.parse('''
+            -> On center button pushing do:
+            - drive forward
+        ''')
+        Assertions.assertNotNull(result)
+        val errors = result.eResource.errors
+        Assertions.assertFalse(errors.isEmpty, "Expected errors")
+    }
+
+    @Test
+    def void testInvalidAction() {
+        val result = parseHelper.parse('''
+            -> On center button touched do:
+            - fly away
+        ''')
+        Assertions.assertNotNull(result)
+        val errors = result.eResource.errors
+        Assertions.assertFalse(errors.isEmpty, "Expected errors")
+    }
+
+    @Test
+    def void testInvalidColorAction() {
+        val result = parseHelper.parse('''
+            -> On center button touched do:
+            - set bottom color to purple
+        ''')
+        Assertions.assertNotNull(result)
+        val errors = result.eResource.errors
+        Assertions.assertFalse(errors.isEmpty, "Expected errors")
+    }
 }

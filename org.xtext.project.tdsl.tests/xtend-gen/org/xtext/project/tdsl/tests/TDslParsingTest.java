@@ -45,4 +45,188 @@ public class TDslParsingTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+
+  @Test
+  public void testValidSoundAction() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- play sound sound1");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      boolean _isEmpty = errors.isEmpty();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
+      Assertions.assertTrue(_isEmpty, _builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testValidColorBottomAction() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- set bottom color to red");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      boolean _isEmpty = errors.isEmpty();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
+      Assertions.assertTrue(_isEmpty, _builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testValidIfStatement() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- drive forward");
+      _builder.newLine();
+      _builder.append("If front left horizontal sensor detecting proximity :");
+      _builder.newLine();
+      _builder.append("- stop driving");
+      _builder.newLine();
+      _builder.append("End if");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      boolean _isEmpty = errors.isEmpty();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
+      Assertions.assertTrue(_isEmpty, _builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testValidTapEvent() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On tap do:");
+      _builder.newLine();
+      _builder.append("- drive forward");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      boolean _isEmpty = errors.isEmpty();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
+      Assertions.assertTrue(_isEmpty, _builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testValidClapEvent() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On clap do:");
+      _builder.newLine();
+      _builder.append("- play sound sound2");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      boolean _isEmpty = errors.isEmpty();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
+      Assertions.assertTrue(_isEmpty, _builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testInvalidEventWithoutOnKeyword() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> center button touched do:");
+      _builder.newLine();
+      _builder.append("- drive forward");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      Assertions.assertFalse(errors.isEmpty(), "Expected errors");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testInvalidButtonState() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button pushing do:");
+      _builder.newLine();
+      _builder.append("- drive forward");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      Assertions.assertFalse(errors.isEmpty(), "Expected errors");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testInvalidAction() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- fly away");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      Assertions.assertFalse(errors.isEmpty(), "Expected errors");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testInvalidColorAction() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- set bottom color to purple");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      Assertions.assertFalse(errors.isEmpty(), "Expected errors");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

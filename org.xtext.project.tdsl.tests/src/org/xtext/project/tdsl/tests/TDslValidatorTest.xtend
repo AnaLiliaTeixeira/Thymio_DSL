@@ -22,27 +22,182 @@ import thymio_DSL.Thymio_DSLPackage
 class TDslValidatorTest {
 	@Inject
 	ParseHelper<ThymioDSL> parseHelper
-	
+
 	@Inject
 	ValidationTestHelper validator
-	
-	@BeforeEach
-    def void setUp() {
-        // Registrar o EPackage antes de executar os testes
-        if (!EPackage.Registry.INSTANCE.containsKey(Thymio_DSLPackage.eNS_URI)) {
-            EPackage.Registry.INSTANCE.put(Thymio_DSLPackage.eNS_URI, Thymio_DSLPackage.eINSTANCE);
-        }
-    }
-    
+
 	@Test
 	def void testRepeatedButtons() {
-		val result = parseHelper.parse('''s
+		val result = parseHelper.parse('''
 			-> On center and center button touched do:
 			- drive forward
 		''')
 		Assertions.assertNotNull(result)
-		validator.assertError(result, Thymio_DSLPackage::eINSTANCE.upperEvent, TDslValidator::DUPLICATE_BUTTON_WARNING,
+		validator.assertWarning(
+			result,
+			Thymio_DSLPackage::eINSTANCE.upperEvent,
+			TDslValidator::DUPLICATE_BUTTON_WARNING,
 			"The button 'center' is repeated and does not make any difference, so it is redundant."
+		)
+	}
+
+	@Test
+	def void testContradictoryActions() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+			- drive forward
+			- stop driving
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertError(
+			result,
+			Thymio_DSLPackage::eINSTANCE.statement,
+			TDslValidator::CONTRADICTORY_ACTION_ERROR,
+			"This is a contradictory action."
+		)
+	}
+
+	@Test
+	def void testDuplicateActions() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+			- drive forward
+			- drive forward
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertWarning(
+			result,
+			Thymio_DSLPackage::eINSTANCE.statement,
+			TDslValidator::DUPLICATE_ACTION_WARNING,
+			"This action will not be executed as there is another action of the same type that will override it."
+		)
+	}
+
+	@Test
+	def void testTurnOffTopLedsWarning() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+			- turn off top leds
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertWarning(
+			result,
+			Thymio_DSLPackage::eINSTANCE.statement,
+			TDslValidator::TURN_OFF_TOP_LEDS_WARNING,
+			"Turning off top LEDs without setting the top color first."
+		)
+	}
+
+	@Test
+	def void testTurnOffBottomLedsWarning() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+			- turn off bottom leds
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertWarning(
+			result,
+			Thymio_DSLPackage::eINSTANCE.statement,
+			TDslValidator::TURN_OFF_BOTTOM_LEDS_WARNING,
+			"Turning off bottom LEDs without setting the bottom color first."
+		)
+	}
+
+	@Test
+	def void testDuplicateEvents() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+			- drive forward
+			-> On center button touched do:
+			- drive backward
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertWarning(
+			result,
+			Thymio_DSLPackage::eINSTANCE.thymioDSL,
+			TDslValidator::DUPLICATE_EVENT_WARNING,
+			"This event will not be executed as there is another identical event that will override it."
+		)
+	}
+
+	@Test
+	def void testNoActionsError() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertError(
+			result,
+			Thymio_DSLPackage::eINSTANCE.statement,
+			TDslValidator::NO_ACTIONS_ERROR,
+			"You should write at least one Action"
+		)
+	}
+
+	@Test
+	def void testDuplicateIfStatement() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+			If front left horizontal sensor detecting proximity :
+			  - drive forward
+			End if
+			If front left horizontal sensor detecting proximity :
+			  - drive forward
+			End if
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertWarning(
+			result,
+			Thymio_DSLPackage::eINSTANCE.statement,
+			TDslValidator::DUPLICATED_IF_STATEMENT_WARNING,
+			"The if statement is repeated and does not make any difference, so it is redundant."
+		)
+	}
+
+	@Test
+	def void testContradictoryIfStatement() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+			If front left horizontal sensor detecting proximity and front left horizontal sensor detecting no proximity :
+			  - drive forward
+			End if  
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertWarning(
+			result,
+			Thymio_DSLPackage::eINSTANCE.ifStatement,
+			TDslValidator::CONTRADICTORY_IF_WARNING,
+			"This condition will never happen because the two sensors are contradictory"
+		)
+	}
+
+	@Test
+	def void testNegativeSpeedWarning() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+			- drive forward with speed -10
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertWarning(
+			result,
+			Thymio_DSLPackage::eINSTANCE.movementAction,
+			TDslValidator::NEGATIVE_SPEED_WARNING,
+			"The speed should be a positive number"
+		)
+	}
+
+	@Test
+	def void testSpeedGreaterThan500Warning() {
+		val result = parseHelper.parse('''
+			-> On center button touched do:
+			- drive forward with speed 600
+		''')
+		Assertions.assertNotNull(result)
+		validator.assertWarning(
+			result,
+			Thymio_DSLPackage::eINSTANCE.movementAction,
+			TDslValidator::SPEED_GT_500_WARNING,
+			"The speed should not exceed 500"
 		)
 	}
 }

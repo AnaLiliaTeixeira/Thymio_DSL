@@ -4,7 +4,6 @@
 package org.xtext.project.tdsl.tests;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
@@ -12,7 +11,6 @@ import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.xtext.project.tdsl.validation.TDslValidator;
@@ -29,31 +27,233 @@ public class TDslValidatorTest {
   @Inject
   private ValidationTestHelper validator;
 
-  @BeforeEach
-  public void setUp() {
-    boolean _containsKey = EPackage.Registry.INSTANCE.containsKey(Thymio_DSLPackage.eNS_URI);
-    boolean _not = (!_containsKey);
-    if (_not) {
-      EPackage.Registry.INSTANCE.put(Thymio_DSLPackage.eNS_URI, Thymio_DSLPackage.eINSTANCE);
-    }
-  }
-
   @Test
   public void testRepeatedButtons() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("s");
-      _builder.newLine();
-      _builder.append("\t\t\t");
       _builder.append("-> On center and center button touched do:");
       _builder.newLine();
-      _builder.append("\t\t\t");
       _builder.append("- drive forward");
       _builder.newLine();
       final ThymioDSL result = this.parseHelper.parse(_builder);
       Assertions.assertNotNull(result);
-      this.validator.assertError(result, Thymio_DSLPackage.eINSTANCE.getUpperEvent(), TDslValidator.DUPLICATE_BUTTON_WARNING, 
+      this.validator.assertWarning(result, 
+        Thymio_DSLPackage.eINSTANCE.getUpperEvent(), 
+        TDslValidator.DUPLICATE_BUTTON_WARNING, 
         "The button \'center\' is repeated and does not make any difference, so it is redundant.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testContradictoryActions() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- drive forward");
+      _builder.newLine();
+      _builder.append("- stop driving");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertError(result, 
+        Thymio_DSLPackage.eINSTANCE.getStatement(), 
+        TDslValidator.CONTRADICTORY_ACTION_ERROR, 
+        "This is a contradictory action.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testDuplicateActions() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- drive forward");
+      _builder.newLine();
+      _builder.append("- drive forward");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertWarning(result, 
+        Thymio_DSLPackage.eINSTANCE.getStatement(), 
+        TDslValidator.DUPLICATE_ACTION_WARNING, 
+        "This action will not be executed as there is another action of the same type that will override it.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testTurnOffTopLedsWarning() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- turn off top leds");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertWarning(result, 
+        Thymio_DSLPackage.eINSTANCE.getStatement(), 
+        TDslValidator.TURN_OFF_TOP_LEDS_WARNING, 
+        "Turning off top LEDs without setting the top color first.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testTurnOffBottomLedsWarning() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- turn off bottom leds");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertWarning(result, 
+        Thymio_DSLPackage.eINSTANCE.getStatement(), 
+        TDslValidator.TURN_OFF_BOTTOM_LEDS_WARNING, 
+        "Turning off bottom LEDs without setting the bottom color first.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testDuplicateEvents() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- drive forward");
+      _builder.newLine();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- drive backward");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertWarning(result, 
+        Thymio_DSLPackage.eINSTANCE.getThymioDSL(), 
+        TDslValidator.DUPLICATE_EVENT_WARNING, 
+        "This event will not be executed as there is another identical event that will override it.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testNoActionsError() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertError(result, 
+        Thymio_DSLPackage.eINSTANCE.getStatement(), 
+        TDslValidator.NO_ACTIONS_ERROR, 
+        "You should write at least one Action");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testDuplicateIfStatement() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("If front left horizontal sensor detecting proximity :");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("- drive forward");
+      _builder.newLine();
+      _builder.append("End if");
+      _builder.newLine();
+      _builder.append("If front left horizontal sensor detecting proximity :");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("- drive forward");
+      _builder.newLine();
+      _builder.append("End if");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertWarning(result, 
+        Thymio_DSLPackage.eINSTANCE.getStatement(), 
+        TDslValidator.DUPLICATED_IF_STATEMENT_WARNING, 
+        "The if statement is repeated and does not make any difference, so it is redundant.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testContradictoryIfStatement() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("If front left horizontal sensor detecting proximity and front left horizontal sensor detecting no proximity :");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("- drive forward");
+      _builder.newLine();
+      _builder.append("End if  ");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertWarning(result, 
+        Thymio_DSLPackage.eINSTANCE.getIfStatement(), 
+        TDslValidator.CONTRADICTORY_IF_WARNING, 
+        "This condition will never happen because the two sensors are contradictory");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testNegativeSpeedWarning() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- drive forward with speed -10");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertWarning(result, 
+        Thymio_DSLPackage.eINSTANCE.getMovementAction(), 
+        TDslValidator.NEGATIVE_SPEED_WARNING, 
+        "The speed should be a positive number");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testSpeedGreaterThan500Warning() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- drive forward with speed 600");
+      _builder.newLine();
+      final ThymioDSL result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validator.assertWarning(result, 
+        Thymio_DSLPackage.eINSTANCE.getMovementAction(), 
+        TDslValidator.SPEED_GT_500_WARNING, 
+        "The speed should not exceed 500");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
