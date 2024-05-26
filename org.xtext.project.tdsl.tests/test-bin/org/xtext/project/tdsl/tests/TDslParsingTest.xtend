@@ -17,11 +17,12 @@ import thymio_DSL.ThymioDSL
 class TDslParsingTest {
 	@Inject
 	ParseHelper<ThymioDSL> parseHelper
-	
+    
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			Hello Xtext!
+			-> On center button touched do:
+			- drive forward
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors

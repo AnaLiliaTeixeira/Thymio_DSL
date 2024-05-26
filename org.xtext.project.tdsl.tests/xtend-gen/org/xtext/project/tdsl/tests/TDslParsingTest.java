@@ -28,7 +28,9 @@ public class TDslParsingTest {
   public void loadModel() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Hello Xtext!");
+      _builder.append("-> On center button touched do:");
+      _builder.newLine();
+      _builder.append("- drive forward");
       _builder.newLine();
       final ThymioDSL result = this.parseHelper.parse(_builder);
       Assertions.assertNotNull(result);
