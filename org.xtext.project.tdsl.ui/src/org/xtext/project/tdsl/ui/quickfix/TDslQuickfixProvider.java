@@ -14,7 +14,8 @@ import org.xtext.project.tdsl.validation.TDslValidator;
 /**
  * Custom quickfixes.
  *
- * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
+ * See
+ * https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 
@@ -24,88 +25,110 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 			removeRepeated(context.getXtextDocument(), issue, "");
 		});
 	}
-	
+
 	@Fix(TDslValidator.DUPLICATE_ACTION_WARNING)
 	public void removeDuplicateAction(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Remove repeated action", "Removed repeated action", null, context -> {
-	    	removeRepeated(context.getXtextDocument(), issue, "");
-	    });
+		acceptor.accept(issue, "Remove repeated action", "Removed repeated action", null, context -> {
+			removeRepeated(context.getXtextDocument(), issue, "");
+		});
 	}
-	
+
 	@Fix(TDslValidator.CONTRADICTORY_ACTION_ERROR)
 	public void removeContradictoryAction(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Remove contradictory action", "Removed contradictory action", null, context -> {
-	    	removeRepeated(context.getXtextDocument(), issue, "");
-	    });
+		acceptor.accept(issue, "Remove contradictory action", "Removed contradictory action", null, context -> {
+			removeRepeated(context.getXtextDocument(), issue, "");
+		});
 	}
 
 	@Fix(TDslValidator.DUPLICATE_SENSORIF_WARNING)
 	public void removeDuplicateSensor(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Remove repeated sensor", "Removed repeated sensor", null, context -> {
-	    	System.out.println(issue.toString());
-	    	System.out.println("\n message: " + issue.getMessage());
-
-	    	removeRepeated(context.getXtextDocument(), issue, "");
-	    });
+		acceptor.accept(issue, "Remove repeated sensor", "Removed repeated sensor", null, context -> {
+			String content = context.getXtextDocument().get(issue.getOffset(), issue.getLength());
+			int end_index = issue.getLength();
+			if(content.contains(" and ")) {
+				end_index = content.indexOf(" and ");
+			}
+			if(content.contains(" or ")) {
+				end_index = content.indexOf(" or ");
+			}
+			
+			removeRepeated(context.getXtextDocument(), issue, content.substring(0, end_index));
+		});
 	}
-	
+
 	@Fix(TDslValidator.CONTRADICTORY_IF_WARNING)
 	public void removeContradictorySensor(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Remove repeated sensor", "Removed repeated sensor", null, context -> {
-	    	removeRepeated(context.getXtextDocument(), issue, "");
-	    });
+		acceptor.accept(issue, "Remove repeated sensor", "Removed repeated sensor", null, context -> {
+			String content = context.getXtextDocument().get(issue.getOffset(), issue.getLength());
+			int end_index = issue.getLength();
+			if(content.contains(" and ")) {
+				end_index = content.indexOf(" and ");
+			}
+			if(content.contains(" or ")) {
+				end_index = content.indexOf(" or ");
+			}
+			
+			removeRepeated(context.getXtextDocument(), issue, content.substring(0, end_index));
+		});
 	}
-	
+
 	@Fix(TDslValidator.DUPLICATE_BUTTON_WARNING)
 	public void removeDuplicateButtonSensor(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Remove repeated button", "Removed repeated button", null, context -> {
-	    	removeRepeated(context.getXtextDocument(), issue, "");
-	    });
+		acceptor.accept(issue, "Remove repeated button", "Removed repeated button", null, context -> {
+			System.out.println(issue.getOffset());
+			System.out.println(issue.getLength());
+			String content = context.getXtextDocument().get(issue.getOffset()-5,issue.getLength()+5);
+			System.out.print(content);
+			context.getXtextDocument().replace(issue.getOffset()-5, issue.getLength()+5, "");
+		});
 	}
-	
+
 	@Fix(TDslValidator.SPEED_GT_500_WARNING)
 	public void setSpeedTo500(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Set speed to 500", "Set speed to 500", null, context -> {
-	    	removeRepeated(context.getXtextDocument(), issue, "500");
-	    });
+		acceptor.accept(issue, "Set speed to 500", "Set speed to 500", null, context -> {
+			removeRepeated(context.getXtextDocument(), issue, "500");
+		});
 	}
-	
 
 	@Fix(TDslValidator.NEGATIVE_SPEED_WARNING)
 	public void updateNegativeValues(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Insert a positive value", "Inserted a positive value", null, context -> {
-	    	removeRepeated(context.getXtextDocument(), issue, removeMinus(context.getXtextDocument(),issue));
-	    });
+
+		acceptor.accept(issue, "Insert a positive value", "Inserted a positive value", null, context -> {
+
+			removeRepeated(context.getXtextDocument(), issue, removeMinus(context.getXtextDocument(), issue));
+		});
 	}
 
 	@Fix(TDslValidator.DUPLICATED_IF_STATEMENT_WARNING)
 	public void removeDuplicateIfStatement(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Remove repeated if statement", "Removed repeated if statement", null, context -> {
-	    	removeRepeated(context.getXtextDocument(), issue, "");
-	    });
-	}	
+		acceptor.accept(issue, "Remove repeated if statement", "Removed repeated if statement", null, context -> {
+			removeRepeated(context.getXtextDocument(), issue, "");
+		});
+	}
 
 	@Fix(TDslValidator.TURN_OFF_TOP_LEDS_WARNING)
 	public void removeTurnOffTopLeds(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Remove turn off top leds", "Removed turn off top leds", null, context -> {
-	    	removeRepeated(context.getXtextDocument(), issue, "");
-	    });
+		acceptor.accept(issue, "Remove turn off top leds", "Removed turn off top leds", null, context -> {
+			removeRepeated(context.getXtextDocument(), issue, "");
+		});
 	}
-	
 
 	@Fix(TDslValidator.TURN_OFF_BOTTOM_LEDS_WARNING)
 	public void removeTurnOffBottomLeds(final Issue issue, IssueResolutionAcceptor acceptor) {
-	    acceptor.accept(issue, "Remove turn off bottom leds", "Removed turn off bottom leds", null, context -> {
-	    	removeRepeated(context.getXtextDocument(), issue, "");
-	    });
-	}	
+		acceptor.accept(issue, "Remove turn off bottom leds", "Removed turn off bottom leds", null, context -> {
+			removeRepeated(context.getXtextDocument(), issue, "");
+		});
+	}
 
-	protected void removeRepeated(IXtextDocument iXtextDocument, Issue issue, String newSpecifier) throws BadLocationException {
-        iXtextDocument.replace(issue.getOffset(), issue.getLength(), newSpecifier);
+	protected void removeRepeated(IXtextDocument iXtextDocument, Issue issue, String newSpecifier)
+			throws BadLocationException {
+		iXtextDocument.replace(issue.getOffset(), issue.getLength(), newSpecifier);
+	}
+
+	protected String removeMinus(IXtextDocument iXtextDocument, Issue issue) throws BadLocationException {
+		return iXtextDocument.get(issue.getOffset(), issue.getLength()).substring(1, issue.getLength());
 	}
 	
-	protected String removeMinus(IXtextDocument iXtextDocument, Issue issue) throws BadLocationException {
-	    return iXtextDocument.get(issue.getOffset(), issue.getLength()).substring(1, issue.getLength());
-	}	
+
 
 }

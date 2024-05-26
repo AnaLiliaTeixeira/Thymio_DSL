@@ -302,6 +302,7 @@ public class TDslProposalProvider extends AbstractTDslProposalProvider {
 	@Override
 	public void complete_ClapEvent(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		
 		acceptor.accept(createCompletionProposal("clap do :\n", context));
 	}
 
