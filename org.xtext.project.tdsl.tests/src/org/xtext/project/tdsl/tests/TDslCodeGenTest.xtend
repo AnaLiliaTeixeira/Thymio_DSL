@@ -11,10 +11,26 @@ import org.eclipse.xtext.xbase.testing.CompilationTestHelper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
+import thymio_DSL.ThymioDSL
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import org.xtext.project.tdsl.generator.TDslGenerator
 
 @ExtendWith(InjectionExtension)
 @InjectWith(TDslInjectorProvider)
 class TDslCodeGenTest {
-
+	@Inject extension CompilationTestHelper
+	@Inject extension ReflectExtensions
+	
+	/** 
+	@Test
+	def void testDSLCodeCompilesToExpectedOutput() {
+		'''->On clap do:
+		- play sound sound1
+		If front middle horizontal sensor detecting proximity:
+		- drive backward
+		End if
+		'''.assertCompilesTo()
+	}*/
 
 }

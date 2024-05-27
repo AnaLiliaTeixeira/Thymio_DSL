@@ -120,6 +120,8 @@ public class TDslProposalProvider extends AbstractTDslProposalProvider {
 	        acceptor.accept(createCompletionProposal("left button", context));
 	        acceptor.accept(createCompletionProposal("forward button", context));
 	        acceptor.accept(createCompletionProposal("backward button", context));
+	        acceptor.accept(createCompletionProposal("clap do :\n", context));
+	        acceptor.accept(createCompletionProposal("tap do :\n", context));
 	   
 	}
 	@Override
@@ -190,14 +192,14 @@ public class TDslProposalProvider extends AbstractTDslProposalProvider {
 	public void completeCondition_RightSensor(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 
-		acceptor.accept(createCompletionProposal("front left/middle horizontal sensor detecting :", context));
-		acceptor.accept(createCompletionProposal("front right horizontal sensor detecting :", context));
-		acceptor.accept(createCompletionProposal("front right/middle horizontal sensor detecting :", context));
-		acceptor.accept(createCompletionProposal("front middle horizontal sensor detecting :", context));
-		acceptor.accept(createCompletionProposal("backward left horizontal sensor detecting :", context));
-		acceptor.accept(createCompletionProposal("backward right horizontal sensor detecting :", context));
-		acceptor.accept(createCompletionProposal("left ground sensor detecting :", context));
-		acceptor.accept(createCompletionProposal("right ground sensor detecting :", context));
+		acceptor.accept(createCompletionProposal("front left/middle horizontal sensor detecting", context));
+		acceptor.accept(createCompletionProposal("front right horizontal sensor detecting", context));
+		acceptor.accept(createCompletionProposal("front right/middle horizontal sensor detecting", context));
+		acceptor.accept(createCompletionProposal("front middle horizontal sensor detecting", context));
+		acceptor.accept(createCompletionProposal("backward left horizontal sensor detecting", context));
+		acceptor.accept(createCompletionProposal("backward right horizontal sensor detecting", context));
+		acceptor.accept(createCompletionProposal("left ground sensor detecting", context));
+		acceptor.accept(createCompletionProposal("right ground sensor detecting", context));
 	}
 
 	@Override
@@ -294,7 +296,7 @@ public class TDslProposalProvider extends AbstractTDslProposalProvider {
 	public void complete_TapEvent(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 
-		acceptor.accept(createCompletionProposal("tap do :\n", context));
+		
 	
 
 	}
@@ -303,7 +305,7 @@ public class TDslProposalProvider extends AbstractTDslProposalProvider {
 	public void complete_ClapEvent(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		
-		acceptor.accept(createCompletionProposal("clap do :\n", context));
+		
 	}
 
 	@Override
