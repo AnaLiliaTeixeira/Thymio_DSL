@@ -121,6 +121,17 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 			removeRepeated(context.getXtextDocument(), issue, "");
 		});
 	}
+	
+	@Fix(TDslValidator.NO_ACTIONS_ERROR)
+	public void addAction(final Issue issue, IssueResolutionAcceptor acceptor) {
+
+		acceptor.accept(issue, "Add action to statement", "Added action to statement", null, context -> {
+			String content = context.getXtextDocument().get(issue.getOffset(), issue.getLength());
+			StringBuilder sb = new StringBuilder(content +"\n	- drive forward");
+			System.out.println(sb.toString());
+			removeRepeated(context.getXtextDocument(), issue, sb.toString());
+		});
+	}
 
 	protected void removeRepeated(IXtextDocument iXtextDocument, Issue issue, String newSpecifier)
 			throws BadLocationException {
