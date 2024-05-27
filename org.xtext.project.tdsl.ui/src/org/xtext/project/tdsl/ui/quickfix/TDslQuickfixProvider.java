@@ -75,10 +75,6 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(TDslValidator.DUPLICATE_BUTTON_WARNING)
 	public void removeDuplicateButtonSensor(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove repeated button", "Removed repeated button", null, context -> {
-			System.out.println(issue.getOffset());
-			System.out.println(issue.getLength());
-			String content = context.getXtextDocument().get(issue.getOffset()-5,issue.getLength()+5);
-			System.out.print(content);
 			context.getXtextDocument().replace(issue.getOffset()-5, issue.getLength()+5, "");
 		});
 	}
@@ -116,6 +112,12 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(TDslValidator.TURN_OFF_BOTTOM_LEDS_WARNING)
 	public void removeTurnOffBottomLeds(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove turn off bottom leds", "Removed turn off bottom leds", null, context -> {
+			removeRepeated(context.getXtextDocument(), issue, "");
+		});
+	}
+	@Fix(TDslValidator.SENSOR_EQUALS_IF_STATEMENT_WARNING)
+	public void removeSensorEqualIfStatement(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove redundant if statement", "Removed redundant if statement", null, context -> {
 			removeRepeated(context.getXtextDocument(), issue, "");
 		});
 	}

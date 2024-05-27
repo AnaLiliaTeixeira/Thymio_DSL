@@ -256,6 +256,29 @@ public class TDslValidator extends AbstractTDslValidator {
 		}   
 	}
 	
+	public static final String SENSOR_EQUALS_IF_STATEMENT_WARNING = "duplicateIfStatementWarning";
+
+	@Check
+	public void checkSensorEqualsIfStatements(Statement statement) {
+	    
+		Event event = statement.getEvent();
+
+        if (event instanceof ProxEvent) {
+            Sensor eventSensor = ((ProxEvent) event).getSensor();
+
+            for (IfStatement ifStatement : statement.getIfstatement()) {
+                Sensor ifSensor = ifStatement.getCondition().getLeftSensor();
+
+                if (ifStatement.getCondition().getRightSensor() == null && sensorsAreEqual(eventSensor, ifSensor)) {
+                    warning("The sensor in the if-statement is the same as the event sensor, which is redundant.",
+                    		Thymio_DSLPackage.Literals.STATEMENT__IFSTATEMENT,
+                            statement.getIfstatement().indexOf(ifStatement),
+                            SENSOR_EQUALS_IF_STATEMENT_WARNING);
+                }
+            }
+        }  
+	}
+	
 	///////////////////////////////////////////////////
 	// PRIVATE METHODS	
 
