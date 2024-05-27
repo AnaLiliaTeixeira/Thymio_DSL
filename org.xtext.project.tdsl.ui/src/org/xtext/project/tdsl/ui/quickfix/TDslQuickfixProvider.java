@@ -126,8 +126,15 @@ public class TDslQuickfixProvider extends DefaultQuickfixProvider {
 	public void addAction(final Issue issue, IssueResolutionAcceptor acceptor) {
 
 		acceptor.accept(issue, "Add action to statement", "Added action to statement", null, context -> {
-			String content = context.getXtextDocument().get(issue.getOffset(), issue.getLength());
-			StringBuilder sb = new StringBuilder(content +"\n	- drive forward");
+			String initial_content = context.getXtextDocument().get(issue.getOffset(), issue.getLength());
+			String content = initial_content;
+			if (content.startsWith("If"))
+				content = content.substring(0, content.length()-6);
+
+			StringBuilder sb = new StringBuilder(content + "\n	- drive forward");
+			if (initial_content.endsWith("End if"))
+				sb.append("\n	End if");
+
 			System.out.println(sb.toString());
 			removeRepeated(context.getXtextDocument(), issue, sb.toString());
 		});
