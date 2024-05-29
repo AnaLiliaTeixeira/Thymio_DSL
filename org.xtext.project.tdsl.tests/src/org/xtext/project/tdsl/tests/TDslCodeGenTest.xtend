@@ -6,31 +6,200 @@ package org.xtext.project.tdsl.tests
 import com.google.inject.Inject
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
-import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
-import thymio_DSL.ThymioDSL
-import org.eclipse.xtext.testing.util.ParseHelper
-import org.eclipse.xtext.testing.validation.ValidationTestHelper
-import org.xtext.project.tdsl.generator.TDslGenerator
+
 
 @ExtendWith(InjectionExtension)
 @InjectWith(TDslInjectorProvider)
 class TDslCodeGenTest {
 	@Inject extension CompilationTestHelper
-	@Inject extension ReflectExtensions
+
 	
-	/** 
+	 
 	@Test
 	def void testDSLCodeCompilesToExpectedOutput() {
-		'''->On clap do:
-		- play sound sound1
-		If front middle horizontal sensor detecting proximity:
-		- drive backward
-		End if
-		'''.assertCompilesTo()
-	}*/
+		'''
+		->On clap do:
+			- play sound sound1
+			If front middle horizontal sensor detecting proximity:
+				- drive backward
+			End if
+		'''.assertCompilesTo(
+		'''
+		# variables for notes
+		var notes[6]
+		var durations[6]
+		var note_index = 6
+		var note_count = 6
+		var wave[142]
+		var i
+		var wave_phase
+		var wave_intensity
+		
+		# compute a sinus wave for sound
+		for i in 0:141 do
+			wave_phase = (i-70)*468
+			call math.cos(wave_intensity, wave_phase)
+			wave[i] = wave_intensity/256
+		end
+		call sound.wave(wave)
+		# reset outputs 
+		call sound.system(-1)
+		call leds.top(0,0,0)
+		call leds.bottom.left(0,0,0)
+		call leds.bottom.right(0,0,0)
+		call leds.circle(0,0,0,0,0,0,0,0)
+		
+		# when a note is finished, play the next note
+		onevent sound.finished 
+			if note_index != note_count then
+				call sound.freq(notes[note_index], durations[note_index])
+				note_index += 1
+			end
+		
+		# setup threshold for detecting claps
+		mic.threshold = 250
+		
+		onevent mic
+		        	call math.copy(notes[0:5], [524, 440, 370, 311, 440, 262]) 
+			call math.copy(durations[0:5], [7, 7, 7, 7, 7, 7]) 
+			note_index = 1 
+			note_count = 6 
+			call sound.freq(notes[0], durations[0])
+		
+		        if prox.horizontal[2] >= 2000 then
+		    motor.left.target = -500
+		        motor.right.target = -500
+		end
+		
+		
+		''')
+		
+		}
+	
+	@Test
+	def void testDSLCodeCompilesToExpectedOutpu2t() {
+		'''
+		-> On tap do:
+			If right ground sensor detecting black :
+			- set top color to red
+			End if
+		 
+			If right ground sensor detecting white :
+			- set top color to green
+			End if
+		
+			If front middle horizontal sensor detecting no proximity:
+			- drive forward
+			- play sound sound1
+			- set top color to pink
+			- set bottom color to yellow
+			End if
+			
+			If front middle horizontal sensor detecting no proximity:
+			- turn left
+			- play sound sound3
+			- turn off top leds
+			- turn off bottom leds
+			End if
+		'''.assertCompilesTo(
+		'''
+		
+		# reset outputs 
+		call sound.system(-1)
+		call leds.top(0,0,0)
+		call leds.bottom.left(0,0,0)
+		call leds.bottom.right(0,0,0)
+		call leds.circle(0,0,0,0,0,0,0,0)
+		
+		onevent tap
+		        if prox.ground.delta[1] < 400 then
+		    call leds.top(32,0,0)        
+		end
+		
+		        if prox.ground.delta[1] > 450 then
+		    call leds.top(0,32,0)        
+		end
+		
+		        if prox.horizontal[2] <= 1000 then
+		    motor.left.target = 500
+		        motor.right.target = 500
+		    	call math.copy(notes[0:5], [524, 440, 370, 311, 440, 262]) 
+			call math.copy(durations[0:5], [7, 7, 7, 7, 7, 7]) 
+			note_index = 1 
+			note_count = 6 
+			call sound.freq(notes[0], durations[0])
+		
+		    call leds.top(32,0,32)        
+		    call leds.bottom.left(32,32,0)
+		 call leds.bottom.right(32,32,0)        
+		end
+		
+		        if prox.horizontal[2] <= 1000 then
+		    motor.left.target = -500
+		        motor.right.target = 500
+		    	call math.copy(notes[0:5], [311, 440, 370, 0, 440, 311]) 
+			call math.copy(durations[0:5], [7, 14, 7, 14, 7, 14]) 
+			note_index = 1 
+			note_count = 6 
+			call sound.freq(notes[0], durations[0])
+		
+		    
+		    
+		end
+		
+		
+		''')
+	}
+	
+	@Test
+	def void testDSLCodeCompilesToExpectedOutput3() {
+		'''
+		->On right ground sensor detecting white do: 
+			- drive forward
+		->On left ground sensor detecting white do:
+			- drive forward with speed 300
+		-> On right ground sensor detecting black do:
+			- turn left
+		-> On left ground sensor detecting black do:
+			- turn right
+		'''.assertCompilesTo(
+		'''
+		
+		
+		
+		
+		# reset outputs 
+		call sound.system(-1)
+		call leds.top(0,0,0)
+		call leds.bottom.left(0,0,0)
+		call leds.bottom.right(0,0,0)
+		call leds.circle(0,0,0,0,0,0,0,0)
+		
+		onevent prox
+		    when prox.ground.delta[1] > 450 do
+		        motor.left.target = 500
+		        motor.right.target = 500
+		end
+		
+		    when prox.ground.delta[0] > 450 do
+		        motor.left.target = 300
+		        motor.right.target = 300
+		end
+		
+		    when prox.ground.delta[1] < 400 do
+		        motor.left.target = -500
+		        motor.right.target = 500
+		end
+		
+		    when prox.ground.delta[0] < 400 do
+		        motor.left.target = 500
+		        motor.right.target = -500
+		end
+		
+		''')
+	}
 
 }
